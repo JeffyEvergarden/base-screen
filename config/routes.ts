@@ -1,5 +1,23 @@
 export default [
   {
+    path: '/screen',
+    layout: false,
+    name: '基础大屏',
+    component: './screen/base-screen',
+  },
+  {
+    path: '/editor',
+    layout: false,
+    name: '编辑',
+    component: './flow',
+  },
+  {
+    path: '/canvas',
+    layout: false,
+    name: '编辑2',
+    component: './Canvas',
+  },
+  {
     path: '/user',
     layout: false,
     routes: [
@@ -18,6 +36,6 @@ export default [
     ],
   },
   { name: '查询表格', icon: 'table', path: '/list', component: './TableList' },
-  { path: '/', redirect: '/welcome' },
+  { path: '/', redirect: '/screen' },
   { component: './404' },
 ];
