@@ -85,6 +85,7 @@ const FlowIndex: any = (props: any) => {
 
   return (
     <PageContainer>
+      
       <GGEditor className={styles.editor}>
         
         <Row className={styles.editorBd} wrap={false}>

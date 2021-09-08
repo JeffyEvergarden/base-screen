@@ -11,31 +11,48 @@ import styles from './index.less';
 
 GGEditor.setTrackable(false);
 
-export default () => (
-  <PageContainer content="千言万语不如一张图，流程图是表示算法思路的好方法">
-    <GGEditor className={styles.editor}>
+export default () => {
+  const editorEvent = {
+    onBeforeAddItem: (node: any) => {
+      console.log('插入前测试');
+      console.log(node);
+    },
+    beforeadditem: (node: any) => {
+      console.log('插入前测试');
+      console.log(node);
+    },
+  };
 
-      <Row className={styles.editorHd}>
-        <Col span={24}>
-          <FlowToolbar />
-        </Col>
-      </Row>
-      
-      <Row className={styles.editorBd}>
-        <Col span={4} className={styles.editorSidebar}>
-          <FlowItemPanel />
-        </Col>
-        <Col span={16} className={styles.editorContent}>
-          <Flow className={styles.flow} />
-        </Col>
-        <Col span={4} className={styles.editorSidebar}>
-          <FlowDetailPanel />
-          <EditorMinimap />
-        </Col>
-      </Row>
-      
-      {/* 在元素下右键浮动按钮 */}
-      <FlowContextMenu />
-    </GGEditor>
-  </PageContainer>
-);
+  return (
+    <PageContainer content="千言万语不如一张图，流程图是表示算法思路的好方法">
+      <GGEditor className={styles.editor}>
+        {/* 上层按钮   相关了解 commend 组件 */}
+        <Row className={styles.editorHd}>
+          <Col span={24}>
+            <FlowToolbar />
+          </Col>
+        </Row>
+
+        {/* 编辑部分   左菜单  中间编辑  右边详情 */}
+        <Row className={styles.editorBd}>
+          <Col span={4} className={styles.editorSidebar}>
+            <FlowItemPanel />
+          </Col>
+          <Col span={16} className={styles.editorContent}>
+            <Flow
+              className={styles.flow}
+              {...editorEvent}
+            />
+          </Col>
+          <Col span={4} className={styles.editorSidebar}>
+            <FlowDetailPanel />
+            <EditorMinimap />
+          </Col>
+        </Row>
+
+        {/* 在元素下右键浮动按钮 */}
+        <FlowContextMenu />
+      </GGEditor>
+    </PageContainer>
+  );
+};

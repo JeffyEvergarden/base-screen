@@ -19,7 +19,7 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = (props) => {
     <Command name={command}>
       <Tooltip
         title={text || upperFirst(command)}
-        placement="bottom"
+        placement="top"
         overlayClassName={styles.tooltip}
       >
         <IconFont type={`icon-${icon || command}`} />
