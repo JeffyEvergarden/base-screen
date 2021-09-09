@@ -1,24 +1,77 @@
-import React, { useRef, useEffect } from 'react';
-import { Col, Row } from 'antd';
+import React, { useRef, useEffect, useState } from 'react';
+import { Col, Row, Tabs } from 'antd';
 
 import FlowPage from '../flow';
 import { PageContainer } from '@ant-design/pro-layout';
+import { isArguments } from 'lodash';
+const { TabPane } = Tabs;
 
 const PageView = (props: any) => {
+  // 页面 tab
+  const [currentPage, setCurrentPage] = useState<any>('paint');
+  const [pages, setPages] = useState<any[]>([]);
+
+  const [map, setMap] = useState<any>({});
+
+  // 更改pageTab
+  const onChange = (val: any) => {
+    console.log('tabChange:');
+    console.log(val);
+    setCurrentPage(val);
+  };
+  const onEdit = (val: any) => {
+    console.log('tabEdit:', val);
+    setPages(pages.filter((item: any) => item.key !== val));
+  };
+
+  // 流程图相关
+  // -- start-----
   const insertNode = (node: any) => {
     console.log('外层监测到插入Node');
     console.log(node);
+    let newPane = {
+      key: node.id,
+      title: node.label,
+      content: node.label,
+      closable: true,
+    };
+    setPages([...pages, newPane]);
   };
 
   const removeNode = (node: any) => {
     console.log('外层监测到删除Node');
     console.log(node);
+    // 删除 Tab
+    const newPages = pages.filter((item: any) => {
+      item.key !== node.key;
+    });
+    if (newPages.length !== pages.length) {
+      setPages(newPages);
+    }
+  };
+  const clickItem = (node: any) => {
+    node = node.model;
+    console.log('点击左边菜单节点事件');
+    console.log(node);
+    let key = pages.findIndex((item: any) => {
+      return item.key === node.id;
+    });
+    if (key > -1) { // 已存在tab了
+      return 
+    }
+    let newPane = {
+      key: node.id,
+      title: node.label,
+      content: node.label,
+      closable: true,
+    };
+    setPages([...pages, newPane]);
   };
 
   const save = (obj: any) => {
     console.log('保存提交', obj);
   };
-
+  // 初始化
   const fake = useRef<any>(null);
   // 初始化测试
   useEffect(() => {
@@ -37,10 +90,33 @@ const PageView = (props: any) => {
       ],
     });
   }, []);
+  // -- end-----
 
   return (
     <PageContainer content="千言万语不如一张图，流程图是表示算法思路的好方法">
-      <FlowPage insertNode={insertNode} removeNode={removeNode} save={save} cref={fake} />
+      <Tabs
+        type="editable-card"
+        onChange={onChange}
+        activeKey={currentPage}
+        onEdit={onEdit}
+        hideAdd
+      >
+        <TabPane tab="流程图" key="paint" closable={false}>
+          <FlowPage
+            insertNode={insertNode}
+            removeNode={removeNode}
+            save={save}
+            clickItem={clickItem}
+            cref={fake}
+          />
+        </TabPane>
+
+        {pages.map((pane) => (
+          <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>
+            {pane.content}
+          </TabPane>
+        ))}
+      </Tabs>
     </PageContainer>
   );
 };

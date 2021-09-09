@@ -6,13 +6,15 @@ import { DetailPanel, NodePanel } from 'gg-editor';
 
 interface PanelProps {
   addNode?: (node: any) => void;
+  clickItem?: (node: any) => void;
 }
 
 const FlowItemPanel = (props: PanelProps) => {
+  const { clickItem } = props;
   return (
     <ItemPanel className={styles.itemPanel}>
       <Card bordered={false}>
-        <MyNodeList />
+        <MyNodeList clickItem={clickItem} />
       </Card>
     </ItemPanel>
   );

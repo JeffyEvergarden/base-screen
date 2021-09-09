@@ -19,10 +19,11 @@ interface PageViewProps {
   save?: (node: any) => void;
   insertNode?: (node: any) => void;
   removeNode?: (node: any) => void;
+  clickItem?: (node: any) => void;
 }
 
 const PageView = (props: PageViewProps) => {
-  const { insertNode, removeNode, save, cref } = props;
+  const { insertNode, removeNode, save, clickItem, cref } = props;
 
   const editorRef = useRef<any>(null);
 
@@ -42,6 +43,7 @@ const PageView = (props: PageViewProps) => {
     init: (initData: any) => {
       const propsAPI = getPropsAPI();
       propsAPI?.read(initData);
+      eventbus.$emit('flashNodeList');
     },
   }));
 
@@ -243,7 +245,7 @@ const PageView = (props: PageViewProps) => {
       {/* 编辑部分   左菜单  中间编辑 */}
       <Row className={styles.editorBd}>
         <Col span={4} className={styles.editorSidebar}>
-          <FlowItemPanel />
+          <FlowItemPanel clickItem={clickItem} />
         </Col>
         <Col span={20} className={styles.editorContent}>
           <Flow className={styles.flow} {...editorEvent} />

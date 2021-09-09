@@ -27,7 +27,7 @@ const testList = [
 ];
 
 const NodeList = (props: any) => {
-  const { propsAPI, defaultValue, max } = props;
+  const { propsAPI, defaultValue, max, clickItem: clickNode } = props;
 
   const [nameVal, setNameVal] = useState<string>('');
 
@@ -61,7 +61,7 @@ const NodeList = (props: any) => {
     propsAPI.update(val.id, {
       label: val.taskName,
       taskId: val.taskId,
-      extra: val
+      extra: val,
     });
   };
 
@@ -106,6 +106,7 @@ const NodeList = (props: any) => {
       const node = propsAPI.find(item.id);
       // console.log(node);
       propsAPI.currentPage.setSelected(node);
+      clickNode?.(node);
     }
   };
 
@@ -182,7 +183,7 @@ const NodeList = (props: any) => {
     console.log('----');
     AddModalRef.current?.open();
   };
-  
+
   // 打开编辑弹窗
   const openUpdateModal = (item: any, index: number) => {
     console.log('打开修改弹窗');
@@ -191,12 +192,14 @@ const NodeList = (props: any) => {
     // 更新
     AddModalRef.current?.open(item);
   };
-  
+
   // 弹窗确认
   const confirm = (val: any) => {
-    if (val.id) { // 更新
-      updateModel(val)
-    } else { // 新建
+    if (val.id) {
+      // 更新
+      updateModel(val);
+    } else {
+      // 新建
       addNode(val);
     }
   };
@@ -236,7 +239,7 @@ const NodeList = (props: any) => {
                   {item.label || '---'}
                 </div>
               </Condition>
-                
+
               {/* 编辑模式代码无用 */}
               <Condition r-if={item.edit}>
                 <div className={style['node-item_label']}>
