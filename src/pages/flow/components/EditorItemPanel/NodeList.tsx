@@ -7,14 +7,14 @@ import { Input, Space, message, Button } from 'antd';
 import { PlusSquareOutlined, EditOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import Condition from '../../common/Condition';
 import style from './index.less';
-
+import eventbus from '../../utils/eventbus';
 const defaultPos: any = {
   w: 80,
   h: 30,
 };
 
 const NodeList = (props: any) => {
-  const { propsAPI, defaultValue, max, addNode: parentAddNode } = props;
+  const { propsAPI, defaultValue, max } = props;
 
   const [nameVal, setNameVal] = useState<string>('');
 
@@ -133,8 +133,18 @@ const NodeList = (props: any) => {
     console.log(propsAPI.save());
   };
 
+  const reflashNodeList = () => {
+    reflashList();
+  };
+
   useEffect(() => {
-    console.log('重新渲染');
+    const reflashNodeList = () => {
+      reflashList();
+    };
+    eventbus.$on('flashNodeList', reflashNodeList);
+    return () => {
+      eventbus.$off('flashNodeList', reflashNodeList);
+    };
   }, []);
 
   return (

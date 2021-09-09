@@ -8,7 +8,9 @@ import { FlowItemPanel } from './components/EditorItemPanel';
 import { FlowToolbar } from './components/EditorToolbar';
 import styles from './index.less';
 import { useEffect, useMemo, useRef } from 'react';
-import { judgeLineByNode } from './util';
+import { judgeLineByNode } from './utils/util';
+import eventbus from './utils/eventbus';
+import { update } from 'lodash';
 
 GGEditor.setTrackable(false);
 
@@ -22,9 +24,10 @@ const PageView = (props: PageViewProps) => {
 
   const editorRef = useRef<any>(null);
 
-  useEffect(() => {
-    console.log(editorRef.current?.propsAPI);
-  }, []);
+  // 可以输出看看有啥方法
+  // useEffect(() => {
+  //   console.log(editorRef.current?.propsAPI);
+  // }, []);
 
   // 获取 propsAPI
   const getPropsAPI = () => {
@@ -58,8 +61,10 @@ const PageView = (props: PageViewProps) => {
       if (event?.item.type === 'node') {
         // 节点是 node （节点随便插入）
         insertNode?.(event);
+        eventbus.$emit('flashNodeList');
       } else if (event?.item.type === 'edge') {
         // 节点是线 （线不能随便连）
+        console.log('插线');
         _insertLine(event);
       }
     }
@@ -99,24 +104,75 @@ const PageView = (props: PageViewProps) => {
       return;
     }
     // 针对3的处理
-    // 找到其他线的尾节点必须
+    //
+    // console.log('判断')
+    // console.log(arr)
+    // console.log(target)
     for (let i = 0; i < arr.length; i++) {
       let tmp = arr[i];
       // 存在一样的连接节点
-      if (tmp.target === target.target && tmp.soucre === target.source) {
+      if (tmp.target === target.target && tmp.source === target.source) {
         console.log('存在一样的连接节点');
         deleteNode(target);
-        return
+        return;
       }
     }
     // 根据节点关系判断是否删除节点
     let flag = false; // 设置是否删除该线的标识
     flag = judgeLineByNode(target, [nodes, lines]);
     if (!flag) {
-      console.log('存在环图需删除')
-      message.warning('不允许存在环形结构')
+      console.log('存在环图需删除');
+      message.warning('不允许存在环形结构');
       deleteNode(target);
     }
+  };
+
+  // 更改线
+  const _updateLine = (event: any) => {
+    // let keys = Object.keys(event.updateModel);
+    const next = event.updateModel;
+    const last = event.originModel;
+    const [nodes, lines] = getAllNode();
+    // 如果更改了源头 且（非锚点变更）
+    if (next.source && next.source !== last.source) {
+      _insertLine(event);
+      // 如果改了目标节点 且（非锚点变更）
+    } else if (next.target && next.target !== last.target) {
+      _insertLine(event);
+    } else {
+      // 其他改值就无视
+      return;
+    }
+  };
+
+  // 关系
+  const saveFn = () => {
+    // 保存时条件
+    // 需每个节点都有关系
+    const [nodes, lines] = getAllNode();
+    // nodes 必须每个节点都有关系
+    const map = {};
+    const nodeMap = {};
+    nodes.forEach((item: any) => {
+      map[item.id] = 0;
+      nodeMap[item.id] = item;
+    });
+    let keys = Object.keys(map);
+    lines.forEach((item: any) => {
+      if (keys.indexOf(item.source) > -1) {
+        map[item.source]++;
+      }
+      if (keys.indexOf(item.source) > -1) {
+        map[item.target]++;
+      }
+    });
+    let illegalKey = [];
+    keys.forEach((item: any) => {
+      if (map[item] === 0) {
+        // 不合规数量汇总
+        illegalKey.push(nodeMap[item]);
+      }
+    });
   };
 
   // 汇总绑定到 组件上
@@ -127,6 +183,24 @@ const PageView = (props: PageViewProps) => {
       if (event.action === 'add') {
         console.log('插入后');
         _insert(event);
+      } else if (event.action === 'remove' && event?.item.type === 'node') {
+        // 删除事件
+        // 删除也要刷新node节点列表
+        eventbus.$emit('flashNodeList');
+      } else if (event.action === 'update') {
+        // 更新事件 影响节点是node 且存在label 则更新
+        if (
+          Object.prototype.hasOwnProperty.call(event.updateModel, 'label') &&
+          event?.item.type === 'node'
+        ) {
+          console.log('更新事件刷新');
+          eventbus.$emit('flashNodeList');
+        } else if (event?.item.type === 'edge') {
+          // 影响节点是线
+          // 改变线的前后节点
+          console.log('影响了线');
+          _updateLine(event);
+        }
       }
     },
   };
