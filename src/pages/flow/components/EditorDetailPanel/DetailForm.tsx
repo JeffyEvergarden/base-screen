@@ -17,6 +17,16 @@ const inlineFormItemLayout = {
   },
 };
 
+const formatStr = (str: string) => {
+  switch (str) {
+    case 'node':
+      return '节点';
+    case 'edge':
+      return '连线';
+  }
+  return '';
+};
+
 type DetailFormProps = {
   type: string;
   propsAPI?: any;
@@ -57,7 +67,7 @@ class DetailForm extends React.Component<DetailFormProps> {
 
     return (
       <Form initialValues={{ label }}>
-        <Item label="Label" name="label" {...inlineFormItemLayout}>
+        <Item label="节点名称" name="label" {...inlineFormItemLayout}>
           <Input onBlur={this.handleInputBlur('label')} />
         </Item>
       </Form>
@@ -69,27 +79,15 @@ class DetailForm extends React.Component<DetailFormProps> {
 
     return (
       <Form initialValues={{ label, shape }}>
-        <Item label="Label" name="label" {...inlineFormItemLayout}>
+        <Item label="线的名称" name="label" {...inlineFormItemLayout}>
           <Input onBlur={this.handleInputBlur('label')} />
         </Item>
-        <Item label="Shape" name="shape" {...inlineFormItemLayout}>
+        <Item label="连线形状" name="shape" {...inlineFormItemLayout}>
           <Select onChange={(value) => this.handleFieldChange({ shape: value })}>
-            <Option value="flow-smooth">Smooth</Option>
-            <Option value="flow-polyline">Polyline</Option>
-            <Option value="flow-polyline-round">Polyline Round</Option>
+            <Option value="flow-smooth">顺滑</Option>
+            <Option value="flow-polyline">直线</Option>
+            <Option value="flow-polyline-round">顺滑的直线</Option>
           </Select>
-        </Item>
-      </Form>
-    );
-  };
-
-  renderGroupDetail = () => {
-    const { label = '新建分组' } = this.item.getModel();
-
-    return (
-      <Form initialValues={{ label }}>
-        <Item label="Label" name="label" {...inlineFormItemLayout}>
-          <Input onBlur={this.handleInputBlur('label')} />
         </Item>
       </Form>
     );
@@ -102,10 +100,9 @@ class DetailForm extends React.Component<DetailFormProps> {
     }
 
     return (
-      <Card type="inner" size="small" title={upperFirst(type)} bordered={false}>
+      <Card type="inner" size="small" title={formatStr(type)} bordered={false}>
         {type === 'node' && this.renderNodeDetail()}
         {type === 'edge' && this.renderEdgeDetail()}
-        {type === 'group' && this.renderGroupDetail()}
       </Card>
     );
   }

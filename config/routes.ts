@@ -9,7 +9,7 @@ export default [
     path: '/editor',
     layout: false,
     name: '编辑',
-    component: './flow',
+    component: './TestPage',
   },
   {
     path: '/canvas',

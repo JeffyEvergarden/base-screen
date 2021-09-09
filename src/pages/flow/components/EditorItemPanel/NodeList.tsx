@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // gg-editor
 import { Item, withPropsAPI } from 'gg-editor';
+
 // 通用组件相关
 import { Input, Space, message, Button } from 'antd';
 import { PlusSquareOutlined, EditOutlined, MinusCircleOutlined } from '@ant-design/icons';
@@ -131,6 +132,10 @@ const NodeList = (props: any) => {
     console.log('获取选择节点：');
     console.log(propsAPI.save());
   };
+
+  useEffect(() => {
+    console.log('重新渲染');
+  }, []);
 
   return (
     <div className={style['node-box']}>

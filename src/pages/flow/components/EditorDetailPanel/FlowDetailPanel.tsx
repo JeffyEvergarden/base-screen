@@ -1,4 +1,4 @@
-import { CanvasPanel, DetailPanel, EdgePanel, GroupPanel, MultiPanel, NodePanel } from 'gg-editor';
+import { CanvasPanel, DetailPanel, EdgePanel, NodePanel } from 'gg-editor';
 
 import { Card } from 'antd';
 import DetailForm from './DetailForm';
@@ -12,15 +12,6 @@ const FlowDetailPanel = () => (
     <EdgePanel>
       <DetailForm type="edge" />
     </EdgePanel>
-    <GroupPanel>
-      <DetailForm type="group" />
-    </GroupPanel>
-    <MultiPanel>
-      <Card type="inner" size="small" title="Multi Select" bordered={false} />
-    </MultiPanel>
-    <CanvasPanel>
-      <Card type="inner" size="small" title="Canvas" bordered={false} />
-    </CanvasPanel>
   </DetailPanel>
 );
 
