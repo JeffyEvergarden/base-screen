@@ -10,13 +10,13 @@ const PageView = (props: any) => {
     console.log('外层插入Node');
   };
 
-  const insertLine = (node: any) => {
-    console.log('外层插入Line');
+  const save = (obj: any) => {
+    console.log('保存提交', obj);
   };
 
   return (
     <PageContainer content="千言万语不如一张图，流程图是表示算法思路的好方法">
-      <FlowPage insertNode={insertNode} insertLine={insertLine} />
+      <FlowPage insertNode={insertNode} save={save} />
     </PageContainer>
   );
 };

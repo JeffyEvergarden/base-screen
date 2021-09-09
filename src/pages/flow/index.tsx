@@ -15,12 +15,13 @@ import { update } from 'lodash';
 GGEditor.setTrackable(false);
 
 interface PageViewProps {
+  save?: (node: any) => void;
   insertNode?: (node: any) => void;
-  insertLine?: (node: any) => void;
+  init?: (node: any) => void;
 }
 
 const PageView = (props: PageViewProps) => {
-  const { insertNode, insertLine } = props;
+  const { insertNode, init, save } = props;
 
   const editorRef = useRef<any>(null);
 
@@ -42,8 +43,8 @@ const PageView = (props: PageViewProps) => {
     // index：序号   id：标识  type：类型
     const edges = rep.edges || []; // 线
     //  index 、 id 、 source 、 target
-    console.log('nodes:', nodes);
-    console.log('edges:', edges);
+    // console.log('nodes:', nodes);
+    // console.log('edges:', edges);
     return [nodes, edges];
   };
 
@@ -150,6 +151,14 @@ const PageView = (props: PageViewProps) => {
     // 保存时条件
     // 需每个节点都有关系
     const [nodes, lines] = getAllNode();
+    if (nodes.length === 0) {
+      message.warning('并未新建任务节点');
+      return;
+    }
+    if (nodes.length > 0 && lines.length === 0) {
+      message.warning('任务节点之间并未存在关系');
+      return;
+    }
     // nodes 必须每个节点都有关系
     const map = {};
     const nodeMap = {};
@@ -166,13 +175,19 @@ const PageView = (props: PageViewProps) => {
         map[item.target]++;
       }
     });
-    let illegalKey = [];
+    let illegalNode: any[] = []; // 违法Node
     keys.forEach((item: any) => {
       if (map[item] === 0) {
         // 不合规数量汇总
-        illegalKey.push(nodeMap[item]);
+        illegalNode.push(nodeMap[item]);
       }
     });
+    if (illegalNode.length > 0) {
+      let labels = illegalNode.map((item) => item.label).join('、');
+      message.warning(`节点${labels}需补全连接关系`);
+    } else {
+      save?.({ nodes, edges: lines });
+    }
   };
 
   // 汇总绑定到 组件上
@@ -210,7 +225,7 @@ const PageView = (props: PageViewProps) => {
       {/* 上层按钮   相关了解 commend 组件 */}
       <Row className={styles.editorHd}>
         <Col span={24}>
-          <FlowToolbar />
+          <FlowToolbar save={saveFn} />
         </Col>
       </Row>
 
