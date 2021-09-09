@@ -3,7 +3,8 @@ import { Col, Row, Tabs } from 'antd';
 
 import FlowPage from '../flow';
 import { PageContainer } from '@ant-design/pro-layout';
-import { isArguments } from 'lodash';
+import EditorOuterPannel from '../flow/components/EditorOuterPanel';
+import style from './index.less';
 const { TabPane } = Tabs;
 
 const PageView = (props: any) => {
@@ -50,14 +51,14 @@ const PageView = (props: any) => {
     }
   };
   const clickItem = (node: any) => {
-    node = node.model;
     console.log('点击左边菜单节点事件');
     console.log(node);
     let key = pages.findIndex((item: any) => {
       return item.key === node.id;
     });
-    if (key > -1) { // 已存在tab了
-      return 
+    if (key > -1) {
+      // 已存在tab了
+      return;
     }
     let newPane = {
       key: node.id,
@@ -94,29 +95,36 @@ const PageView = (props: any) => {
 
   return (
     <PageContainer content="千言万语不如一张图，流程图是表示算法思路的好方法">
-      <Tabs
-        type="editable-card"
-        onChange={onChange}
-        activeKey={currentPage}
-        onEdit={onEdit}
-        hideAdd
-      >
-        <TabPane tab="流程图" key="paint" closable={false}>
-          <FlowPage
-            insertNode={insertNode}
-            removeNode={removeNode}
-            save={save}
-            clickItem={clickItem}
-            cref={fake}
-          />
-        </TabPane>
+      <div className={style['container']}>
+        <div className={style['container_left']}>
+          <EditorOuterPannel clickItem={clickItem} />
+        </div>
+        <div className={style['container_right']}>
+          <Tabs
+            type="editable-card"
+            onChange={onChange}
+            activeKey={currentPage}
+            onEdit={onEdit}
+            hideAdd
+          >
+            <TabPane tab="流程图" key="paint" closable={false}>
+              <FlowPage
+                insertNode={insertNode}
+                removeNode={removeNode}
+                save={save}
+                clickItem={clickItem}
+                cref={fake}
+              />
+            </TabPane>
 
-        {pages.map((pane) => (
-          <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>
-            {pane.content}
-          </TabPane>
-        ))}
-      </Tabs>
+            {pages.map((pane) => (
+              <TabPane tab={pane.title} key={pane.key} closable={pane.closable}>
+                {pane.content}
+              </TabPane>
+            ))}
+          </Tabs>
+        </div>
+      </div>
     </PageContainer>
   );
 };

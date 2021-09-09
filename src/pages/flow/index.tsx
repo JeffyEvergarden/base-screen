@@ -22,7 +22,7 @@ interface PageViewProps {
   clickItem?: (node: any) => void;
 }
 
-const PageView = (props: PageViewProps) => {
+const EditorView = (props: PageViewProps) => {
   const { insertNode, removeNode, save, clickItem, cref } = props;
 
   const editorRef = useRef<any>(null);
@@ -38,14 +38,20 @@ const PageView = (props: PageViewProps) => {
   };
 
   // 初始化
-
   useImperativeHandle(cref, () => ({
     init: (initData: any) => {
+      // 初始化
       const propsAPI = getPropsAPI();
       propsAPI?.read(initData);
-      eventbus.$emit('flashNodeList');
+      refreshOtherPane();
     },
   }));
+
+  // 刷新
+  const refreshOtherPane = () => {
+    const [nodes] = getAllNode();
+    eventbus.$emit('flashNodeList', nodes);
+  };
 
   // 获取所有节点
   const getAllNode = () => {
@@ -64,6 +70,7 @@ const PageView = (props: PageViewProps) => {
   const deleteNode = (item: any) => {
     const propsAPI = getPropsAPI();
     propsAPI.remove(item.id || item);
+    refreshOtherPane();
   };
 
   // 插入节点
@@ -74,7 +81,7 @@ const PageView = (props: PageViewProps) => {
       if (event?.item.type === 'node') {
         // 节点是 node （节点随便插入）
         insertNode?.(event.model);
-        eventbus.$emit('flashNodeList');
+        refreshOtherPane();
       } else if (event?.item.type === 'edge') {
         // 节点是线 （线不能随便连）
         console.log('插线');
@@ -214,7 +221,7 @@ const PageView = (props: PageViewProps) => {
         // 删除事件
         // 删除也要刷新node节点列表
         removeNode?.(event?.item.model);
-        eventbus.$emit('flashNodeList');
+        refreshOtherPane();
       } else if (event.action === 'update') {
         // 更新事件 影响节点是node 且存在label 则更新
         if (
@@ -222,7 +229,7 @@ const PageView = (props: PageViewProps) => {
           event?.item.type === 'node'
         ) {
           // console.log('更新事件刷新');
-          eventbus.$emit('flashNodeList');
+          refreshOtherPane();
         } else if (event?.item.type === 'edge') {
           // 影响节点是线
           // 改变线的前后节点
@@ -232,6 +239,34 @@ const PageView = (props: PageViewProps) => {
       }
     },
   };
+
+  // ------ eventbus 事件
+  //
+  const addNode = (newNode: any) => {
+    const propsAPI = getPropsAPI();
+    propsAPI.add('node', newNode);
+    refreshOtherPane();
+  };
+  const updateNode = (id: any, model: any) => {
+    const propsAPI = getPropsAPI();
+    propsAPI.update(id, {
+      label: model.taskName,
+      taskId: model.taskId,
+      extra: model,
+    });
+    refreshOtherPane();
+  };
+
+  useEffect(() => {
+    eventbus.$on('addNode', addNode);
+    eventbus.$on('deleteNode', deleteNode);
+    eventbus.$on('updateNode', updateNode);
+    return () => {
+      eventbus.$off('addNode', addNode);
+      eventbus.$off('deleteNode', deleteNode);
+      eventbus.$off('updateNode', updateNode);
+    };
+  }, []);
 
   return (
     <GGEditor className={styles.editor} ref={editorRef}>
@@ -244,10 +279,10 @@ const PageView = (props: PageViewProps) => {
 
       {/* 编辑部分   左菜单  中间编辑 */}
       <Row className={styles.editorBd}>
-        <Col span={4} className={styles.editorSidebar}>
+        {/* <Col span={4} className={styles.editorSidebar}>
           <FlowItemPanel clickItem={clickItem} />
-        </Col>
-        <Col span={20} className={styles.editorContent}>
+        </Col> */}
+        <Col span={24} className={styles.editorContent}>
           <Flow className={styles.flow} {...editorEvent} />
         </Col>
       </Row>
@@ -258,4 +293,4 @@ const PageView = (props: PageViewProps) => {
   );
 };
 
-export default PageView;
+export default EditorView;

@@ -25,6 +25,7 @@ const AddModal: React.FC<BaseFormProps> = (props) => {
       .validateFields()
       .then((res) => {
         if (id) {
+          console.log(res)
           confirm?.({ ...res, id });
         } else {
           confirm?.(res);
@@ -45,9 +46,13 @@ const AddModal: React.FC<BaseFormProps> = (props) => {
       if (obj?.id) {
         // 有id
         setId(obj.id);
-        form.setFieldsValue({ taskId: '', taskName: '', codeType: undefined, ...obj.extra });
+        if (obj.extra) { // 有详情对象
+          form.setFieldsValue({ taskId: '', taskName: '', codeType: undefined, ...obj.extra });
+        } else {
+          form.setFieldsValue({ taskId: '', taskName: '', codeType: undefined });
+        }
       } else {
-        setId(id);
+        setId('');
         form.setFieldsValue({ taskId: '', taskName: '', codeType: undefined });
       }
       setVisible(true);
@@ -85,7 +90,11 @@ const AddModal: React.FC<BaseFormProps> = (props) => {
               },
             ]}
           >
-            <Input placeholder="请输入TASK_ID" autoComplete="off" style={{ width: '300px' }}></Input>
+            <Input
+              placeholder="请输入TASK_ID"
+              autoComplete="off"
+              style={{ width: '300px' }}
+            ></Input>
           </FormItem>
 
           <FormItem
@@ -100,7 +109,12 @@ const AddModal: React.FC<BaseFormProps> = (props) => {
               },
             ]}
           >
-            <Input placeholder="请输入任务名称" autoComplete="off" style={{ width: '300px' }}></Input>
+            <Input
+              placeholder="请输入任务名称"
+              autoComplete="off"
+              maxLength={30}
+              style={{ width: '300px' }}
+            ></Input>
           </FormItem>
 
           <FormItem
