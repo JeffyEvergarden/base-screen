@@ -1,27 +1,28 @@
 import { Col, Row, message } from 'antd';
 import GGEditor, { Flow, Item } from 'gg-editor';
 
-import EditorMinimap from './components/EditorMinimap';
+// import EditorMinimap from './components/EditorMinimap';
 import { FlowContextMenu } from './components/EditorContextMenu';
-import { FlowDetailPanel } from './components/EditorDetailPanel';
+// import { FlowDetailPanel } from './components/EditorDetailPanel';
 import { FlowItemPanel } from './components/EditorItemPanel';
 import { FlowToolbar } from './components/EditorToolbar';
 import styles from './index.less';
 import { useEffect, useMemo, useRef } from 'react';
 import { judgeLineByNode } from './utils/util';
 import eventbus from './utils/eventbus';
-import { update } from 'lodash';
+import { useImperativeHandle } from 'react';
 
 GGEditor.setTrackable(false);
 
 interface PageViewProps {
+  cref?: any;
   save?: (node: any) => void;
   insertNode?: (node: any) => void;
-  init?: (node: any) => void;
+  removeNode?: (node: any) => void;
 }
 
 const PageView = (props: PageViewProps) => {
-  const { insertNode, init, save } = props;
+  const { insertNode, removeNode, save, cref } = props;
 
   const editorRef = useRef<any>(null);
 
@@ -34,6 +35,15 @@ const PageView = (props: PageViewProps) => {
   const getPropsAPI = () => {
     return editorRef.current?.propsAPI;
   };
+
+  // 初始化
+
+  useImperativeHandle(cref, () => ({
+    init: (initData: any) => {
+      const propsAPI = getPropsAPI();
+      propsAPI?.read(initData);
+    },
+  }));
 
   // 获取所有节点
   const getAllNode = () => {
@@ -61,7 +71,7 @@ const PageView = (props: PageViewProps) => {
       // 插入前是没有item的，插入后追加的
       if (event?.item.type === 'node') {
         // 节点是 node （节点随便插入）
-        insertNode?.(event);
+        insertNode?.(event.model);
         eventbus.$emit('flashNodeList');
       } else if (event?.item.type === 'edge') {
         // 节点是线 （线不能随便连）
@@ -196,11 +206,12 @@ const PageView = (props: PageViewProps) => {
     onAfterChange: (event: any) => {
       console.log(event); // action: "add" //item：节点 //affectedItemIds 影响id
       if (event.action === 'add') {
-        console.log('插入后');
+        // console.log('插入后');
         _insert(event);
       } else if (event.action === 'remove' && event?.item.type === 'node') {
         // 删除事件
         // 删除也要刷新node节点列表
+        removeNode?.(event?.item.model);
         eventbus.$emit('flashNodeList');
       } else if (event.action === 'update') {
         // 更新事件 影响节点是node 且存在label 则更新
@@ -208,12 +219,12 @@ const PageView = (props: PageViewProps) => {
           Object.prototype.hasOwnProperty.call(event.updateModel, 'label') &&
           event?.item.type === 'node'
         ) {
-          console.log('更新事件刷新');
+          // console.log('更新事件刷新');
           eventbus.$emit('flashNodeList');
         } else if (event?.item.type === 'edge') {
           // 影响节点是线
           // 改变线的前后节点
-          console.log('影响了线');
+          // console.log('影响了线');
           _updateLine(event);
         }
       }
@@ -229,17 +240,13 @@ const PageView = (props: PageViewProps) => {
         </Col>
       </Row>
 
-      {/* 编辑部分   左菜单  中间编辑  右边详情 */}
+      {/* 编辑部分   左菜单  中间编辑 */}
       <Row className={styles.editorBd}>
         <Col span={4} className={styles.editorSidebar}>
           <FlowItemPanel />
         </Col>
-        <Col span={16} className={styles.editorContent}>
+        <Col span={20} className={styles.editorContent}>
           <Flow className={styles.flow} {...editorEvent} />
-        </Col>
-        <Col span={4} className={styles.editorSidebar}>
-          <FlowDetailPanel />
-          <EditorMinimap />
         </Col>
       </Row>
 

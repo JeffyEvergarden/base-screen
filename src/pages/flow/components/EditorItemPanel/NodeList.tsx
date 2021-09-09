@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 // gg-editor
 import { Item, withPropsAPI } from 'gg-editor';
 
+import AddModal from '../Modal/addModal';
+
 // 通用组件相关
-import { Input, Space, message, Button } from 'antd';
+import { Input, Space, message } from 'antd';
 import { PlusSquareOutlined, EditOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import Condition from '../../common/Condition';
 import style from './index.less';
@@ -12,6 +14,17 @@ const defaultPos: any = {
   w: 80,
   h: 30,
 };
+
+const testList = [
+  {
+    value: 1,
+    label: '1个和尚',
+  },
+  {
+    value: 2,
+    label: '2个和尚',
+  },
+];
 
 const NodeList = (props: any) => {
   const { propsAPI, defaultValue, max } = props;
@@ -26,27 +39,32 @@ const NodeList = (props: any) => {
   };
 
   // 增加节点
-  const addNode = () => {
-    const val = nameVal.trim();
-    if (!val || (val && val.length == 0)) {
-      message.info('请输入有效节点名称');
-      return;
-    }
+  const addNode = (obj: any) => {
     // 新节点位置
     let [x, y] = getNewNodePostion();
     const newNode = {
       size: `${defaultPos.w}*${defaultPos.h}`,
-      shape: 'flow-rect"',
+      shape: 'flow-rect',
       color: '#1890FF', //'#FA8C16',
-      label: val,
+      label: obj.taskName,
+      taskId: obj.taskId, // 不知道会不会补进来
+      extra: obj, // 试试
       x: x,
       y: y,
     };
-    setNameVal('');
     propsAPI.add('node', newNode);
     // 更新list
     reflashList();
   };
+  // 修改节点
+  const updateModel = (val: any) => {
+    propsAPI.update(val.id, {
+      label: val.taskName,
+      taskId: val.taskId,
+      extra: val
+    });
+  };
+
   // 获取所有节点
   const getAllNode = () => {
     const rep = propsAPI.save();
@@ -56,7 +74,7 @@ const NodeList = (props: any) => {
     //  index 、 id 、 source 、 target
     return [nodes, edges];
   };
-
+  // 设置节点新位置
   const getNewNodePostion = () => {
     const [nodes] = getAllNode();
     if (nodes.length === 0) {
@@ -74,9 +92,11 @@ const NodeList = (props: any) => {
       }
     }
   };
-
+  // 刷新列表
   const reflashList = () => {
     const [nodes] = getAllNode();
+    // console.log(nodes);
+    setNameVal('');
     setNodeList(nodes);
   };
 
@@ -84,7 +104,7 @@ const NodeList = (props: any) => {
   const clickItem = (e: MouseEvent, item: any) => {
     if (item) {
       const node = propsAPI.find(item.id);
-      console.log(node);
+      // console.log(node);
       propsAPI.currentPage.setSelected(node);
     }
   };
@@ -121,6 +141,7 @@ const NodeList = (props: any) => {
     setNodeList([...nodeList]);
   };
 
+  // 测试用
   const test = () => {
     console.log('propsAPI:');
     console.log(propsAPI);
@@ -133,8 +154,51 @@ const NodeList = (props: any) => {
     console.log(propsAPI.save());
   };
 
-  const reflashNodeList = () => {
-    reflashList();
+  // 搜索框 触发
+  const search = () => {
+    const val = nameVal.trim();
+    setNameVal(val);
+    if (!val || (val && val.length == 0)) {
+      const [nodes] = getAllNode();
+      setNodeList(nodes);
+      return;
+    }
+    // 有值时
+    const newList = nodeList.filter((item: any) => {
+      if (!item.label) {
+        return true;
+      }
+      return item.label.includes(val) || val.includes(item.label);
+    });
+    setNodeList(newList);
+  };
+
+  // 创建编辑弹窗相关
+
+  const AddModalRef = useRef<any>(null);
+
+  const openAddModal = () => {
+    console.log('打开弹窗');
+    console.log('----');
+    AddModalRef.current?.open();
+  };
+  
+  // 打开编辑弹窗
+  const openUpdateModal = (item: any, index: number) => {
+    console.log('打开修改弹窗');
+    console.log('----');
+    console.log(item);
+    // 更新
+    AddModalRef.current?.open(item);
+  };
+  
+  // 弹窗确认
+  const confirm = (val: any) => {
+    if (val.id) { // 更新
+      updateModel(val)
+    } else { // 新建
+      addNode(val);
+    }
   };
 
   useEffect(() => {
@@ -150,15 +214,19 @@ const NodeList = (props: any) => {
   return (
     <div className={style['node-box']}>
       <div className={style['node-header']}>
-        <Input value={nameVal} placeholder="请输入新的任务名" onChange={changeNameVal} allowClear />
+        <Input
+          value={nameVal}
+          placeholder="搜索任务名"
+          onChange={changeNameVal}
+          onPressEnter={search}
+          // allowClear
+        />
         <PlusSquareOutlined
-          onClick={addNode}
-          style={{ fontSize: 20, color: '#1890ff', paddingLeft: '8px' }}
+          onClick={openAddModal}
+          style={{ fontSize: 20, color: '#1890ff', paddingLeft: '16px' }}
         />
       </div>
-      <div style={{ padding: '10px 0' }}>
-        <h3 onClick={test}>已创建节点：</h3>
-      </div>
+
       <div className={style['node-content']}>
         {nodeList.map((item: any, index: any) => {
           return (
@@ -168,7 +236,8 @@ const NodeList = (props: any) => {
                   {item.label || '---'}
                 </div>
               </Condition>
-
+                
+              {/* 编辑模式代码无用 */}
               <Condition r-if={item.edit}>
                 <div className={style['node-item_label']}>
                   <Input
@@ -186,7 +255,7 @@ const NodeList = (props: any) => {
                 <EditOutlined
                   style={{ color: '#1890ff' }}
                   onClick={() => {
-                    changeMode(item, index);
+                    openUpdateModal(item, index);
                   }}
                 />
                 <MinusCircleOutlined
@@ -198,6 +267,8 @@ const NodeList = (props: any) => {
           );
         })}
       </div>
+
+      <AddModal cref={AddModalRef} confirm={confirm} list={testList} />
     </div>
   );
 };
