@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 // 通用组件
-import { Card } from 'antd';
+// import { Card } from 'antd';
 import { Title, TitleNum } from './components/common';
 // 图表组件
-import Funnel from './components/funnel';
-import TestView from './components/TestView';
+import Funnel from './components/Funnel';
+import ChinaMap from './components/ChinaMap';
+import Pie from './components/Pie';
+import TableView from './components/Table';
+import LineChart from './components/LineChart';
+// import TestView from './components/TestView';
 //样式 和图片
 import style from './style.less';
-import logo from '@/assets/logo.png';
+// import logo from '@/assets/logo.png';
 // 方法
 import { getCnTime } from '@/utils';
 import { throttle } from './util';
@@ -26,11 +30,11 @@ const ScreenPage: React.FC<any> = (props: any) => {
 
   // 比率计算
   const rate = document.body.clientWidth / 1920;
-  const [base, setBase] = useState<Number>(rate);
+  const [base, setBase] = useState<number>(rate);
   useEffect(() => {
     const fn = throttle(() => {
-      const rate = document.body.clientWidth / 1920;
-      setBase(rate);
+      const realRate = document.body.clientWidth / 1920;
+      setBase(realRate);
     }, 300);
     window.addEventListener('resize', fn);
     return () => {
@@ -60,11 +64,28 @@ const ScreenPage: React.FC<any> = (props: any) => {
       </div>
 
       <div className={style['screen-content']}>
+        {/* 漏斗地图 */}
         <Funnel base={base} />
+        {/* 中国地图 */}
+        <ChinaMap base={base} />
+        {/* 饼图 */}
+        <Pie base={base} />
+      </div>
 
-        <TestView />
-        <div className={style['chart_three']}>
-          <Card className={style['card']}>hello</Card>
+      <div className={style['screen-content_bottom']}>
+        <TableView />
+        <div className={style['chart_four']}>
+          <div className={style['title-4']}>
+            <Title title="近30天进件量与净增余额" />
+          </div>
+
+          <LineChart type="day" id="day" base={base} />
+
+          <div className={style['title-5']}>
+            <Title title="近1年进件量与净增余额" />
+          </div>
+
+          <LineChart type="month" id="month" base={base} />
         </div>
       </div>
     </div>

@@ -3,7 +3,6 @@ import React, { useEffect, useLayoutEffect, useRef, useMemo } from 'react';
 import * as echarts from 'echarts';
 
 import { option, testData } from './config';
-import { option as option2 } from './config-test';
 
 import style from '../../style.less';
 import { isNumber } from 'lodash';
@@ -21,8 +20,8 @@ const Funnel: React.FC<any> = (props: any) => {
     return Object.assign({}, option, {
       series: [
         {
-          top: 32 * base,
-          bottom: 32 * base,
+          top: 8 * base,
+          bottom: 21 * base,
           type: 'funnel',
           gap: 11.85 * base,
           minSize: 196 * base,
@@ -45,7 +44,7 @@ const Funnel: React.FC<any> = (props: any) => {
             textBorderColor: '#FFF',
             textBorderWidth: 0,
             formatter: function (d: any) {
-              var ins = d.name + ': ' + d.data.num;
+              const ins = d.name + ': ' + d.data.num;
               return ins;
             },
           },
@@ -56,7 +55,7 @@ const Funnel: React.FC<any> = (props: any) => {
   }, [base]);
 
   useEffect(() => {
-    var chartDom = document.getElementById('funnel');
+    const chartDom = document.getElementById('funnel');
     myChart.current = echarts.init(chartDom as any);
     myChart.current.setOption(options);
     first = true;
@@ -64,7 +63,7 @@ const Funnel: React.FC<any> = (props: any) => {
 
   useEffect(() => {
     if (!first) {
-      console.log('重新绘制-------');
+      // console.log('重新绘制-------');
       myChart.current?.setOption?.(options);
       myChart.current?.resize?.();
     }
@@ -74,9 +73,7 @@ const Funnel: React.FC<any> = (props: any) => {
     <div className={style['chart_one']}>
       <div id="funnel" className={style['funnel-box']}></div>
 
-      <div className={style['arrow_left']}>
-        
-      </div>
+      <div className={style['arrow_left']}></div>
     </div>
   );
 };

@@ -38,84 +38,82 @@
 .icon_circle {
   width: 10px;
   height: 10px;
+  margin-right: 5px;
   background: #668eff;
   border-radius: 50%;
-  margin-right: 5px;
 }
 
 .header {
   .my-row;
+
   justify-content: space-between;
+  width: 100%;
+  height: 64px * @rate;
+  color: #fff;
   background: url('./assets/header.svg') no-repeat 100%;
   background-position: top left;
   background-size: 100%;
-  width: 100%;
-  color: #FFF;
-  height: 64px * @rate;
 
   &-left {
-    font-size: 30px * @rate;
     padding-left: 48px * @rate;
     font-weight: 700;
+    font-size: 30px * @rate;
   }
 
   .time {
     padding-top: 17px * @rate;
-    font-size: 18px * @rate;
     padding-right: 48px * @rate;
     font-weight: 700;
+    font-size: 18px * @rate;
   }
 }
 
 // ---------------
 // 通用组件
 .title-box {
-  border-radius: 8px; // radius 不用乘
-  background: #668eff;
-  color: #FFF;
-  font-weight: 700;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  font-size: 20px * @rate;
   height: 40px * @rate;
-  padding-left: 10px * @rate;
   padding-right: 20px * @rate;
+  padding-left: 10px * @rate;
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px * @rate;
+  background: #668eff;
+  border-radius: 8px; // radius 不用乘
 
   .title_circle {
-    border: (4px*@rate) solid #fff;
-    border-radius: 50%;
     width: 16px * @rate;
     height: 16px * @rate;
     margin-right: 8px * @rate;
+    border: (4px * @rate) solid #fff;
+    border-radius: 50%;
   }
 }
 
-
-
-
 .screen-content_top {
+  position: relative;
   width: 100%;
   height: 73px * @rate;
-  position: relative;
 
   .title-1 {
     position: absolute;
-    left: 48px * @rate;
     top: 32px * @rate;
+    left: 48px * @rate;
   }
 
   .center-box {
     position: absolute;
-    width: 100%;
-    left: 0;
     top: -16px * @rate;
+    left: 0;
     display: flex;
     justify-content: center;
+    width: 100%;
 
     &_left {
       display: flex;
-      justify-content: flex-end;
       flex: 1 0 auto;
+      justify-content: flex-end;
 
       .tmp-box {
         width: 230px * @rate;
@@ -128,59 +126,197 @@
     }
 
     &_right {
-      margin-left: 24px * @rate;
-      width: 230px * @rate;
       flex: 1 0 auto;
+      width: 230px * @rate;
+      margin-left: 24px * @rate;
     }
 
     &__header {
       .my-row;
-      color: rgba(0, 0, 0, 0.65);
-      line-height: 22px * @rate;
-      font-size: 18px * @rate;
+
       margin-bottom: 20px @rate;
+      color: rgba(0, 0, 0, 0.65);
+      font-size: 18px * @rate;
+      line-height: 22px * @rate;
     }
 
     &__content {
-      font-size: 48px * @rate;
       color: #1a2b5b;
       font-weight: 700;
+      font-size: 48px * @rate;
     }
   }
 
   .title-2 {
     position: absolute;
-    right: 48px * @rate;
     top: 32px * @rate;
+    right: 48px * @rate;
   }
 }
-
-
 
 // ---------------
 // 图表布局
 .screen-content {
   .my-row;
+
   align-items: flex-start;
-  height: 426px * @rate;
+  // height: 425px * @rate;
 
   .chart_one {
     position: relative;
     width: 592px * @rate;
-    height: 426px * @rate;
+    height: 320px * @rate;
+    margin-top: 24px * @rate;
+    margin-right: 20px * @rate;
+    margin-left: 48px * @rate;
+    overflow: hidden;
   }
 
   .chart_two {
-    width: 30%;
+    width: 592px * @rate;
+    height: 422px * @rate;
+    margin-right: 77px * @rate;
+    overflow: hidden;
   }
 
   .chart_three {
-    width: 30%;
+    width: 592px * @rate;
+    height: 320px * @rate;
+    margin-top: 24px * @rate;
+    overflow: hidden;
   }
 }
 
 // 图表类
+// 漏斗图
 .funnel-box {
   width: 592px * @rate;
-  height: 426px * @rate;
+  height: 320px * @rate;
+}
+
+.map-box {
+  width: 527px * @rate;
+  height: 422px * @rate;
+}
+
+.pie-box {
+  width: 592px * @rate;
+  height: 320px * @rate;
+}
+
+.line-box {
+  width: 592px * @rate;
+  height: 207px * @rate;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+}
+
+.screen-content_bottom {
+  .my-row;
+
+  position: relative;
+  top: -5px * @rate;
+  align-items: flex-start;
+  height: 495px * @rate;
+  padding-left: 48px * @rate;
+
+  .chart_four {
+    position: relative;
+    width: 592px * @rate;
+    margin-left: 24px * @rate;
+  }
+
+  .title-3 {
+    position: absolute;
+    top: -56px * @rate;
+    left: 0 * @rate;
+    z-index: 10;
+  }
+
+  .title-4 {
+    position: absolute;
+    top: -56px * @rate;
+    right: 0;
+  }
+
+  .title-5 {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px * @rate;
+    margin-bottom: 16px * @rate;
+  }
+
+  .table-box {
+    position: relative;
+    width: 1208px * @rate;
+
+    :global {
+      .ant-table {
+        border-bottom: 1px solid #80c4ff;
+        border-left: 1px solid #80c4ff;
+      }
+
+      // 关于 table
+      .ant-table-thead {
+        tr {
+          th {
+            padding: 6px * @rate;
+            font-size: 14px * @rate;
+            background: #fff;
+            border: 1px solid #80c4ff;
+            border-bottom: none;
+            border-left: none;
+            border-collapse: collapse;
+          }
+        }
+      }
+
+      .ant-table-tbody {
+        tr:nth-child(odd) {
+          td {
+            padding: 5px * @rate 10px * @rate 3px * @rate;
+            font-size: 14px * @rate;
+            background: rgba(67, 160, 241, 0.03);
+            border: 1px solid #80c4ff;
+            border-bottom: none;
+            border-left: none;
+            border-collapse: collapse;
+          }
+
+          .row_blue {
+            background: rgba(68, 162, 244, 0.2);
+          }
+
+          .row_blue_sp {
+            background: rgba(68, 162, 245, 0.28);
+          }
+        }
+
+        tr:nth-child(even) {
+          td {
+            padding: 5px * @rate 10px * @rate 3px * @rate;
+            font-size: 14px * @rate;
+            background: rgba(67, 160, 241, 0.1);
+            border: 1px solid #80c4ff;
+            border-bottom: none;
+            border-left: none;
+            border-collapse: collapse;
+          }
+
+          .row_blue {
+            background: rgba(67, 160, 241, 0.13);
+          }
+
+          .row_blue_sp {
+            background: rgba(68, 162, 245, 0.22);
+          }
+        }
+      }
+
+      .col_white {
+        background: #fff !important;
+      }
+    }
+  }
 }
