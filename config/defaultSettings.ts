@@ -12,7 +12,7 @@ const Settings: LayoutSettings & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: '中邮消费金融',
+  title: '中邮消费金融有限公司',
   pwa: false,
   logo: '',
   iconfontUrl: '',

@@ -2,10 +2,9 @@ import React, { useEffect, useLayoutEffect, useRef, useMemo } from 'react';
 
 import * as echarts from 'echarts';
 
-import { option, testData } from './config';
+import { option, testData, getLine } from './config';
 
 import style from '../../style.less';
-import { isNumber } from 'lodash';
 
 const Funnel: React.FC<any> = (props: any) => {
   let { base = 1 } = props;
@@ -29,7 +28,7 @@ const Funnel: React.FC<any> = (props: any) => {
           width: 334 * base,
           itemStyle: {
             borderColor: '#fff',
-            borderWidth: 1,
+            borderWidth: 0,
             shadowColor: 'rgba(33, 59, 84, 0.16)',
             shadowOffsetX: 4 * base,
             shadowOffsetY: 4 * base,
@@ -50,6 +49,7 @@ const Funnel: React.FC<any> = (props: any) => {
           },
           data: testData,
         },
+        getLine(base, testData),
       ],
     });
   }, [base]);

@@ -11,6 +11,7 @@
   width: 1920px * @rate;
   height: 1080px * @rate;
   background: url('./assets/bg.svg') no-repeat 100%;
+  background-color: #d2eaff;
   background-position: top left;
   background-size: 100%;
 }
@@ -173,10 +174,16 @@
   }
 
   .chart_two {
+    position: relative;
     width: 592px * @rate;
     height: 422px * @rate;
     margin-right: 77px * @rate;
-    overflow: hidden;
+    // overflow: hidden;
+    .title-map {
+      position: absolute;
+      top: 12px * @rate;
+      left: -12px * @rate;
+    }
   }
 
   .chart_three {
@@ -195,7 +202,7 @@
 }
 
 .map-box {
-  width: 527px * @rate;
+  width: 592px * @rate;
   height: 422px * @rate;
 }
 

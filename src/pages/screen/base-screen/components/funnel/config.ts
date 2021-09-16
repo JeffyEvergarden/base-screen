@@ -1,6 +1,6 @@
 // import * as echarts from 'echarts';
 
-// const colors = ['#00c473', '#2E65FF', '#FAA138', '#FC464C', '#975FE5', '#9692ff'];
+const labelColors = ['#00c473', '#2E65FF', '#FAA138', '#FC464C', '#975FE5', '#9692ff'];
 
 // 渐变色
 const colors = [
@@ -96,48 +96,141 @@ const colors = [
   },
 ];
 
+const lineColors = [
+  {
+    type: 'linear',
+    x: 0,
+    y: 0,
+    x2: 1,
+    y2: 1,
+    colorStops: [
+      {
+        offset: 0,
+        color: '#1CD389', // 0% 处的颜色
+      },
+      {
+        offset: 1,
+        color: '#2E65FF', // 100% 处的颜色
+      },
+    ],
+    global: false, // 缺省为 false
+  },
+  {
+    type: 'linear',
+    x: 0,
+    y: 1,
+    x2: 1,
+    y2: 0,
+    colorStops: [
+      {
+        offset: 0,
+        color: '#FAA138', // 0% 处的颜色
+      },
+      {
+        offset: 1,
+        color: '#668EFF', // 100% 处的颜色
+      },
+    ],
+    global: false, // 缺省为 false
+  },
+  {
+    type: 'linear',
+    x: 0,
+    y: 0,
+    x2: 1,
+    y2: 1,
+    colorStops: [
+      {
+        offset: 0,
+        color: '#FFC751', // 0% 处的颜色
+      },
+      {
+        offset: 1,
+        color: '#FC464C', // 100% 处的颜色
+      },
+    ],
+    global: false, // 缺省为 false
+  },
+  {
+    type: 'linear',
+    x: 0,
+    y: 0,
+    x2: 1,
+    y2: 0,
+    colorStops: [
+      {
+        offset: 0,
+        color: '#975FE5', // 0% 处的颜色
+      },
+      {
+        offset: 1,
+        color: '#FF6E73', // 100% 处的颜色
+      },
+    ],
+    global: false, // 缺省为 false
+  },
+  {
+    type: 'linear',
+    x: 0,
+    y: 1,
+    x2: 1,
+    y2: 0,
+    colorStops: [
+      {
+        offset: 0,
+        color: '#8683E6', // 0% 处的颜色
+      },
+      {
+        offset: 1,
+        color: '#975FE5', // 100% 处的颜色
+      },
+    ],
+    global: false, // 缺省为 false
+  },
+];
+
 // 虚拟数据源
 let lineargroup = [
   {
     value: 100,
-    name: '目标',
-    oriname: '意向',
+    name: '可触达',
+    oriname: '可触达',
     number: 98756,
     color: ['rgba(29,211,137,0.8)', 'rgba(29,211,137,0)'],
   },
   {
     value: 80,
-    name: '方案率',
-    oriname: '方案',
+    name: '投件',
+    oriname: '投件',
     number: 88756,
     color: ['rgba(102,142,255,0.7)', 'rgba(102,142,255,0)'],
   },
   {
     value: 60,
-    name: '商務率',
-    oriname: '商務',
+    name: '进件',
+    oriname: '进件',
     number: 78756,
     color: ['rgba(255,198,82,0.6)', 'rgba(255,198,82,0)'],
   },
   {
     value: 40,
     name: '成交率',
-    oriname: '即將成交',
+    oriname: '成交率',
     number: 68756,
     color: ['rgba(255,110,115,0.5)', 'rgba(255,110,115,0)'],
   },
   {
     value: 20,
-    name: '贏單率',
-    oriname: '贏單',
+    name: '贏单率',
+    oriname: '贏单率',
     number: 58756,
     color: ['rgba(134,131,230,0.4)', 'rgba(134,131,230,0)'],
   },
 ];
 // 测试数据
-let testData: any = [];
-for (var i = 0; i < lineargroup.length; i++) {
-  var obj1 = {
+const testData: any = [];
+for (let i = 0; i < lineargroup.length; i++) {
+  let obj1 = {
     value: lineargroup[i].value,
     num: lineargroup[i].number,
     name: lineargroup[i].oriname,
@@ -147,6 +240,12 @@ for (var i = 0; i < lineargroup.length; i++) {
 
 const option = {
   color: colors,
+  grid: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
   series: [
     {
       top: 32,
@@ -173,7 +272,7 @@ const option = {
         textBorderColor: '#FFF',
         textBorderWidth: 0,
         formatter: function (d: any) {
-          var ins = d.name + ': ' + d.data.num;
+          const ins = d.name + ': ' + d.data.num;
           return ins;
         },
       },
@@ -181,4 +280,117 @@ const option = {
   ],
 };
 
-export { option, testData };
+const getLine = (base: number, data: any[]) => {
+  return {
+    // 画箭头线
+    z: 1,
+    top: 30 * base,
+    height: 320 * base,
+    type: 'graph',
+    layout: 'none',
+    symbolSize: 0,
+    roam: false,
+    edgeSymbol: ['circle', 'arrow'],
+    lineStyle: {
+      width: 2,
+    },
+    edgeLabel: {
+      show: true,
+      position: 'middle',
+      rotate: 0,
+      borderRadius: 4,
+      color: '#333',
+      fontWeight: 700,
+      verticalAlign: 'middle',
+      fontSize: 18 * base,
+      formatter: function (d: any) {
+        const i = d.data.source;
+        const ins = data[i].value + '%\n\n';
+        return ins;
+      },
+    },
+    data: [
+      {
+        name: '0',
+        x: 296 * base,
+        y: 0,
+      },
+      {
+        name: '1',
+        x: 296 * base,
+        y: 15,
+      },
+      {
+        name: '2',
+        x: 296 * base,
+        y: 30,
+      },
+      {
+        name: '3',
+        x: 296 * base,
+        y: 45,
+      },
+      {
+        name: '4',
+        x: 296 * base,
+        y: 60,
+      },
+      {
+        name: '5',
+        x: 296 * base,
+        y: 80,
+      },
+    ],
+    links: [
+      {
+        source: '0',
+        target: '1',
+        lineStyle: {
+          curveness: 9,
+          color: lineColors[0],
+        },
+        label: {
+          color: labelColors[1],
+        },
+      },
+      {
+        source: '1',
+        target: '2',
+
+        lineStyle: {
+          curveness: -9,
+          color: lineColors[1],
+        },
+        label: {
+          color: labelColors[2],
+        },
+      },
+      {
+        source: '2',
+        target: '3',
+
+        lineStyle: {
+          curveness: 7,
+          color: lineColors[2],
+        },
+        label: {
+          color: labelColors[3],
+        },
+      },
+      {
+        source: '3',
+        target: '4',
+
+        lineStyle: {
+          curveness: -7,
+          color: lineColors[3],
+        },
+        label: {
+          color: labelColors[4],
+        },
+      },
+    ],
+  };
+};
+
+export { option, testData, getLine };

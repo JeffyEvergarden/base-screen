@@ -3,9 +3,8 @@ import React, { useEffect, useRef, useMemo } from 'react';
 import * as echarts from 'echarts';
 import mapJson from './assets/map.json';
 import testData from './test';
-import { Title } from '../common';
 
-import style from '../../style.less';
+import style from './style.less';
 
 const Funnel: React.FC<any> = (props: any) => {
   let { base = 1 } = props;
@@ -45,7 +44,7 @@ const Funnel: React.FC<any> = (props: any) => {
           map: 'china',
           show: true,
           center: [98, 38],
-          zoom: 1.45,
+          // zoom: 1.45,
           roam: false,
           itemStyle: {
             borderColor: 'rgba(0,63,140,0.2)',
@@ -70,7 +69,6 @@ const Funnel: React.FC<any> = (props: any) => {
             type: 'map',
             mapType: 'china',
             center: [98, 38],
-            zoom: 1.45,
             // geoIndex: 0,
             label: {
               show: false,
@@ -116,9 +114,7 @@ const Funnel: React.FC<any> = (props: any) => {
   }, [options]);
 
   return (
-    <div className={style['chart_two']}>
-      <Title title="进见省份分布" className={style['title-map']} />
-
+    <div className={style['screen-bg']}>
       <div id="china-map" className={style['map-box']}></div>
     </div>
   );

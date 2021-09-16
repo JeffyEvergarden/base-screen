@@ -100,7 +100,6 @@ const Pie: React.FC<any> = (props: any) => {
             show: true,
             fontSize: 14 * base,
             formatter: function (d: any) {
-              console.log(d);
               if (!d.name) {
                 return '';
               }

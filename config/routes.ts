@@ -9,13 +9,13 @@ export default [
     path: '/editor',
     layout: false,
     name: '编辑',
-    component: './TestPage',
+    component: './TestEditor',
   },
   {
-    path: '/canvas',
+    path: '/chinamap',
     layout: false,
-    name: '编辑2',
-    component: './Canvas',
+    name: '中国地图测试',
+    component: './ChinaMap',
   },
   {
     path: '/user',
