@@ -1,12 +1,11 @@
-import React, { useEffect, useLayoutEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import * as echarts from 'echarts';
-import { getMax, columns, data1, data2 } from './config';
+import { getMax } from './config';
 import style from '../../style.less';
-import { useState } from 'react';
 
 const LineChart: React.FC<any> = (props: any) => {
-  let { base = 1, id } = props;
+  let { base = 1, id, data = [] } = props;
   const lineChart = useRef<any>(null);
 
   let first = false;
@@ -192,7 +191,19 @@ const LineChart: React.FC<any> = (props: any) => {
   };
 
   const initMap = () => {
-    lineChart.current.setOption(initOptions(columns, data1, data2));
+    const columns: any = [];
+    const data1: any = [];
+    const data2: any = [];
+    data.forEach((item: any) => {
+      columns.push(item.name);
+      data1.push(item.value1);
+      data2.push(item.value2);
+    });
+    if (!data1.length || !data2.length) {
+      return;
+    }
+    const options: any = initOptions(columns, data1, data2);
+    lineChart.current.setOption(options);
   };
 
   useEffect(() => {
@@ -205,10 +216,10 @@ const LineChart: React.FC<any> = (props: any) => {
   useEffect(() => {
     if (!first) {
       console.log('重新绘制-------：', lineChart.current);
-      lineChart.current?.setOption?.(initOptions(columns, data1, data2));
+      initMap();
       lineChart.current?.resize?.();
     }
-  }, [base]);
+  }, [base, data]);
 
   return (
     <div className={style['line-box']}>

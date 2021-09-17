@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useMemo } from 'react';
 
 import * as echarts from 'echarts';
-import mapJson from './assets/map.json';
+import mapJson from './config';
 import testData from './test';
 import { Title } from '../common';
 
@@ -21,6 +21,7 @@ const Funnel: React.FC<any> = (props: any) => {
       {
         tooltip: {
           formatter: function (params: any) {
+            // params.name === '海南省' && console.log('params', params);
             return params.name + '<br>' + '进件数:' + (params.value || 0) + '<br>';
           },
         },
@@ -45,7 +46,7 @@ const Funnel: React.FC<any> = (props: any) => {
           map: 'china',
           show: true,
           center: [98, 38],
-          zoom: 1.45,
+          zoom: 1.1,
           roam: false,
           itemStyle: {
             borderColor: 'rgba(0,63,140,0.2)',
@@ -56,10 +57,11 @@ const Funnel: React.FC<any> = (props: any) => {
           emphasis: {
             itemStyle: {
               borderWidth: 1.6,
+              areaColor: '#8dd7fc',
             },
             label: {
-              show: true,
-              color: '#333',
+              show: false,
+              color: '#fff',
               fontWeight: '700',
               fontSize: 18 * base,
             },
@@ -70,10 +72,11 @@ const Funnel: React.FC<any> = (props: any) => {
             type: 'map',
             mapType: 'china',
             center: [98, 38],
-            zoom: 1.45,
+            zoom: 1.1,
             // geoIndex: 0,
             label: {
               show: false,
+              color: '#fff',
             },
             itemStyle: {
               areaColor: '#B2CAE0',
@@ -85,7 +88,10 @@ const Funnel: React.FC<any> = (props: any) => {
                 areaColor: '#8dd7fc',
               },
               label: {
-                show: false,
+                show: true,
+                color: '#fff',
+                fontWeight: '700',
+                fontSize: 18 * base,
               },
             },
             data: testData,
@@ -99,12 +105,68 @@ const Funnel: React.FC<any> = (props: any) => {
     mapChart.current.setOption(options);
   };
 
+  // 时间计数器
+  const fake = useRef<any>({});
+
+  const select = (i: number) => {
+    mapChart.current.dispatchAction({
+      type: 'highlight',
+      seriesIndex: 0,
+      dataIndex: i,
+    });
+    mapChart.current.dispatchAction({
+      type: 'showTip',
+      seriesIndex: 0,
+      dataIndex: i,
+    });
+  };
+  const unselect = (i: number) => {
+    mapChart.current.dispatchAction({
+      type: 'downplay',
+      seriesIndex: 0,
+      dataIndex: i,
+    });
+  };
+
+  const clearTimeFn = () => {
+    clearInterval(fake.current.fn);
+    fake.current.index = -1;
+    fake.current.fn = null;
+  };
+
+  const timeFn = () => {
+    let i: any = fake.current.index;
+    // console.log('ChinaMap执行timeFn:' + i);
+    if (i >= testData.length) {
+      clearTimeFn();
+      return;
+    }
+    if (i >= 1) {
+      unselect(i - 1); // 取消上一个
+    }
+    select(i); // 显示当前
+    fake.current.index++;
+  };
+
+  const refresh = () => {
+    clearTimeFn();
+    let timeLen = Math.floor(100 / testData.length);
+    timeLen = timeLen < 4 ? timeLen : 4;
+    timeLen = timeLen > 2 ? timeLen : 2;
+    fake.current.index = 0;
+    fake.current.fn = setInterval(timeFn, timeLen * 1000);
+  };
+
   useEffect(() => {
     const chartDom = document.getElementById('china-map');
     echarts.registerMap('china', mapJson as any);
     mapChart.current = echarts.init(chartDom as any);
     initMap();
+    refresh();
     first = true;
+    return () => {
+      clearTimeFn();
+    };
   }, []);
 
   useEffect(() => {

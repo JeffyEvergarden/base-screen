@@ -1,11 +1,11 @@
-import React, { useEffect, useLayoutEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 
 import * as echarts from 'echarts';
-import { option, testData } from './config';
+import { option } from './config';
 import style from '../../style.less';
 
 const Pie: React.FC<any> = (props: any) => {
-  let { base = 1 } = props;
+  let { base = 1, data = [] } = props;
   const mapChart = useRef<any>(null);
 
   let first = false;
@@ -13,12 +13,12 @@ const Pie: React.FC<any> = (props: any) => {
   base = isNaN(base) ? 1 : base;
 
   const options = useMemo(() => {
-    let len: number = testData.length ? testData.length : 1;
-    let gadVal = testData.reduce((total: number, cur: any) => total + cur.value, 0) / len;
+    let len: number = data.length ? data.length : 1;
+    let gadVal = data.reduce((total: number, cur: any) => total + cur.value, 0) / len;
     gadVal = Math.floor(gadVal / 13);
-    const data: any = [];
-    testData.forEach((item: any) => {
-      data.push(
+    const targetData: any = [];
+    data.forEach((item: any, i: number) => {
+      targetData.push(
         {
           ...item,
           labelLine: {
@@ -48,6 +48,8 @@ const Pie: React.FC<any> = (props: any) => {
         },
       );
     });
+    // console.log(data);
+
     return Object.assign({}, option, {
       tooltip: {
         formatter: function (params: any) {
@@ -95,10 +97,12 @@ const Pie: React.FC<any> = (props: any) => {
               fontSize: 14 * base,
               fontWeight: 'bold',
             },
+            scaleSize: 20 * base,
           },
           label: {
             show: true,
             fontSize: 14 * base,
+            lineHeight: 22 * base,
             formatter: function (d: any) {
               if (!d.name) {
                 return '';
@@ -108,27 +112,63 @@ const Pie: React.FC<any> = (props: any) => {
               return ins;
             },
           },
-          data: data,
+          data: targetData,
         },
       ],
     });
-  }, [base]);
+  }, [base, data]);
 
   const initMap = () => {
     mapChart.current.setOption(options);
+    // console.log('dispatchAction', mapChart.current.dispatchAction);
+    // 触发激活 最大值
+    // 前置要求 排好序
+    mapChart.current.dispatchAction({
+      type: 'highlight',
+      seriesIndex: 0,
+      dataIndex: 0,
+    });
+  };
+
+  const moveOutFn = (e: any) => {
+    // 移除事件
+    console.log('mouseout:', e);
+    if (e.dataIndex !== 0) {
+      mapChart.current.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 0,
+        dataIndex: 0,
+      });
+    }
+  };
+  const moveInFn = (e: any) => {
+    // 移除事件
+    if (e.dataIndex !== 0) {
+      mapChart.current.dispatchAction({
+        type: 'downplay',
+        seriesIndex: 0,
+        dataIndex: 0,
+      });
+    }
   };
 
   useEffect(() => {
     const chartDom = document.getElementById('piebox');
     mapChart.current = echarts.init(chartDom as any);
     initMap();
+    mapChart.current.on('mouseout', moveOutFn);
+    mapChart.current.on('mouseover', moveInFn);
     first = true;
+    return () => {
+      mapChart.current.off('mouseout', moveOutFn);
+      mapChart.current.off('mouseover', moveInFn);
+    };
   }, []);
 
   useEffect(() => {
     if (!first) {
       console.log('重新绘制-------：', mapChart.current);
-      mapChart.current?.setOption?.(options);
+      initMap();
       mapChart.current?.resize?.();
     }
   }, [options]);

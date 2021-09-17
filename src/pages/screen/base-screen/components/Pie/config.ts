@@ -130,19 +130,8 @@ const colors = [
   },
 ];
 
-// 虚拟数据源
-const testData: any = [
-  { value: 1048, name: '中邮钱包', realPercent: '10%' },
-  { value: 735, name: '支付宝', realPercent: '10%' },
-  { value: 580, name: '微信', realPercent: '10%' },
-  { value: 484, name: '手机银行', realPercent: '10%' },
-  { value: 300, name: '蚂蚁金服务', realPercent: '10%' },
-  { value: 250, name: 'fuck', realPercent: '10%' },
-  { value: 300, name: '其他', realPercent: '10%' },
-];
-
 const option = {
   color: colors,
 };
 
-export { option, testData };
+export { option };

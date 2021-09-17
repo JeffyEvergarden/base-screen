@@ -1,5 +1,6 @@
 // import * as echarts from 'echarts';
 
+// 文字颜色
 const labelColors = ['#00c473', '#2E65FF', '#FAA138', '#FC464C', '#975FE5', '#9692ff'];
 
 // 渐变色
@@ -96,6 +97,7 @@ const colors = [
   },
 ];
 
+// 转换线渐变
 const lineColors = [
   {
     type: 'linear',
@@ -189,55 +191,7 @@ const lineColors = [
   },
 ];
 
-// 虚拟数据源
-let lineargroup = [
-  {
-    value: 100,
-    name: '可触达',
-    oriname: '可触达',
-    number: 98756,
-    color: ['rgba(29,211,137,0.8)', 'rgba(29,211,137,0)'],
-  },
-  {
-    value: 80,
-    name: '投件',
-    oriname: '投件',
-    number: 88756,
-    color: ['rgba(102,142,255,0.7)', 'rgba(102,142,255,0)'],
-  },
-  {
-    value: 60,
-    name: '进件',
-    oriname: '进件',
-    number: 78756,
-    color: ['rgba(255,198,82,0.6)', 'rgba(255,198,82,0)'],
-  },
-  {
-    value: 40,
-    name: '成交率',
-    oriname: '成交率',
-    number: 68756,
-    color: ['rgba(255,110,115,0.5)', 'rgba(255,110,115,0)'],
-  },
-  {
-    value: 20,
-    name: '贏单率',
-    oriname: '贏单率',
-    number: 58756,
-    color: ['rgba(134,131,230,0.4)', 'rgba(134,131,230,0)'],
-  },
-];
-// 测试数据
-const testData: any = [];
-for (let i = 0; i < lineargroup.length; i++) {
-  let obj1 = {
-    value: lineargroup[i].value,
-    num: lineargroup[i].number,
-    name: lineargroup[i].oriname,
-  };
-  testData.push(obj1);
-}
-
+// 基本配置
 const option = {
   color: colors,
   grid: {
@@ -280,7 +234,11 @@ const option = {
   ],
 };
 
+// 生产转换线
 const getLine = (base: number, data: any[]) => {
+  if (data.length < 5) {
+    return null;
+  }
   return {
     // 画箭头线
     z: 1,
@@ -346,7 +304,7 @@ const getLine = (base: number, data: any[]) => {
         source: '0',
         target: '1',
         lineStyle: {
-          curveness: 9,
+          curveness: 8,
           color: lineColors[0],
         },
         label: {
@@ -356,9 +314,8 @@ const getLine = (base: number, data: any[]) => {
       {
         source: '1',
         target: '2',
-
         lineStyle: {
-          curveness: -9,
+          curveness: -8,
           color: lineColors[1],
         },
         label: {
@@ -393,4 +350,4 @@ const getLine = (base: number, data: any[]) => {
   };
 };
 
-export { option, testData, getLine };
+export { option, getLine };

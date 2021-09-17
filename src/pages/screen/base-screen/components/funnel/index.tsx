@@ -1,13 +1,13 @@
-import React, { useEffect, useLayoutEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 
 import * as echarts from 'echarts';
 
-import { option, testData, getLine } from './config';
+import { option, getLine } from './config';
 
 import style from '../../style.less';
 
 const Funnel: React.FC<any> = (props: any) => {
-  let { base = 1 } = props;
+  let { base = 1, data = [] } = props;
   const myChart = useRef<any>(null);
 
   let first = false;
@@ -15,7 +15,6 @@ const Funnel: React.FC<any> = (props: any) => {
   base = isNaN(base) ? 1 : base;
 
   const options = useMemo(() => {
-    console.log(base);
     return Object.assign({}, option, {
       series: [
         {
@@ -47,12 +46,12 @@ const Funnel: React.FC<any> = (props: any) => {
               return ins;
             },
           },
-          data: testData,
+          data: data,
         },
-        getLine(base, testData),
+        getLine(base, data),
       ],
     });
-  }, [base]);
+  }, [base, data]);
 
   useEffect(() => {
     const chartDom = document.getElementById('funnel');

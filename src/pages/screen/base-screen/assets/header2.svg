@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="64" viewBox="0 0 1920 64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #668eff;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="头部背景" transform="translate(-437 -80)">
+    <path id="路径_66" data-name="路径 66" class="cls-1" d="M1216.375,481H792V417h461S1216,480.5,1216.375,481Z" transform="translate(-355 -337)"/>
+    <g id="组_55" data-name="组 55">
+      <path id="路径_69" data-name="路径 69" class="cls-1" d="M-10,0H782L766,28H6Z" transform="translate(1012 80)"/>
+      <path id="路径_73" data-name="路径 73" class="cls-1" d="M1867.263,91H1793l4,4h72.365Z" transform="translate(-861 11.487)"/>
+      <path id="路径_71" data-name="路径 71" class="cls-1" d="M1884,91h-97l9.513,9.513H1889Z" transform="translate(-884 -2)"/>
+      <path id="路径_74" data-name="路径 74" class="cls-2" d="M1758.333,92h-720V90h720Z" transform="translate(-1.833 6)"/>
+      <path id="路径_126" data-name="路径 126" class="cls-1" d="M1795.1,91h74.263l-4,4H1793Z" transform="translate(-5.365 11.487)"/>
+      <path id="路径_127" data-name="路径 127" class="cls-1" d="M1792,91h97l-9.513,9.513H1787Z" transform="translate(4 -2)"/>
+      <path id="路径_129" data-name="路径 129" class="cls-1" d="M2,0H994l4,6H-2Z" transform="translate(899 80)"/>
+    </g>
+    <g id="组_54" data-name="组 54">
+      <path id="路径_125" data-name="路径 125" class="cls-1" d="M828.625,481H1253V417H792S829,480.5,828.625,481Z" transform="translate(1104 -337)"/>
+      <path id="路径_130" data-name="路径 130" class="cls-2" d="M2065,121.5H1951.667v-2H2065Z" transform="translate(7)"/>
+    </g>
+  </g>
+</svg>
