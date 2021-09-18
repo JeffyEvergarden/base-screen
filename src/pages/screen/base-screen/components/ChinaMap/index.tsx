@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useMemo } from 'react';
 
 import * as echarts from 'echarts';
-import mapJson from './config';
+import mapInfo from './config';
 import testData from './test';
 import { Title } from '../common';
 
@@ -31,18 +31,24 @@ const Funnel: React.FC<any> = (props: any) => {
 
   const options = useMemo(() => {
     let max = 0;
-    data.forEach((ele: any) => {
+    const map: any = mapInfo.map;
+    const newData = data.map((ele: any) => {
       if (max <= ele.value) {
         max = ele.value;
       }
+      return {
+        ...ele,
+        name: map.get(ele.code) || ele.name,
+      };
     });
+    // console.log(newData)
     return Object.assign(
       {},
       {
         tooltip: {
           // confine: true,
           formatter: function (params: any) {
-            console.log(params);
+            // console.log(params);
             // params.name === '海南省' && console.log('params', params);
             // return params.name + '<br>' + '进件数:' + (params.value || 0) + '<br>';
             return renderTool(params);
@@ -122,7 +128,7 @@ const Funnel: React.FC<any> = (props: any) => {
                 fontSize: 12 * base,
               },
             },
-            data: data,
+            data: newData,
           },
         ],
       },
@@ -187,7 +193,7 @@ const Funnel: React.FC<any> = (props: any) => {
 
   useEffect(() => {
     const chartDom = document.getElementById('china-map');
-    echarts.registerMap('china', mapJson as any);
+    echarts.registerMap('china', mapInfo.mapJson as any);
     mapChart.current = echarts.init(chartDom as any);
     initMap();
     refresh();

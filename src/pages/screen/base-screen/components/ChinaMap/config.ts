@@ -1,6 +1,9 @@
 import mapJson from './assets/map.json';
 
+const map: any = new Map();
+
 mapJson.features.forEach((item: any) => {
+  map.set(String(item.properties.adcode), item.properties.name);
   if (item.properties.name === '海南省') {
     let arr: any[] = [];
     item.geometry.coordinates.forEach((arr1: any[]) => {
@@ -13,4 +16,4 @@ mapJson.features.forEach((item: any) => {
   }
 });
 
-export default mapJson;
+export default { mapJson, map };
