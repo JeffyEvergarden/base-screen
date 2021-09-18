@@ -1,5 +1,11 @@
 export default [
   {
+    path: '/',
+    layout: false,
+    name: '基础大屏',
+    component: './screen/base-screen',
+  },
+  {
     path: '/screen',
     layout: false,
     name: '基础大屏',
