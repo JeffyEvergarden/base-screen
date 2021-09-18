@@ -30,6 +30,9 @@ const LineChart: React.FC<any> = (props: any) => {
           right: 60 * base,
           bottom: 30 * base,
         },
+        tooltip: {
+          trigger: 'axis',
+        },
         xAxis: {
           type: 'category',
           data: columns,
