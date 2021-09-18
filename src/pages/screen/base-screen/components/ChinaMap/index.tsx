@@ -42,6 +42,7 @@ const Funnel: React.FC<any> = (props: any) => {
         tooltip: {
           // confine: true,
           formatter: function (params: any) {
+            console.log(params);
             // params.name === '海南省' && console.log('params', params);
             // return params.name + '<br>' + '进件数:' + (params.value || 0) + '<br>';
             return renderTool(params);

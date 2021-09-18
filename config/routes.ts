@@ -2,7 +2,7 @@ export default [
   {
     path: '/',
     layout: false,
-    name: '基础大屏',
+    name: '标准基础大屏',
     component: './screen/base-screen',
   },
   {
@@ -42,6 +42,6 @@ export default [
     ],
   },
   { name: '查询表格', icon: 'table', path: '/list', component: './TableList' },
-  { path: '/', redirect: '/screen' },
+  // { path: '/', redirect: '/screen' },
   { component: './404' },
 ];

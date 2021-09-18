@@ -2,15 +2,7 @@
   "code": 0,
   "msg": "查询成功",
   "resObject": [
-    {
-      "CODE": "1",
-      "NAME": "广东",
-      "NUM": "20"
-    },
-    {
-      "CODE": "2",
-      "NAME": "广西",
-      "NUM": "20"
-    }
+    { "code": "1", "provinceName": "广东", "inPartsNumberByProvince": 32 },
+    { "code": "2", "provinceName": "广西", "inPartsNumberByProvince": 15 }
   ]
 }

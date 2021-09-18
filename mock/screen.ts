@@ -78,9 +78,9 @@ const getChinaMap = (req: Request, res: Response) => {
       return;
     }
     testData.push({
-      NAME: item.properties.name,
-      NUM: val,
-      CODE: item.properties.adcode,
+      provinceName: item.properties.name,
+      inPartsNumberByProvince: val,
+      code: item.properties.adcode,
       extra: item.properties,
     });
   });

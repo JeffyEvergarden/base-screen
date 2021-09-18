@@ -172,9 +172,9 @@ export const useMapModel = () => {
 
     data = data.map((item: any) => {
       return {
-        code: item.CODE,
-        name: item.NAME,
-        value: item.NUM,
+        code: item.code,
+        name: item.provinceName,
+        value: item.inPartsNumberByProvince,
       };
     });
     // console.log('map', data);
