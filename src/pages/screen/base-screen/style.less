@@ -268,7 +268,7 @@
 }
 
 .tooltips-bg {
-  padding: 10px * @rate 7.5 * @rate;
+  padding-right: 20px;
 }
 
 .tooltips-box {
@@ -288,6 +288,7 @@
 
 .tooltips-num {
   margin-left: 27px * @rate;
+  color: #1a2b5b;
   font-size: 24px * @rate;
   line-height: 30px * @rate;
 }
@@ -356,6 +357,7 @@
       .ant-table-tbody {
         tr:nth-child(odd) {
           td {
+            min-width: 80px * @rate;
             padding: 5px * @rate 10px * @rate 3px * @rate;
             font-size: 14px * @rate;
             background: rgba(67, 160, 241, 0.03);
@@ -376,6 +378,7 @@
 
         tr:nth-child(even) {
           td {
+            min-width: 80px * @rate;
             padding: 5px * @rate 10px * @rate 3px * @rate;
             font-size: 14px * @rate;
             background: rgba(67, 160, 241, 0.1);

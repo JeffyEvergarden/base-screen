@@ -1,0 +1,30 @@
+{
+  "code": 0,
+  "msg": "成功",
+  "resObject": [
+    {
+      "updateTime": "2021-09-18 02:18:05",
+      "updateName": "中邮钱包"
+    },
+    {
+      "updateTime": "2021-09-18 02:18:05",
+      "updateName": "京东金融"
+    },
+    {
+      "updateTime": "2021-09-18 02:18:05",
+      "updateName": "微信"
+    },
+    {
+      "updateTime": "2021-09-18 02:18:05",
+      "updateName": "支付宝"
+    },
+    {
+      "updateTime": "2021-09-18 02:18:05",
+      "updateName": "手机银行"
+    },
+    {
+      "updateTime": "2021-09-18 02:18:05",
+      "updateName": "蚂蚁金服"
+    }
+  ]
+}

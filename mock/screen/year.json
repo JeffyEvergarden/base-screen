@@ -1,0 +1,71 @@
+{
+  "code": 0,
+  "msg": "成功",
+  "resObject": [
+    {
+      "month": "去年09",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    },
+    {
+      "month": "去年10",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    },
+    {
+      "month": "去年11",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    },
+    {
+      "month": "去年12",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    },
+    {
+      "month": "01",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    },
+    {
+      "month": "02",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    },
+    {
+      "month": "03",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    },
+    {
+      "month": "04",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    },
+    {
+      "month": "05",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    },
+    {
+      "month": "06",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    },
+    {
+      "month": "07",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    },
+    {
+      "month": "08",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    },
+    {
+      "month": "09",
+      "inPartsNumber": 10,
+      "growthBalance": 10
+    }
+  ]
+}

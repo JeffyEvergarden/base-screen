@@ -2,7 +2,7 @@ import { request } from 'umi';
 
 // 获取总揽数据
 export const getOverviewData = async (params?: any) => {
-  return request('/screen/base/overall', {
+  return request('/screen/data/overview', {
     method: 'get',
     params,
   });
@@ -10,35 +10,35 @@ export const getOverviewData = async (params?: any) => {
 
 // 获取总揽数据
 export const getFunnel = async (params?: any) => {
-  return request('/screen/base/funnel', {
-    method: 'get',
-    params,
-  });
-};
-
-const getPieList = async (params?: any) => {
-  return request('/screen/base/Pie', {
+  return request('/screen/data/funnel', {
     method: 'get',
     params,
   });
 };
 
 const getMonthList = async (params?: any) => {
-  return request('/screen/base/month', {
+  return request('/screen/data/month', {
     method: 'get',
     params,
   });
 };
 
 const getYearList = async (params?: any) => {
-  return request('/screen/base/year', {
+  return request('/screen/data/year', {
     method: 'get',
     params,
   });
 };
 
 const getChinaMap = async (params?: any) => {
-  return request('/screen/base/chinamap', {
+  return request('/screen/data/map', {
+    method: 'get',
+    params,
+  });
+};
+
+const getTimeList = async (params?: any) => {
+  return request('/screen/data/time', {
     method: 'get',
     params,
   });
@@ -47,8 +47,8 @@ const getChinaMap = async (params?: any) => {
 export default {
   getOverviewData,
   getFunnel,
-  getPieList,
   getMonthList,
   getYearList,
   getChinaMap,
+  getTimeList,
 };

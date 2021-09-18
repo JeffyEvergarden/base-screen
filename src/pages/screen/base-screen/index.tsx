@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // 通用组件
-import { Card, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import { Title, TitleNum } from './components/common';
 import { InfoCircleOutlined } from '@ant-design/icons';
 // 图表组件
@@ -18,7 +18,7 @@ import { getCnTime } from '@/utils';
 import { throttle } from './util';
 
 // 数据
-import { useOverViewModel, useFunnelModel, usePieModel, useLineModal, useMapModel } from './model';
+import { useOverViewModel, useFunnelModel, useLineModal, useMapModel, useTimeModel } from './model';
 
 const ScreenPage: React.FC<any> = (props: any) => {
   // 右上角时间
@@ -46,26 +46,15 @@ const ScreenPage: React.FC<any> = (props: any) => {
     };
   }, []);
 
-  // 总揽数据
-  const { dayInNum, dayOutMoney, dayNetProfitMoney, getOverviewData } = useOverViewModel();
+  // 总揽数据 饼图数据
+  const { dayInNum, dayOutMoney, dayNetProfitMoney, total, pieList, tableList, getOverviewData } =
+    useOverViewModel();
 
   // 更新数据
-  const [updateList, setUpdateList] = useState<any[]>([
-    {
-      name: '核心核心核心',
-      date: '2021-09-13 11:34:43',
-    },
-    {
-      name: '百度',
-      date: '2021-09-13 11:34:43',
-    },
-  ]);
+  const { updateList, getTime } = useTimeModel();
 
   // 漏斗数据
   const { funnelList, getFunnel } = useFunnelModel();
-
-  // 饼图数据
-  const { pieList, getPieList } = usePieModel();
 
   // 直线表数据
   const { dayList, monthList, getMonthList, getYearList } = useLineModal();
@@ -76,10 +65,10 @@ const ScreenPage: React.FC<any> = (props: any) => {
   useEffect(() => {
     getOverviewData(); // 总揽数据
     getFunnel(); // 漏斗数据
-    getPieList(); // 饼图数据
     getMonthList(); // 月份数据
     getYearList(); // 年份数据
     getMap(); // 地图数据
+    getTime();
   }, []);
 
   const renderHeaderIcon = (
@@ -137,12 +126,12 @@ const ScreenPage: React.FC<any> = (props: any) => {
         <Funnel base={base} data={funnelList} />
         {/* 中国地图 */}
         <ChinaMap base={base} data={mapList} />
-        {/* 饼图 */}
-        <Pie base={base} data={pieList} />
+        {/* 饼图  需显示总贷款余额*/}
+        <Pie base={base} data={pieList} totalMoney={total} />
       </div>
 
       <div className={style['screen-content_bottom']}>
-        <TableView />
+        <TableView data={tableList} />
         <div className={style['chart_four']}>
           <div className={style['title-4']}>
             <Title title="近30天进件量与净增余额" />

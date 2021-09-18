@@ -2,75 +2,28 @@
 import { Request, Response } from 'express';
 import moment from 'moment';
 import mapJson from './util/map.json';
+// 总揽数据json
+import overviewJson from './screen/OverView.json';
+// 漏斗数据json
+import funnelJson from './screen/funnel.json';
+
+// 年数据json
+import yearJson from './screen/year.json';
+
+// 月数据json
+import monthJson from './screen/month.json';
+
+// 月数据json
+import timeJson from './screen/Time.json';
 
 // 获取总揽
 const getOverviewData = (req: Request, res: Response) => {
-  res.json({
-    resultCode: '000',
-    data: {
-      dayInNum: 28999,
-      dayOutMoney: 828999,
-      dayNetProfitMoney: 828999,
-    },
-  });
+  res.json(overviewJson);
 };
 
 // 获取漏斗数据
 const getFunnel = (req: Request, res: Response) => {
-  // 虚拟数据源
-  let lineargroup = [
-    {
-      value: 100,
-      name: '可触达1',
-      oriname: '可触达1',
-      number: 98756,
-      color: ['rgba(29,211,137,0.8)', 'rgba(29,211,137,0)'],
-    },
-    {
-      value: 80,
-      name: '投件',
-      oriname: '投件',
-      number: 88756,
-      color: ['rgba(102,142,255,0.7)', 'rgba(102,142,255,0)'],
-    },
-    {
-      value: 60,
-      name: '进件',
-      oriname: '进件',
-      number: 78756,
-      color: ['rgba(255,198,82,0.6)', 'rgba(255,198,82,0)'],
-    },
-    {
-      value: 40,
-      name: '成交率',
-      oriname: '成交率',
-      number: 68756,
-      color: ['rgba(255,110,115,0.5)', 'rgba(255,110,115,0)'],
-    },
-    {
-      value: 20,
-      name: '贏单率',
-      oriname: '贏单率',
-      number: 58756,
-      color: ['rgba(134,131,230,0.4)', 'rgba(134,131,230,0)'],
-    },
-  ];
-  // 测试数据
-  const testData: any = [];
-  for (let i = 0; i < lineargroup.length; i++) {
-    let obj1 = {
-      value: lineargroup[i].value,
-      num: lineargroup[i].number,
-      percent: lineargroup[i].value,
-      name: lineargroup[i].oriname,
-    };
-    testData.push(obj1);
-  }
-
-  res.json({
-    resultCode: '000',
-    data: testData,
-  });
+  res.json(funnelJson);
 };
 
 // 获取 中国地图 进件数据
@@ -97,38 +50,17 @@ const getTableList = (req: Request, res: Response) => {};
 
 // 获取月份数据
 const getMonthData = (req: Request, res: Response) => {
-  const columns = ['09-01', '09-02', '09-03', '09-04', '09-06', '09-07'];
-  const data1 = [300, 400, 700, 200, 100, 600];
-  const data2 = [3000, 4030, 4700, 1200, 8000, 5600];
-  const data = columns.map((item: any, i: number) => {
-    return {
-      name: item,
-      value1: data1[i],
-      value2: data2[i],
-    };
-  });
-  res.json({
-    resultCode: '000',
-    data: data,
-  });
+  res.json(monthJson);
 };
 
 // 获取 年份数据
 const getYearData = (req: Request, res: Response) => {
-  const columns = ['1月', '2月', '3月', '4月', '5月', '6月'];
-  const data1 = [300, 400, 700, 200, 100, 600];
-  const data2 = [3000, 4030, 4700, 1200, 8000, 5600];
-  const data = columns.map((item: any, i: number) => {
-    return {
-      name: item,
-      value1: data1[i],
-      value2: data2[i] * 10000000,
-    };
-  });
-  res.json({
-    resultCode: '000',
-    data: data,
-  });
+  res.json(yearJson);
+};
+
+// 获取月份数据
+const getTime = (req: Request, res: Response) => {
+  res.json(timeJson);
 };
 
 const getChinaMap = (req: Request, res: Response) => {
@@ -146,25 +78,26 @@ const getChinaMap = (req: Request, res: Response) => {
       return;
     }
     testData.push({
-      name: item.properties.name,
-      value: val,
+      NAME: item.properties.name,
+      NUM: val,
+      CODE: item.properties.adcode,
       extra: item.properties,
     });
   });
 
   testData = testData.sort((a: any, b: any) => b.value - a.value);
   res.json({
-    resultCode: '000',
-    data: testData,
+    code: 0,
+    msg: '查询成功',
+    resObject: testData,
   });
 };
 
 export default {
-  'GET /screen/base/overall': getOverviewData,
-  'GET /screen/base/funnel': getFunnel,
-  'GET /screen/base/chinamap': getChinaMap,
-  'GET /screen/base/Pie': getPieData,
-  'GET /screen/base/table': getTableList,
-  'GET /screen/base/month': getMonthData,
-  'GET /screen/base/year': getYearData,
+  'GET /screen/data/overview': getOverviewData,
+  'GET /screen/data/funnel': getFunnel,
+  'GET /screen/data/map': getChinaMap,
+  'GET /screen/data/month': getMonthData,
+  'GET /screen/data/year': getYearData,
+  'GET /screen/data/time': getTime,
 };

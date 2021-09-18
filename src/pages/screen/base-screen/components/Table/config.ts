@@ -1,3 +1,5 @@
+import { formatePercent } from '../../util';
+
 const columns = [
   {
     dataIndex: 'channel',
@@ -10,9 +12,9 @@ const columns = [
         props: {},
       };
       if (text === '线上') {
-        obj.props.rowSpan = 8;
+        obj.props.rowSpan = row.rowSpan;
       } else if (text === '线下') {
-        obj.props.rowSpan = 5;
+        obj.props.rowSpan = row.rowSpan;
       } else if (text === '合计') {
         obj.props.colSpan = 2; // 两列
       } else if (text === '其他') {
@@ -24,7 +26,8 @@ const columns = [
     },
   },
   {
-    dataIndex: 'type',
+    dataIndex: 'channelName',
+    key: 'key',
     title: '渠道', // 渠道大类
     className: 'col_white',
     render: (text: any, row: any, index: any) => {
@@ -42,52 +45,55 @@ const columns = [
     },
   },
   {
-    dataIndex: 'day_num1',
+    dataIndex: 'inPartsNumberByDay',
     title: '本日进件量',
     align: 'right',
   },
   {
-    dataIndex: 'day_num2',
+    dataIndex: 'loansMoneyByDay',
     title: '本日放贷金额',
     align: 'right',
   },
   {
-    dataIndex: 'day_num3',
+    dataIndex: 'growthBalanceByDay',
     title: '本日净增余额',
     align: 'right',
   },
   {
-    dataIndex: 'month_num1',
+    dataIndex: 'inPartsNumberByMonth',
     title: '本月进件量',
     align: 'right',
     className: 'row_blue',
   },
   {
-    dataIndex: 'month_num2',
+    dataIndex: 'passRateMonth',
     title: '本月审批通过率',
     align: 'right',
     className: 'row_blue',
+    render: (text: any, row: any, index: any) => {
+      return formatePercent(text);
+    },
   },
   {
-    dataIndex: 'month_num3',
+    dataIndex: 'loansMoneyByMonth',
     title: '本月放贷金额',
     align: 'right',
     className: 'row_blue',
   },
   {
-    dataIndex: 'month_num4',
+    dataIndex: 'growthBalanceByMonth',
     title: '本月净增余额',
     align: 'right',
     className: 'row_blue',
   },
   {
-    dataIndex: 'year_num1',
+    dataIndex: 'growthBalanceByYear',
     title: '本年净增余额',
     align: 'right',
     className: 'row_blue_sp',
   },
   {
-    dataIndex: 'total',
+    dataIndex: 'loanBalance',
     title: '贷款余额',
     align: 'right',
     className: 'row_blue_sp',

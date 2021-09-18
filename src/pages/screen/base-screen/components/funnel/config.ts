@@ -1,5 +1,5 @@
 // import * as echarts from 'echarts';
-
+import { formatePercent } from '../../util';
 // 文字颜色
 const labelColors = ['#00c473', '#2E65FF', '#FAA138', '#FC464C', '#975FE5', '#9692ff'];
 
@@ -263,7 +263,7 @@ const getLine = (base: number, data: any[]) => {
       fontSize: 18 * base,
       formatter: function (d: any) {
         const i = d.data.source;
-        const ins = data[i].value + '%\n\n';
+        const ins = formatePercent(data[i].percent) + '\n\n';
         return ins;
       },
     },

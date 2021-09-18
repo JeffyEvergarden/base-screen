@@ -1,0 +1,36 @@
+{
+  "code": 0,
+  "msg": "成功",
+  "resObject": [
+    {
+      "customerNumber": 1000000,
+      "percent": 1.0,
+      "custType": "可触达",
+      "custTypeOrder": 1
+    },
+    {
+      "customerNumber": 800000,
+      "percent": 0.8,
+      "custType": "响应",
+      "custTypeOrder": 2
+    },
+    {
+      "customerNumber": 600000,
+      "percent": 0.75,
+      "custType": "授信",
+      "custTypeOrder": 3
+    },
+    {
+      "customerNumber": 400000,
+      "percent": 0.6666667,
+      "custType": "用信",
+      "custTypeOrder": 4
+    },
+    {
+      "customerNumber": 200000,
+      "percent": 0.5,
+      "custType": "结存",
+      "custTypeOrder": 5
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useMemo } from 'react';
 import * as echarts from 'echarts';
 
 import { option, getLine } from './config';
-
+import { formateBaseMoney } from '../../util';
 import style from '../../style.less';
 
 const Funnel: React.FC<any> = (props: any) => {
@@ -37,12 +37,12 @@ const Funnel: React.FC<any> = (props: any) => {
             show: true,
             position: 'inside',
             fontSize: 16 * base,
-            fontWeight: 900,
+            fontWeight: 700,
             color: '#FFF',
             textBorderColor: '#FFF',
             textBorderWidth: 0,
             formatter: function (d: any) {
-              const ins = d.name + ': ' + d.data.num;
+              const ins = d.name + ': ' + formateBaseMoney(d.data.num);
               return ins;
             },
           },

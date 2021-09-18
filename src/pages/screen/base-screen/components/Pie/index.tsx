@@ -4,8 +4,10 @@ import * as echarts from 'echarts';
 import { option } from './config';
 import style from '../../style.less';
 
+import { formatePercent, formateBaseMoney, formateNumer } from '../../util';
+
 const Pie: React.FC<any> = (props: any) => {
-  let { base = 1, data = [] } = props;
+  let { base = 1, data = [], totalMoney = 0 } = props;
   const mapChart = useRef<any>(null);
 
   let first = false;
@@ -13,6 +15,17 @@ const Pie: React.FC<any> = (props: any) => {
   base = isNaN(base) ? 1 : base;
 
   const options = useMemo(() => {
+    // 贷款余额处理
+    let unit = '';
+    let money = totalMoney;
+    if (totalMoney >= 100000000) {
+      unit = '亿';
+      money = formateNumer(totalMoney / 10000000);
+    } else if (totalMoney >= 10000) {
+      unit = '万';
+      money = formateNumer(totalMoney / 10000);
+    }
+
     let len: number = data.length ? data.length : 1;
     let gadVal = data.reduce((total: number, cur: any) => total + cur.value, 0) / len;
     gadVal = Math.floor(gadVal / 13);
@@ -23,7 +36,8 @@ const Pie: React.FC<any> = (props: any) => {
           ...item,
           labelLine: {
             show: true,
-            length: 28 * base,
+            length: 20 * base,
+            length2: (i === 0 ? 40 : 10) * base,
             lineStyle: {
               color: '#B7B7B7',
               lineHeight: 18,
@@ -59,9 +73,15 @@ const Pie: React.FC<any> = (props: any) => {
           return params.name + ':' + params.value + '<br>';
         },
       },
+      grid: {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+      },
       title: {
-        text: '贷款余额 (亿元)',
-        subtext: `¥ ${'123,224'}`,
+        text: `贷款余额 (${unit}元)`,
+        subtext: `¥ ${money}`,
         top: '35%',
         textAlign: 'center',
         left: '49%',
@@ -118,7 +138,12 @@ const Pie: React.FC<any> = (props: any) => {
                 return '';
               }
               // console.log(d);
-              const ins = d.name + ' | ' + d.data.realPercent + '\n' + `¥${d.value}元`;
+              const ins =
+                d.name +
+                ' | ' +
+                formatePercent(d.data.realPercent) +
+                '\n' +
+                `¥ ${formateBaseMoney(d.value)}元`;
               return ins;
             },
           },
@@ -126,7 +151,7 @@ const Pie: React.FC<any> = (props: any) => {
         },
       ],
     });
-  }, [base, data]);
+  }, [base, data, totalMoney]);
 
   const initMap = () => {
     mapChart.current.setOption(options);
@@ -142,7 +167,7 @@ const Pie: React.FC<any> = (props: any) => {
 
   const moveOutFn = (e: any) => {
     // 移除事件
-    console.log('mouseout:', e);
+    // console.log('mouseout:', e);
     if (e.dataIndex !== 0) {
       mapChart.current.dispatchAction({
         type: 'highlight',
