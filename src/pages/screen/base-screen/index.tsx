@@ -18,7 +18,7 @@ import { getCnTime } from '@/utils';
 import { throttle } from './util';
 
 // 数据
-import { useOverViewModel, useFunnelModel, usePieModel, useLineModal } from './model';
+import { useOverViewModel, useFunnelModel, usePieModel, useLineModal, useMapModel } from './model';
 
 const ScreenPage: React.FC<any> = (props: any) => {
   // 右上角时间
@@ -70,12 +70,16 @@ const ScreenPage: React.FC<any> = (props: any) => {
   // 直线表数据
   const { dayList, monthList, getMonthList, getYearList } = useLineModal();
 
+  // 漏斗数据
+  const { mapList, getMap } = useMapModel();
+
   useEffect(() => {
     getOverviewData(); // 总揽数据
     getFunnel(); // 漏斗数据
     getPieList(); // 饼图数据
     getMonthList(); // 月份数据
     getYearList(); // 年份数据
+    getMap(); // 地图数据
   }, []);
 
   const renderHeaderIcon = (
@@ -126,7 +130,7 @@ const ScreenPage: React.FC<any> = (props: any) => {
         {/* 漏斗图 */}
         <Funnel base={base} data={funnelList} />
         {/* 中国地图 */}
-        <ChinaMap base={base} />
+        <ChinaMap base={base} data={mapList} />
         {/* 饼图 */}
         <Pie base={base} data={pieList} />
       </div>

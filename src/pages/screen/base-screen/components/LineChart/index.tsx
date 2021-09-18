@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 import * as echarts from 'echarts';
 import { getMax } from './config';
+import { formateMoney } from '../../util';
 import style from '../../style.less';
 
 const LineChart: React.FC<any> = (props: any) => {
@@ -22,8 +23,8 @@ const LineChart: React.FC<any> = (props: any) => {
         },
         grid: {
           top: 35 * base,
-          left: 50 * base,
-          right: 53 * base,
+          left: 55 * base,
+          right: 60 * base,
           bottom: 30 * base,
         },
         xAxis: {
@@ -58,6 +59,11 @@ const LineChart: React.FC<any> = (props: any) => {
                 color: 'rgba(0,0,0,0.07)',
               },
             },
+            axisLabel: {
+              formatter: (val: any) => {
+                return val;
+              },
+            },
           },
           {
             name: '单位：亿元',
@@ -69,6 +75,11 @@ const LineChart: React.FC<any> = (props: any) => {
             },
             splitLine: {
               show: false,
+            },
+            axisLabel: {
+              formatter: (val: any) => {
+                return formateMoney(val);
+              },
             },
           },
         ],
@@ -161,7 +172,7 @@ const LineChart: React.FC<any> = (props: any) => {
                   // console.log(d);
                   let coord = d.data.coord[0];
                   let value = d.value;
-                  return `${columns[coord]}: ${value}亿元`;
+                  return `${columns[coord]}: ${formateMoney(value)}元`;
                 },
               },
               data: [
@@ -215,7 +226,7 @@ const LineChart: React.FC<any> = (props: any) => {
 
   useEffect(() => {
     if (!first) {
-      console.log('重新绘制-------：', lineChart.current);
+      // console.log('重新绘制-------：', lineChart.current);
       initMap();
       lineChart.current?.resize?.();
     }

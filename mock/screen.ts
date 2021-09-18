@@ -122,7 +122,7 @@ const getYearData = (req: Request, res: Response) => {
     return {
       name: item,
       value1: data1[i],
-      value2: data2[i],
+      value2: data2[i] * 10000000,
     };
   });
   res.json({
@@ -153,12 +153,16 @@ const getChinaMap = (req: Request, res: Response) => {
   });
 
   testData = testData.sort((a: any, b: any) => b.value - a.value);
+  res.json({
+    resultCode: '000',
+    data: testData,
+  });
 };
 
 export default {
   'GET /screen/base/overall': getOverviewData,
   'GET /screen/base/funnel': getFunnel,
-  'GET /screen/base/chinaMap': getChinaMap,
+  'GET /screen/base/chinamap': getChinaMap,
   'GET /screen/base/Pie': getPieData,
   'GET /screen/base/table': getTableList,
   'GET /screen/base/month': getMonthData,

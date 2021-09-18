@@ -132,10 +132,6 @@ const colors = [
   },
 ];
 
-const columns = ['09-01', '09-02', '09-03', '09-04', '09-06', '09-07'];
-const data1 = [300, 400, 700, 200, 100, 600];
-const data2 = [3000, 4030, 4700, 1200, 8000, 5600];
-
 // 找最适合的刻度线
 // 43 ---> 50 2位数 50倍数
 // 371 --> 100  3位数 100倍数取整
@@ -205,4 +201,4 @@ const getMax = (data: any[]) => {
   return minSpit * 5;
 };
 
-export { columns, data1, data2, getMax };
+export { getMax };

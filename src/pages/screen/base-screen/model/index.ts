@@ -83,3 +83,19 @@ export const useLineModal = () => {
 };
 
 export const useTableModel = () => {};
+
+// 地图数据
+export const useMapModel = () => {
+  const [mapList, setMapList] = useState<any[]>([]);
+
+  const getMap = async () => {
+    const res: any = await API.getChinaMap();
+    const data: any = res?.data || [];
+    console.log('map', data);
+    setMapList(data || []);
+  };
+  return {
+    mapList,
+    getMap,
+  };
+};

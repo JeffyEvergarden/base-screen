@@ -8,7 +8,7 @@ import { Title } from '../common';
 import style from '../../style.less';
 
 const Funnel: React.FC<any> = (props: any) => {
-  let { base = 1 } = props;
+  let { base = 1, data } = props;
   const mapChart = useRef<any>(null);
 
   let first = false;
@@ -94,12 +94,12 @@ const Funnel: React.FC<any> = (props: any) => {
                 fontSize: 18 * base,
               },
             },
-            data: testData,
+            data: data,
           },
         ],
       },
     );
-  }, [base]);
+  }, [base, data]);
 
   const initMap = () => {
     mapChart.current.setOption(options);
@@ -150,7 +150,7 @@ const Funnel: React.FC<any> = (props: any) => {
 
   const refresh = () => {
     clearTimeFn();
-    let timeLen = Math.floor(100 / testData.length);
+    let timeLen = Math.floor(100 / data.length);
     timeLen = timeLen < 4 ? timeLen : 4;
     timeLen = timeLen > 2 ? timeLen : 2;
     fake.current.index = 0;

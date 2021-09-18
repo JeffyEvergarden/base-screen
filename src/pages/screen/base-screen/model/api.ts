@@ -37,10 +37,18 @@ const getYearList = async (params?: any) => {
   });
 };
 
+const getChinaMap = async (params?: any) => {
+  return request('/screen/base/chinamap', {
+    method: 'get',
+    params,
+  });
+};
+
 export default {
   getOverviewData,
   getFunnel,
   getPieList,
   getMonthList,
   getYearList,
+  getChinaMap,
 };
