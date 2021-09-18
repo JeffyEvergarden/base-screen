@@ -23,7 +23,7 @@ const Pie: React.FC<any> = (props: any) => {
           ...item,
           labelLine: {
             show: true,
-            length: 15 * base,
+            length: 28 * base,
             lineStyle: {
               color: '#B7B7B7',
               lineHeight: 18,
@@ -61,7 +61,7 @@ const Pie: React.FC<any> = (props: any) => {
       },
       title: {
         text: '贷款余额 (亿元)',
-        subtext: `${'123,224'}`,
+        subtext: `¥ ${'123,224'}`,
         top: '35%',
         textAlign: 'center',
         left: '49%',
@@ -97,10 +97,20 @@ const Pie: React.FC<any> = (props: any) => {
               fontSize: 14 * base,
               fontWeight: 'bold',
             },
-            scaleSize: 20 * base,
+            scaleSize: 16 * base,
+            labelLine: {
+              show: true,
+              length: 25 * base,
+              lineStyle: {
+                color: '#B7B7B7',
+                lineHeight: 18,
+                width: 1,
+              },
+            },
           },
           label: {
             show: true,
+            fontWeight: '700',
             fontSize: 14 * base,
             lineHeight: 22 * base,
             formatter: function (d: any) {
@@ -167,7 +177,7 @@ const Pie: React.FC<any> = (props: any) => {
 
   useEffect(() => {
     if (!first) {
-      console.log('重新绘制-------：', mapChart.current);
+      // console.log('重新绘制-------：', mapChart.current);
       initMap();
       mapChart.current?.resize?.();
     }

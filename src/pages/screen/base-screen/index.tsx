@@ -108,7 +108,13 @@ const ScreenPage: React.FC<any> = (props: any) => {
             <div>放款数据更新时间：{time}</div>
           </div>
           <div className={style['time_icon']}>
-            <Tooltip placement="bottomRight" title={renderHeaderIcon} trigger={'click'}>
+            <Tooltip
+              placement="bottomRight"
+              title={renderHeaderIcon}
+              trigger={'hover'}
+              overlayClassName={style['fake-tips']}
+              overlayStyle={{ maxWidth: '700px' }}
+            >
               <InfoCircleOutlined />
             </Tooltip>
           </div>

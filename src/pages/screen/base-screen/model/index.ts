@@ -91,7 +91,7 @@ export const useMapModel = () => {
   const getMap = async () => {
     const res: any = await API.getChinaMap();
     const data: any = res?.data || [];
-    console.log('map', data);
+    // console.log('map', data);
     setMapList(data || []);
   };
   return {

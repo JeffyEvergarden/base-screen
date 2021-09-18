@@ -72,7 +72,7 @@ const Funnel: React.FC<any> = (props: any) => {
     <div className={style['chart_one']}>
       <div id="funnel" className={style['funnel-box']}></div>
 
-      <div className={style['arrow_left']}></div>
+      <div className={style['tips']}>备注：结存用户数及余额指标都已剔除abs出表</div>
     </div>
   );
 };

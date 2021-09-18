@@ -6,6 +6,20 @@ import testData from './test';
 import { Title } from '../common';
 
 import style from '../../style.less';
+import icon from './assets/icon.png';
+import { formateNumer } from '../../util';
+// console.log('icon',icon)
+// 返回str
+const renderTool = (params: any) => {
+  return `
+      <div class="${style['tooltips-bg']}">
+        <div class="${style['tooltips-box']}">
+          <img src="${icon}" class="${style['tooltips-icon']}"/>
+          <span>${params.name}</span>
+        </div>
+        <div class="${style['tooltips-num']}">${formateNumer(params.value)}</div>
+      </div>`;
+};
 
 const Funnel: React.FC<any> = (props: any) => {
   let { base = 1, data } = props;
@@ -16,22 +30,32 @@ const Funnel: React.FC<any> = (props: any) => {
   base = isNaN(base) ? 1 : base;
 
   const options = useMemo(() => {
+    let max = 0;
+    data.forEach((ele: any) => {
+      if (max <= ele.value) {
+        max = ele.value;
+      }
+    });
     return Object.assign(
       {},
       {
         tooltip: {
+          // confine: true,
           formatter: function (params: any) {
             // params.name === '海南省' && console.log('params', params);
-            return params.name + '<br>' + '进件数:' + (params.value || 0) + '<br>';
+            // return params.name + '<br>' + '进件数:' + (params.value || 0) + '<br>';
+            return renderTool(params);
           },
         },
         visualMap: {
           min: 0,
-          max: 2000,
-          left: '3%',
+          max: max,
+          left: '0%',
           bottom: '5%',
-          calculable: true,
+          text: ['高', '低'],
+          calculable: false,
           seriesIndex: [0],
+          handleIcon: 'image://' + icon,
           inRange: {
             color: ['#B2CAE0', '#D2EAFF', '#8AC6FD', '#45A5F8'],
           },
@@ -40,13 +64,16 @@ const Funnel: React.FC<any> = (props: any) => {
           },
           textStyle: {
             color: '#24CFF4',
+            fontWeight: 700,
           },
+          itemHeight: 60 * base,
+          itemWidth: 12 * base,
         },
         geo: {
           map: 'china',
           show: true,
           center: [98, 38],
-          zoom: 1.1,
+          zoom: 1,
           roam: false,
           itemStyle: {
             borderColor: 'rgba(0,63,140,0.2)',
@@ -70,9 +97,9 @@ const Funnel: React.FC<any> = (props: any) => {
         series: [
           {
             type: 'map',
-            mapType: 'china',
+            map: 'china',
             center: [98, 38],
-            zoom: 1.1,
+            zoom: 1,
             // geoIndex: 0,
             label: {
               show: false,
@@ -88,10 +115,10 @@ const Funnel: React.FC<any> = (props: any) => {
                 areaColor: '#8dd7fc',
               },
               label: {
-                show: true,
+                show: false,
                 color: '#fff',
                 fontWeight: '700',
-                fontSize: 18 * base,
+                fontSize: 12 * base,
               },
             },
             data: data,
@@ -171,7 +198,7 @@ const Funnel: React.FC<any> = (props: any) => {
 
   useEffect(() => {
     if (!first) {
-      console.log('重新绘制-------：', mapChart.current);
+      // console.log('重新绘制-------：', mapChart.current);
       mapChart.current?.setOption?.(options);
       mapChart.current?.resize?.();
     }
@@ -179,7 +206,7 @@ const Funnel: React.FC<any> = (props: any) => {
 
   return (
     <div className={style['chart_two']}>
-      <Title title="进见省份分布" className={style['title-map']} />
+      <Title title="进件省份分布" className={style['title-map']} />
 
       <div id="china-map" className={style['map-box']}></div>
     </div>

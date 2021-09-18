@@ -14,6 +14,9 @@ const LineChart: React.FC<any> = (props: any) => {
   base = isNaN(base) ? 1 : base;
 
   const initOptions = (columns: any[], data1: any[], data2: any[]) => {
+    let max1 = getMax(data1);
+    let max2 = getMax(data2);
+
     return Object.assign(
       {},
       {
@@ -47,7 +50,7 @@ const LineChart: React.FC<any> = (props: any) => {
           {
             name: '单位：笔数',
             type: 'value',
-            max: getMax(data1),
+            max: max1,
             splitNumber: 6,
             nameTextStyle: {
               fontSize: 12 * base,
@@ -68,7 +71,7 @@ const LineChart: React.FC<any> = (props: any) => {
           {
             name: '单位：亿元',
             type: 'value',
-            max: getMax(data2),
+            max: max2,
             splitNumber: 6,
             nameTextStyle: {
               fontSize: 12 * base,
@@ -172,7 +175,7 @@ const LineChart: React.FC<any> = (props: any) => {
                   // console.log(d);
                   let coord = d.data.coord[0];
                   let value = d.value;
-                  return `${columns[coord]}: ${formateMoney(value)}元`;
+                  return `${columns[coord]}: ${formateMoney(value)}亿元`;
                 },
               },
               data: [

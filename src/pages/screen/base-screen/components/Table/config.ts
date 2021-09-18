@@ -170,6 +170,6 @@ function initData(): any[] {
   return arr;
 }
 
-console.log(testData);
+// console.log(testData);
 
 export { columns, testData };

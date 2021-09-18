@@ -78,12 +78,14 @@
 }
 
 .tips-box {
+  padding: 2px * @rate 15px * @rate;
   color: #fff;
   font-size: 14px * @rate;
   line-height: 24px * @rate;
 
   &_item {
     display: flex;
+    justify-content: flex-end;
   }
 
   .left {
@@ -98,7 +100,8 @@
 }
 
 .fake-tips {
-  width: 600px;
+  max-width: 700px;
+  padding: 8px * @rate 10px * @rate;
 }
 
 // ---------------
@@ -202,7 +205,20 @@
     margin-top: 24px * @rate;
     margin-right: 20px * @rate;
     margin-left: 48px * @rate;
-    overflow: hidden;
+    // overflow: hidden;
+
+    .tips {
+      position: absolute;
+      bottom: -8px * @rate;
+      left: 0;
+      z-index: 10;
+      width: 100%;
+      color: rgba(0, 0, 0, 0.65);
+      font-weight: 700;
+      font-size: 14px * @rate;
+      line-height: 22px * @rate;
+      text-align: center;
+    }
   }
 
   .chart_two {
@@ -215,7 +231,7 @@
     .title-map {
       position: absolute;
       top: 12px * @rate;
-      left: -12px * @rate;
+      left: 3px * @rate;
     }
   }
 
@@ -251,6 +267,31 @@
   border-radius: 8px;
 }
 
+.tooltips-bg {
+  padding: 10px * @rate 7.5 * @rate;
+}
+
+.tooltips-box {
+  display: flex;
+  align-items: center;
+  margin-right: 4px * @rate;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px * @rate;
+  line-height: 22px * @rate;
+
+  .tooltips-icon {
+    width: 16px * @rate;
+    height: 16px * @rate;
+    margin-right: 4px;
+  }
+}
+
+.tooltips-num {
+  margin-left: 27px * @rate;
+  font-size: 24px * @rate;
+  line-height: 30px * @rate;
+}
+
 .screen-content_bottom {
   .my-row;
 
@@ -283,7 +324,7 @@
     position: relative;
     display: flex;
     justify-content: flex-end;
-    margin-top: 24px * @rate;
+    margin-top: 32px * @rate;
     margin-bottom: 16px * @rate;
   }
 

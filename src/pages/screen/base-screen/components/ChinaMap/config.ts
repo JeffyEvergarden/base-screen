@@ -5,7 +5,7 @@ mapJson.features.forEach((item: any) => {
     let arr: any[] = [];
     item.geometry.coordinates.forEach((arr1: any[]) => {
       let arr2 = arr1[0][0];
-      if (arr2[1] > 13) {
+      if (arr2[1] > 18) {
         arr.push(arr1);
       }
     });

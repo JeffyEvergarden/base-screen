@@ -17,7 +17,7 @@ const Funnel: React.FC<any> = (props: any) => {
   base = isNaN(base) ? 1 : base;
 
   const options = useMemo(() => {
-    console.log(base);
+    // console.log(base);
     return Object.assign({}, option, {
       series: [
         {
@@ -45,7 +45,7 @@ const Funnel: React.FC<any> = (props: any) => {
             textBorderColor: '#FFF',
             textBorderWidth: 0,
             formatter: function (d: any) {
-              var ins = d.name + ': ' + d.data.num;
+              const ins = d.name + ': ' + d.data.num;
               return ins;
             },
           },
@@ -56,7 +56,7 @@ const Funnel: React.FC<any> = (props: any) => {
   }, [base]);
 
   useEffect(() => {
-    var chartDom = document.getElementById('funnel');
+    const chartDom = document.getElementById('funnel');
     myChart.current = echarts.init(chartDom as any);
     myChart.current.setOption(options);
     first = true;
@@ -74,9 +74,7 @@ const Funnel: React.FC<any> = (props: any) => {
     <div className={style['chart_one']}>
       <div id="funnel" className={style['funnel-box']}></div>
 
-      <div className={style['arrow_left']}>
-        
-      </div>
+      <div className={style['arrow_left']}></div>
     </div>
   );
 };
