@@ -16,7 +16,7 @@
       "refuseByMonth": null,
       "passRateMonth": 0.5,
       "growthBalanceByYear": 80.0,
-      "loanBalance": 80.0
+      "loanBalance": 800000000.0
     },
     "other": {
       "channelType": "其他",
@@ -47,7 +47,7 @@
       },
       {
         "channelName": "蚂蚁金服",
-        "loalBalance": 10.0,
+        "loalBalance": 0,
         "rate": 0.125
       },
       {

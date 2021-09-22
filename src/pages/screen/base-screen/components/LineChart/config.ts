@@ -206,3 +206,26 @@ const getMax = (data: any[]) => {
 };
 
 export { getMax };
+
+// markLine: {
+//   symbol: 'none',
+//   silent: true,
+//   data: [
+//     {
+//       symbol: 'none',
+//       label: {
+//         show: false,
+//       },
+//       type: 'max',
+//       name: '绿-最高点',
+//     },
+//     {
+//       symbol: 'none',
+//       type: 'min',
+//       label: {
+//         show: false,
+//       },
+//       name: '绿-最低点',
+//     },
+//   ],
+// },

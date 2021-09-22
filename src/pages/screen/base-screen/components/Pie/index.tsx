@@ -4,7 +4,7 @@ import * as echarts from 'echarts';
 import { option } from './config';
 import style from '../../style.less';
 
-import { formatePercent, formateBaseMoney, formateNumer } from '../../util';
+import { formatePercent, formateBaseMoney, formateNumer, ONE_YI, ONE_W } from '../../util';
 
 const Pie: React.FC<any> = (props: any) => {
   let { base = 1, data = [], totalMoney = 0 } = props;
@@ -18,12 +18,12 @@ const Pie: React.FC<any> = (props: any) => {
     // 贷款余额处理
     let unit = '';
     let money = totalMoney;
-    if (totalMoney >= 100000000) {
+    if (totalMoney >= ONE_YI) {
       unit = '亿';
-      money = formateNumer(totalMoney / 10000000);
-    } else if (totalMoney >= 10000) {
+      money = formateNumer(totalMoney / ONE_YI);
+    } else if (totalMoney >= ONE_W) {
       unit = '万';
-      money = formateNumer(totalMoney / 10000);
+      money = formateNumer(totalMoney / ONE_W);
     }
 
     let len: number = data.length ? data.length : 1;
@@ -31,6 +31,10 @@ const Pie: React.FC<any> = (props: any) => {
     gadVal = Math.floor(gadVal / 13);
     const targetData: any = [];
     data.forEach((item: any, i: number) => {
+      // 过滤 0的数据
+      if (item.value === 0) {
+        return;
+      }
       targetData.push(
         {
           ...item,

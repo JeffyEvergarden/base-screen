@@ -22,6 +22,7 @@ const LineChart: React.FC<any> = (props: any) => {
       {
         color: ['#668EFF', '#1CD389'],
         legend: {
+          // icon: 'circle',
           data: ['进件量', '净增余额'],
         },
         grid: {
@@ -103,28 +104,6 @@ const LineChart: React.FC<any> = (props: any) => {
             label: {
               fontSize: 12 * base,
             },
-            // markLine: {
-            //   symbol: 'none',
-            //   silent: true,
-            //   data: [
-            //     {
-            //       symbol: 'none',
-            //       label: {
-            //         show: false,
-            //       },
-            //       type: 'max',
-            //       name: '绿-最高点',
-            //     },
-            //     {
-            //       symbol: 'none',
-            //       type: 'min',
-            //       label: {
-            //         show: false,
-            //       },
-            //       name: '绿-最低点',
-            //     },
-            //   ],
-            // },
             markPoint: {
               symbol: 'circle',
               symbolSize: 4,
@@ -132,6 +111,9 @@ const LineChart: React.FC<any> = (props: any) => {
                 formatter: (d: any) => {
                   let coord = d.data.coord[0];
                   let value = d.value;
+                  if (value === 0) {
+                    return '';
+                  }
                   return `${columns[coord]}: ${Math.floor(value)}`;
                 },
               },
@@ -178,6 +160,9 @@ const LineChart: React.FC<any> = (props: any) => {
                   // console.log(d);
                   let coord = d.data.coord[0];
                   let value = d.value;
+                  if (value === 0) {
+                    return '';
+                  }
                   return `${columns[coord]}: ${value}${type === 'month' ? '亿' : '千万'}元`;
                 },
               },

@@ -102,7 +102,7 @@ export const useOverViewModel = () => {
       const totalVal = totalObj.loanBalance || 0;
 
       // 总揽数据
-      setDayInNum(totalObj.inPartsNumberByDay || 0);
+      setDayInNum(totalObj.inPartsNumberByDay || 0); // 今日进见
       setDayOutMoney(loansMoneyByDay || 0); // 处理成万
       setDayNetProfitMoney(growthBalanceByDay || 0); // 处理成万
       setTotal(totalVal);
@@ -138,10 +138,11 @@ export const useFunnelModel = () => {
   const getFunnel = async () => {
     const res: any = await API.getFunnel();
     let data: any = res?.resObject || [];
+    const len = data.length;
     data = data.map((item: any, i: number) => {
       return {
         name: item.custType,
-        value: 5 - i,
+        value: len - i,
         percent: item.percent,
         num: item.customerNumber,
       };
