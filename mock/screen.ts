@@ -63,8 +63,8 @@ const getMonthData = (req: Request, res: Response) => {
 // 获取 年份数据
 const getYearData = (req: Request, res: Response) => {
   yearJson.resObject.forEach((item) => {
-    item.inPartsNumber = item.inPartsNumber * Math.random();
-    item.growthBalance = Number((ONE_YI * Math.random() + 10 * ONE_YI).toFixed(0));
+    item.inPartsNumber = item.inPartsNumber;
+    // item.growthBalance = Number((ONE_YI * Math.random() + 10 * ONE_YI).toFixed(0));
   });
   res.json(yearJson);
 };

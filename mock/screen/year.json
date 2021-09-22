@@ -2,70 +2,18 @@
   "code": 0,
   "msg": "成功",
   "resObject": [
-    {
-      "month": "去年09",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    },
-    {
-      "month": "去年10",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    },
-    {
-      "month": "去年11",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    },
-    {
-      "month": "去年12",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    },
-    {
-      "month": "01",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    },
-    {
-      "month": "02",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    },
-    {
-      "month": "03",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    },
-    {
-      "month": "04",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    },
-    {
-      "month": "05",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    },
-    {
-      "month": "06",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    },
-    {
-      "month": "07",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    },
-    {
-      "month": "08",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    },
-    {
-      "month": "09",
-      "inPartsNumber": 10000000,
-      "growthBalance": 1000000000
-    }
+    { "month": "去年9", "inPartsNumber": 10333309, "growthBalance": 1031333309 },
+    { "month": "去年10", "inPartsNumber": 10316570, "growthBalance": 1030316570 },
+    { "month": "去年11", "inPartsNumber": 3211897, "growthBalance": 1069188864 },
+    { "month": "去年12", "inPartsNumber": 1221414, "growthBalance": 1060442215 },
+    { "month": "1月", "inPartsNumber": 123334, "growthBalance": 1016364872 },
+    { "month": "2月", "inPartsNumber": 1037600, "growthBalance": 1033413514 },
+    { "month": "3月", "inPartsNumber": 49898282, "growthBalance": 1098677267 },
+    { "month": "4月", "inPartsNumber": 2244255, "growthBalance": 1039742149 },
+    { "month": "5月", "inPartsNumber": 0, "growthBalance": 1002490400 },
+    { "month": "6月", "inPartsNumber": 900000, "growthBalance": 1037688000 },
+    { "month": "7月", "inPartsNumber": 105262, "growthBalance": 1049285262 },
+    { "month": "8月", "inPartsNumber": 0, "growthBalance": 1037425693 },
+    { "month": "9月", "inPartsNumber": 10400, "growthBalance": 1076098092 }
   ]
 }

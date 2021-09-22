@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 import * as echarts from 'echarts';
-import { getMax } from './config';
+import { getMax, getMarkPoint } from './config';
 import { formateMoney, formateNumer } from '../../util';
 import style from '../../style.less';
 
@@ -14,9 +14,13 @@ const LineChart: React.FC<any> = (props: any) => {
   base = isNaN(base) ? 1 : base;
 
   const initOptions = (columns: any[], data1: any[], data2: any[]) => {
+    // 获取坐标最大节点
     let max1 = getMax(data1);
+
     let max2 = getMax(data2);
+
     console.log('max: ' + max1 + ' ' + max2);
+
     return Object.assign(
       {},
       {
@@ -106,7 +110,7 @@ const LineChart: React.FC<any> = (props: any) => {
             },
             markPoint: {
               symbol: 'circle',
-              symbolSize: 4,
+              symbolSize: 6,
               label: {
                 formatter: (d: any) => {
                   let coord = d.data.coord[0];
@@ -117,24 +121,7 @@ const LineChart: React.FC<any> = (props: any) => {
                   return `${columns[coord]}: ${Math.floor(value)}`;
                 },
               },
-              data: [
-                {
-                  name: '进件量最大',
-                  type: 'max',
-                  label: {
-                    position: [-15, -15],
-                    color: '#668EFF',
-                  },
-                },
-                {
-                  name: '进件量最小',
-                  type: 'min',
-                  label: {
-                    position: [-15, 10],
-                    color: '#668EFF',
-                  },
-                },
-              ],
+              data: getMarkPoint(['进件量最大', '进件量最小'], data1, '', max1),
             },
             data: data1,
           },
@@ -154,7 +141,7 @@ const LineChart: React.FC<any> = (props: any) => {
             },
             markPoint: {
               symbol: 'circle',
-              symbolSize: 4,
+              symbolSize: 6,
               label: {
                 formatter: (d: any) => {
                   // console.log(d);
@@ -166,24 +153,7 @@ const LineChart: React.FC<any> = (props: any) => {
                   return `${columns[coord]}: ${value}${type === 'month' ? '亿' : '千万'}元`;
                 },
               },
-              data: [
-                {
-                  name: '净增余额最大',
-                  type: 'max',
-                  label: {
-                    position: [-15, -15],
-                    color: '#1CD389',
-                  },
-                },
-                {
-                  name: '净增余额最小',
-                  type: 'min',
-                  label: {
-                    position: [-15, 10],
-                    color: '#1CD389',
-                  },
-                },
-              ],
+              data: getMarkPoint(['净增余额最大', '净增余额最小'], data2, '#1CD389', max2),
             },
             data: data2,
           },

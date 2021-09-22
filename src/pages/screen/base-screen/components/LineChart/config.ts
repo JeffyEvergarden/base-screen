@@ -149,21 +149,27 @@ const getLen = (max: number) => {
   return num;
 };
 
-const findMinSpit = (minSpit: number) => {
+const findMinSpit = (minSpit: number, MAX: number) => {
   // 获取长度
   // 输入43
   let len = getLen(minSpit);
   let k = len;
-  let max = 1;
+
+  let max = 1; // 比当前位数大一倍 的值 假如 是 43  那 max = 100
   while (k--) {
     max = max * 10;
   }
-  if ([1, 2, 4].includes(max)) {
+  //
+  if ([1, 2].includes(max)) {
     return minSpit;
   }
-  if (max === 10) {
+  if (len === 1) {
+    // 只有1位数字
+    if (minSpit < 1 && MAX < 1) {
+      return 0.2;
+    }
     // 就一位数
-    return minSpit <= 5 ? 5 : 10;
+    return minSpit <= 5 ? Math.ceil(minSpit) : 10;
   }
   // max = 100
   let secMax = Math.floor(max / 10);
@@ -191,6 +197,7 @@ const findMinSpit = (minSpit: number) => {
   return minSpit;
 };
 
+// 目的是分成五份 数字得是整数（整10、整百得那种）
 const getMax = (data: any[]) => {
   let max = 0;
   data.forEach((val: any) => {
@@ -200,12 +207,54 @@ const getMax = (data: any[]) => {
   });
   // 找出最大值
   // 画成5份
-  let minSpit = findMinSpit(max / 5);
+  let minSpit = findMinSpit(max / 5, max);
   // console.log(minSpit)
-  return Math.ceil(minSpit * 5);
+  let computedMax = Math.ceil(minSpit * 5);
+  // if (max / computedMax > 0.95) {
+  //   computedMax = computedMax + minSpit
+  // }
+  return computedMax;
 };
 
-export { getMax };
+// 最大 最小节点显示
+
+const getMarkPoint = (title: any[], data: number[], color?: string, MAX: number = 1) => {
+  let max = 0;
+  let min: number = data[0];
+
+  data.forEach((val: any) => {
+    if (val > max) {
+      max = val;
+    }
+    if (val < min) {
+      min = val;
+    }
+  });
+  let arr: any[] = [];
+  if (max > 0) {
+    arr.push({
+      name: title[0],
+      type: 'max',
+      label: {
+        position: max / MAX <= 0.95 ? [-15, -15] : [10, -3],
+        color: color || '#668EFF',
+      },
+    });
+  }
+  if (min > 0) {
+    arr.push({
+      name: title[1],
+      type: 'min',
+      label: {
+        position: min / MAX > 0.05 ? [-15, 10] : [10, -3],
+        color: color || '#668EFF',
+      },
+    });
+  }
+  return arr;
+};
+
+export { getMax, getMarkPoint };
 
 // markLine: {
 //   symbol: 'none',
