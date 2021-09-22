@@ -249,6 +249,7 @@ const getLine = (base: number, data: any[]) => {
     symbolSize: 0,
     roam: false,
     edgeSymbol: ['circle', 'arrow'],
+    edgeSymbolSize: 16,
     lineStyle: {
       width: 2,
     },
@@ -262,7 +263,7 @@ const getLine = (base: number, data: any[]) => {
       verticalAlign: 'middle',
       fontSize: 18 * base,
       formatter: function (d: any) {
-        const i = d.data.source;
+        const i = d.data.target;
         const ins = formatePercent(data[i].percent) + '\n\n';
         return ins;
       },
@@ -306,6 +307,7 @@ const getLine = (base: number, data: any[]) => {
         lineStyle: {
           curveness: 8,
           color: lineColors[0],
+          width: 3,
         },
         label: {
           color: labelColors[1],
@@ -317,6 +319,7 @@ const getLine = (base: number, data: any[]) => {
         lineStyle: {
           curveness: -8,
           color: lineColors[1],
+          width: 3,
         },
         label: {
           color: labelColors[2],
@@ -329,6 +332,7 @@ const getLine = (base: number, data: any[]) => {
         lineStyle: {
           curveness: 7,
           color: lineColors[2],
+          width: 3,
         },
         label: {
           color: labelColors[3],
@@ -341,6 +345,7 @@ const getLine = (base: number, data: any[]) => {
         lineStyle: {
           curveness: -7,
           color: lineColors[3],
+          width: 3,
         },
         label: {
           color: labelColors[4],
