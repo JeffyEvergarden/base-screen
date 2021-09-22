@@ -98,6 +98,7 @@ const LineChart: React.FC<any> = (props: any) => {
           {
             name: '进件量',
             type: 'line',
+            zlevel: 10,
             showSymbol: false,
             lineStyle: {
               width: 2 * base,
@@ -118,7 +119,7 @@ const LineChart: React.FC<any> = (props: any) => {
                   if (value === 0) {
                     return '';
                   }
-                  return `${columns[coord]}: ${Math.floor(value)}`;
+                  return `${columns[coord]}: ${value}`;
                 },
               },
               data: getMarkPoint(['进件量最大', '进件量最小'], data1, '', max1),
@@ -129,7 +130,7 @@ const LineChart: React.FC<any> = (props: any) => {
             name: '净增余额',
             type: 'line',
             yAxisIndex: 1,
-            z: 2,
+            zlevel: 20,
             showSymbol: false,
             lineStyle: {
               width: 2 * base,
