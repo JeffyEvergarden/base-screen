@@ -2,6 +2,39 @@ import { useState } from 'react';
 import { formateBaseMoney } from '../util';
 import API from './api';
 
+const ONE_WAN = 10000;
+
+const TEN_MILLION = 10000000;
+
+const ONE_YI = 100000000;
+
+// 万做单位
+const formateNumByWan = (val: number) => {
+  if (isNaN(val)) {
+    return 0;
+  }
+  val = Number((val / ONE_WAN).toFixed(2));
+  return val;
+};
+
+// 千万做单位
+const formateNumByTenMillion = (val: number) => {
+  if (isNaN(val)) {
+    return 0;
+  }
+  val = Number((val / TEN_MILLION).toFixed(2));
+  return val;
+};
+
+// 亿做单位
+const formateNumByhundredMillion = (val: number) => {
+  if (isNaN(val)) {
+    return 0;
+  }
+  val = Number((val / ONE_YI).toFixed(2));
+  return val;
+};
+
 // 总揽数据 （这个接口 处理 总揽/饼图/表格）
 export const useOverViewModel = () => {
   // 总揽数据
@@ -134,8 +167,8 @@ export const useLineModal = () => {
     data = data.map((item: any) => {
       return {
         name: item.day,
-        value1: item.inPartsNumber,
-        value2: item.growthBalance,
+        value1: formateNumByWan(item.inPartsNumber),
+        value2: formateNumByTenMillion(item.growthBalance),
       };
     });
     setDayList(data || []);
@@ -147,8 +180,8 @@ export const useLineModal = () => {
     data = data.map((item: any) => {
       return {
         name: item.month,
-        value1: item.inPartsNumber,
-        value2: item.growthBalance,
+        value1: formateNumByWan(item.inPartsNumber),
+        value2: formateNumByhundredMillion(item.growthBalance),
       };
     });
     setMonthList(data || []);
@@ -189,13 +222,21 @@ export const useMapModel = () => {
 // 更新时间
 
 export const useTimeModel = () => {
+  // 进件时间
+  const [tipsTime, setTipsTime] = useState<string>('');
+  // 放款时间
+  const [tipsTime2, setTipsTime2] = useState<string>('');
   // 更新时间
   const [updateList, setUpdateList] = useState<any[]>([]);
+
   const getTime = async () => {
     const res: any = await API.getTimeList();
-    let data: any = res?.resObject || [];
-
-    data = data.map((item: any) => {
+    let data: any = res?.resObject || {};
+    const time1: any[] = data.time1 || [];
+    const time2: any[] = data.time2 || [];
+    setTipsTime(time1?.[0]?.updateTime || '');
+    setTipsTime2(time1?.[1]?.updateTime || '');
+    data = time2.map((item: any) => {
       return {
         name: item.updateName,
         date: item.updateTime,
@@ -205,6 +246,8 @@ export const useTimeModel = () => {
     setUpdateList(data || []);
   };
   return {
+    tipsTime,
+    tipsTime2,
     updateList,
     getTime,
   };

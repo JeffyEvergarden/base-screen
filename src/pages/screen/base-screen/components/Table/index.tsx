@@ -18,8 +18,9 @@ const TableView: React.FC<tableProps> = (props: tableProps) => {
       <div className={style['title-3']}>
         <Title title="各渠道关键业务量指标" />
       </div>
-
-      <Table columns={columns as any} dataSource={data} pagination={false}></Table>
+      {data && data.length > 0 && (
+        <Table columns={columns as any} dataSource={data} pagination={false}></Table>
+      )}
     </div>
   );
 };

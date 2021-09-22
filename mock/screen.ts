@@ -16,6 +16,9 @@ import monthJson from './screen/month.json';
 // 月数据json
 import timeJson from './screen/Time.json';
 
+const ONE_YI = 100000000;
+const TEN_MILLION = 10000000;
+
 // 获取总揽
 const getOverviewData = (req: Request, res: Response) => {
   res.json(overviewJson);
@@ -50,11 +53,19 @@ const getTableList = (req: Request, res: Response) => {};
 
 // 获取月份数据
 const getMonthData = (req: Request, res: Response) => {
+  monthJson.resObject.forEach((item) => {
+    item.inPartsNumber = item.inPartsNumber * Math.random();
+    item.growthBalance = Number((TEN_MILLION * Math.random() + 10 * TEN_MILLION).toFixed(0));
+  });
   res.json(monthJson);
 };
 
 // 获取 年份数据
 const getYearData = (req: Request, res: Response) => {
+  yearJson.resObject.forEach((item) => {
+    item.inPartsNumber = item.inPartsNumber * Math.random();
+    item.growthBalance = Number((ONE_YI * Math.random() + 10 * ONE_YI).toFixed(0));
+  });
   res.json(yearJson);
 };
 

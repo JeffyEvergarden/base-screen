@@ -158,9 +158,12 @@ const findMinSpit = (minSpit: number) => {
   while (k--) {
     max = max * 10;
   }
+  if ([1, 2, 4].includes(max)) {
+    return minSpit;
+  }
   if (max === 10) {
     // 就一位数
-    return minSpit;
+    return minSpit <= 5 ? 5 : 10;
   }
   // max = 100
   let secMax = Math.floor(max / 10);
@@ -195,10 +198,11 @@ const getMax = (data: any[]) => {
       max = val;
     }
   });
+  // 找出最大值
   // 画成5份
   let minSpit = findMinSpit(max / 5);
   // console.log(minSpit)
-  return minSpit * 5;
+  return Math.ceil(minSpit * 5);
 };
 
 export { getMax };

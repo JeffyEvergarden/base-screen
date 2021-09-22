@@ -9,7 +9,7 @@
 export default {
   dev: {
     '/screen/': {
-      target: 'https://preview.pro.ant.design',
+      target: 'http://172.16.250.66:10086',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },

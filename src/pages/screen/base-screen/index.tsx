@@ -51,7 +51,7 @@ const ScreenPage: React.FC<any> = (props: any) => {
     useOverViewModel();
 
   // 更新数据
-  const { updateList, getTime } = useTimeModel();
+  const { tipsTime, tipsTime2, updateList, getTime } = useTimeModel();
 
   // 漏斗数据
   const { funnelList, getFunnel } = useFunnelModel();
@@ -62,13 +62,25 @@ const ScreenPage: React.FC<any> = (props: any) => {
   // 漏斗数据
   const { mapList, getMap } = useMapModel();
 
-  useEffect(() => {
+  const getList = () => {
     getOverviewData(); // 总揽数据
     getFunnel(); // 漏斗数据
     getMonthList(); // 月份数据
     getYearList(); // 年份数据
     getMap(); // 地图数据
     getTime();
+  };
+
+  useEffect(() => {
+    getList(); // 获取数据
+
+    // 计时
+    const fake = setInterval(() => {
+      getList();
+    }, 2 * 60 * 1000);
+    return () => {
+      clearInterval(fake);
+    };
   }, []);
 
   const renderHeaderIcon = (
@@ -93,8 +105,8 @@ const ScreenPage: React.FC<any> = (props: any) => {
         </div>
         <div className={style['time']}>
           <div>
-            <div>进件数据更新时间：{time}</div>
-            <div>放款数据更新时间：{time}</div>
+            <div>进件数据更新时间：{tipsTime}</div>
+            <div>放款数据更新时间：{tipsTime2}</div>
           </div>
           <div className={style['time_icon']}>
             <Tooltip

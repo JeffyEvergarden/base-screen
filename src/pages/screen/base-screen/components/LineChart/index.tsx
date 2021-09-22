@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from 'react';
 
 import * as echarts from 'echarts';
 import { getMax } from './config';
-import { formateMoney } from '../../util';
+import { formateMoney, formateNumer } from '../../util';
 import style from '../../style.less';
 
 const LineChart: React.FC<any> = (props: any) => {
-  let { base = 1, id, data = [] } = props;
+  let { base = 1, id, type, data = [] } = props;
   const lineChart = useRef<any>(null);
 
   let first = false;
@@ -16,7 +16,7 @@ const LineChart: React.FC<any> = (props: any) => {
   const initOptions = (columns: any[], data1: any[], data2: any[]) => {
     let max1 = getMax(data1);
     let max2 = getMax(data2);
-
+    console.log('max: ' + max1 + ' ' + max2);
     return Object.assign(
       {},
       {
@@ -51,7 +51,7 @@ const LineChart: React.FC<any> = (props: any) => {
         },
         yAxis: [
           {
-            name: '单位：笔数',
+            name: `单位：万笔数`,
             type: 'value',
             max: max1,
             splitNumber: 6,
@@ -72,7 +72,7 @@ const LineChart: React.FC<any> = (props: any) => {
             },
           },
           {
-            name: '单位：亿元',
+            name: `单位：${type === 'month' ? '亿' : '千万'}元`,
             type: 'value',
             max: max2,
             splitNumber: 6,
@@ -84,7 +84,7 @@ const LineChart: React.FC<any> = (props: any) => {
             },
             axisLabel: {
               formatter: (val: any) => {
-                return formateMoney(val);
+                return val;
               },
             },
           },
@@ -132,7 +132,7 @@ const LineChart: React.FC<any> = (props: any) => {
                 formatter: (d: any) => {
                   let coord = d.data.coord[0];
                   let value = d.value;
-                  return `${columns[coord]}: ${value}`;
+                  return `${columns[coord]}: ${Math.floor(value)}`;
                 },
               },
               data: [
@@ -178,7 +178,7 @@ const LineChart: React.FC<any> = (props: any) => {
                   // console.log(d);
                   let coord = d.data.coord[0];
                   let value = d.value;
-                  return `${columns[coord]}: ${formateMoney(value)}亿元`;
+                  return `${columns[coord]}: ${value}${type === 'month' ? '亿' : '千万'}元`;
                 },
               },
               data: [
