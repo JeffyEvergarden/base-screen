@@ -129,6 +129,7 @@ const LineChart: React.FC<any> = (props: any) => {
             name: '净增余额',
             type: 'line',
             yAxisIndex: 1,
+            z: 2,
             showSymbol: false,
             lineStyle: {
               width: 2 * base,
@@ -142,6 +143,7 @@ const LineChart: React.FC<any> = (props: any) => {
             markPoint: {
               symbol: 'circle',
               symbolSize: 6,
+              z: 20,
               label: {
                 formatter: (d: any) => {
                   // console.log(d);
