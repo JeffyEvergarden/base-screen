@@ -9,13 +9,13 @@
       "custTypeOrder": 1
     },
     {
-      "customerNumber": 800000,
+      "customerNumber": 804500,
       "percent": 0.8,
       "custType": "响应",
       "custTypeOrder": 2
     },
     {
-      "customerNumber": 600000,
+      "customerNumber": 601400,
       "percent": 0.75,
       "custType": "授信",
       "custTypeOrder": 3

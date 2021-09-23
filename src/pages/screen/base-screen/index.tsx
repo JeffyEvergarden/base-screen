@@ -116,7 +116,9 @@ const ScreenPage: React.FC<any> = (props: any) => {
               overlayClassName={style['fake-tips']}
               overlayStyle={{ maxWidth: '700px' }}
             >
-              <InfoCircleOutlined />
+              <div className={style['inner-tips']}>
+                <InfoCircleOutlined />
+              </div>
             </Tooltip>
           </div>
         </div>

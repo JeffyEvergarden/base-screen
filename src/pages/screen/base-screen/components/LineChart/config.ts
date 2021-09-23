@@ -231,26 +231,31 @@ const getMarkPoint = (title: any[], data: number[], color?: string, MAX: number 
     }
   });
   let arr: any[] = [];
-  if (max > 0) {
-    arr.push({
-      name: title[0],
-      type: 'max',
-      label: {
-        position: max / MAX <= 0.95 ? [-15, -15] : [10, -3],
-        color: color || '#668EFF',
-      },
-    });
-  }
-  if (min > 0) {
-    arr.push({
-      name: title[1],
-      type: 'min',
-      label: {
-        position: min / MAX > 0.05 ? [-15, 10] : [10, -3],
-        color: color || '#668EFF',
-      },
-    });
-  }
+
+  arr.push({
+    name: title[0],
+    type: 'max',
+    zlevel: 200,
+    z: 200,
+    label: {
+      position: [color ? 13 : 0, -15],
+      color: color || '#668EFF',
+      backgroundColor: '#fff',
+      padding: 1,
+    },
+  });
+
+  arr.push({
+    name: title[1],
+    type: 'min',
+    zlevel: 200,
+    z: 200,
+    label: {
+      position: [color ? 13 : 0, -15],
+      color: color || '#668EFF',
+    },
+  });
+
   return arr;
 };
 

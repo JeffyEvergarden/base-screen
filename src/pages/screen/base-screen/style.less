@@ -11,6 +11,7 @@
   width: 1920px * @rate;
   height: 1080px * @rate;
   overflow: hidden;
+  font-family: PingFang SC, Microsoft YaHei, SimHei;
   background: url('./assets/bg.svg') no-repeat 100%;
   background-color: #d2eaff;
   background-position: top left;
@@ -105,6 +106,9 @@
   padding: 8px * @rate 10px * @rate;
 }
 
+.inner-tips {
+  height: 34px * @rate;
+}
 // ---------------
 // 通用组件
 .title-box {
@@ -336,6 +340,7 @@
 
     :global {
       .ant-table {
+        font-weight: 700;
         border-bottom: 1px solid #80c4ff;
         border-left: 1px solid #80c4ff;
       }
@@ -345,6 +350,7 @@
         tr {
           th {
             padding: 6px * @rate;
+            font-weight: 700;
             font-size: 14px * @rate;
             background: #fff;
             border: 1px solid #80c4ff;

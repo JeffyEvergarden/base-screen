@@ -25,6 +25,9 @@ const LineChart: React.FC<any> = (props: any) => {
       {},
       {
         color: ['#668EFF', '#1CD389'],
+        textStyle: {
+          fontFamily: 'PingFang SC, Microsoft YaHei, SimHei',
+        },
         legend: {
           // icon: 'circle',
           data: ['进件量', '净增余额'],
@@ -112,16 +115,16 @@ const LineChart: React.FC<any> = (props: any) => {
             markPoint: {
               symbol: 'circle',
               symbolSize: 6,
-              label: {
-                formatter: (d: any) => {
-                  let coord = d.data.coord[0];
-                  let value = d.value;
-                  if (value === 0) {
-                    return '';
-                  }
-                  return `${columns[coord]}: ${value}`;
-                },
-              },
+              // label: {
+              //   formatter: (d: any) => {
+              //     let coord = d.data.coord[0];
+              //     let value = d.value;
+              //     // if (value === 0) {
+              //     //   return '';
+              //     // }
+              //     return `${columns[coord]}: ${value}`;
+              //   },
+              // },
               data: getMarkPoint(['进件量最大', '进件量最小'], data1, '', max1),
             },
             data: data1,
@@ -145,17 +148,17 @@ const LineChart: React.FC<any> = (props: any) => {
               symbol: 'circle',
               symbolSize: 6,
               z: 20,
-              label: {
-                formatter: (d: any) => {
-                  // console.log(d);
-                  let coord = d.data.coord[0];
-                  let value = d.value;
-                  if (value === 0) {
-                    return '';
-                  }
-                  return `${columns[coord]}: ${value}${type === 'month' ? '亿' : '千万'}元`;
-                },
-              },
+              // label: {
+              //   formatter: (d: any) => {
+              //     // console.log(d);
+              //     let coord = d.data.coord[0];
+              //     let value = d.value;
+              //     if (value === 0) {
+              //       return '';
+              //     }
+              //     return `${columns[coord]}: ${value}${type === 'month' ? '亿' : '千万'}元`;
+              //   },
+              // },
               data: getMarkPoint(['净增余额最大', '净增余额最小'], data2, '#1CD389', max2),
             },
             data: data2,

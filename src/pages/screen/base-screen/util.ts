@@ -68,5 +68,8 @@ export function formateBaseMoney(val: number): string {
 
 export function formateNumer(val: number): string {
   let str = numeral(val).format('0,0');
+  if (val % 1 !== 0) {
+    str = numeral(val).format('0,0.00');
+  }
   return str;
 }
