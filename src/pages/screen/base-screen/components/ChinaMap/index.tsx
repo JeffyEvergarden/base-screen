@@ -135,10 +135,6 @@ const Funnel: React.FC<any> = (props: any) => {
     );
   }, [base, data]);
 
-  const initMap = () => {
-    mapChart.current.setOption(options);
-  };
-
   // 时间计数器
   const fake = useRef<any>({});
 
@@ -171,24 +167,34 @@ const Funnel: React.FC<any> = (props: any) => {
   const timeFn = () => {
     let i: any = fake.current.index;
     // console.log('ChinaMap执行timeFn:' + i);
-    if (i >= testData.length) {
+    if (i > data.length) {
       clearTimeFn();
       return;
     }
     if (i >= 1) {
       unselect(i - 1); // 取消上一个
     }
-    select(i); // 显示当前
+    if (i === data.length) {
+      select(0);
+    } else {
+      select(i); // 显示当前
+    }
     fake.current.index++;
   };
 
   const refresh = () => {
     clearTimeFn();
+    // unselect(0);
     let timeLen = Math.floor(100 / data.length);
     timeLen = timeLen < 4 ? timeLen : 4;
     timeLen = timeLen > 2 ? timeLen : 2;
     fake.current.index = 0;
-    fake.current.fn = setInterval(timeFn, timeLen * 1000);
+    fake.current.fn = setInterval(timeFn, 2 * 1000);
+  };
+
+  const initMap = () => {
+    mapChart.current.setOption(options);
+    refresh();
   };
 
   useEffect(() => {
@@ -196,7 +202,6 @@ const Funnel: React.FC<any> = (props: any) => {
     echarts.registerMap('china', mapInfo.mapJson as any);
     mapChart.current = echarts.init(chartDom as any);
     initMap();
-    refresh();
     first = true;
     return () => {
       clearTimeFn();
@@ -210,6 +215,15 @@ const Funnel: React.FC<any> = (props: any) => {
       mapChart.current?.resize?.();
     }
   }, [options]);
+
+  // 激活更新
+  useEffect(() => {
+    if (!first) {
+      setTimeout(() => {
+        refresh();
+      }, 1000);
+    }
+  }, [data]);
 
   return (
     <div className={style['chart_two']}>
