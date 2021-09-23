@@ -156,6 +156,11 @@ const Funnel: React.FC<any> = (props: any) => {
       seriesIndex: 0,
       dataIndex: i,
     });
+    mapChart.current.dispatchAction({
+      type: 'hideTip',
+      seriesIndex: 0,
+      dataIndex: i,
+    });
   };
 
   const clearTimeFn = () => {
@@ -219,6 +224,7 @@ const Funnel: React.FC<any> = (props: any) => {
   // 激活更新
   useEffect(() => {
     if (!first) {
+      unselect(0);
       setTimeout(() => {
         refresh();
       }, 1000);
