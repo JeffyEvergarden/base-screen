@@ -295,6 +295,7 @@
   position: relative;
   z-index: 20;
 }
+
 .tooltips-box {
   display: flex;
   align-items: center;
@@ -382,12 +383,21 @@
       }
 
       .ant-table-tbody {
+        tr {
+          td {
+            padding: 5px * @rate 8px * @rate 4px * @rate;
+            overflow: hidden;
+            font-size: 14px * @rate;
+            line-height: 20px * @rate;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+
         tr:nth-child(odd) {
           td {
             min-width: 80px * @rate;
-            padding: 5px * @rate 8px * @rate 4px * @rate;
-            font-size: 14px * @rate;
-            line-height: 20px * @rate;
+            max-width: 120px * @rate;
             background: rgba(67, 160, 241, 0.03);
             border: 1px solid #80c4ff;
             border-bottom: none;
@@ -407,9 +417,7 @@
         tr:nth-child(even) {
           td {
             min-width: 80px * @rate;
-            padding: 4px * @rate 8px * @rate 4px * @rate;
-            font-size: 14px * @rate;
-            line-height: 20px * @rate;
+            max-width: 120px * @rate;
             background: rgba(67, 160, 241, 0.1);
             border: 1px solid #80c4ff;
             border-bottom: none;

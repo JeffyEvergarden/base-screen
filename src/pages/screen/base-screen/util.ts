@@ -67,6 +67,9 @@ export function formateBaseMoney(val: number): string {
 // 格式化数字 1000 => 1,000
 
 export function formateNumer(val: number): string {
+  if (isNaN(val)) {
+    return '0';
+  }
   let str = numeral(val).format('0,0');
   if (val % 1 !== 0) {
     str = numeral(val).format('0,0.00');
