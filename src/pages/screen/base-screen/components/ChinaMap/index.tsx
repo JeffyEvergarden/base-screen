@@ -13,11 +13,14 @@ import { formateNumer } from '../../util';
 const renderTool = (params: any) => {
   return `
       <div class="${style['tooltips-bg']}">
-        <div class="${style['tooltips-box']}">
-          <img src="${icon}" class="${style['tooltips-icon']}"/>
-          <span>${params.name}</span>
+        <div class="${style['tc-bg']}">
+          <div class="${style['tooltips-box']}">
+            <img src="${icon}" class="${style['tooltips-icon']}"/>
+            <span>${params.name}</span>
+          </div>
+          <div class="${style['tooltips-num']}">${formateNumer(params.value)}</div>
         </div>
-        <div class="${style['tooltips-num']}">${formateNumer(params.value)}</div>
+        <div class="${style['tt-bg']}"></div>
       </div>`;
 };
 
@@ -47,6 +50,8 @@ const Funnel: React.FC<any> = (props: any) => {
       {
         tooltip: {
           // confine: true,
+          padding: 0,
+          backgroundColor: 'transparent',
           formatter: function (params: any) {
             // console.log(params);
             // params.name === '海南省' && console.log('params', params);

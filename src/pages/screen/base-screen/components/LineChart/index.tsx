@@ -35,7 +35,7 @@ const LineChart: React.FC<any> = (props: any) => {
         grid: {
           top: 35 * base,
           left: 55 * base,
-          right: 60 * base,
+          right: 50 * base,
           bottom: 30 * base,
         },
         tooltip: {
@@ -101,7 +101,7 @@ const LineChart: React.FC<any> = (props: any) => {
           {
             name: '进件量',
             type: 'line',
-            zlevel: 10,
+            zlevel: 20,
             showSymbol: false,
             lineStyle: {
               width: 2 * base,
@@ -133,7 +133,7 @@ const LineChart: React.FC<any> = (props: any) => {
             name: '净增余额',
             type: 'line',
             yAxisIndex: 1,
-            zlevel: 20,
+            zlevel: 10,
             showSymbol: false,
             lineStyle: {
               width: 2 * base,

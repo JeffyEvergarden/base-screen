@@ -199,20 +199,34 @@ const findMinSpit = (minSpit: number, MAX: number) => {
 
 // 目的是分成五份 数字得是整数（整10、整百得那种）
 const getMax = (data: any[]) => {
-  let max = 0;
+  let max: number = 0;
+  let min: number = data?.[0] || 0;
   data.forEach((val: any) => {
     if (val > max) {
       max = val;
     }
+    if (min > val) {
+      min = val;
+    }
   });
   // 找出最大值
   // 画成5份
-  let minSpit = findMinSpit(max / 5, max);
-  // console.log(minSpit)
-  let computedMax = Math.ceil(minSpit * 5);
-  // if (max / computedMax > 0.95) {
-  //   computedMax = computedMax + minSpit
-  // }
+  // 最小值 > 0
+  if (min >= 0) {
+    let minSpit = findMinSpit(max / 5, max);
+    // console.log(minSpit)
+    let computedMax = Math.ceil(minSpit * 5);
+    return computedMax;
+  }
+
+  let minSpit = findMinSpit((max - min) / 5, max);
+  let computedMax = 0;
+  console.log('max - min', max, ' ', max - min, ' ', (max - min) / 5);
+  console.log('minSpit', minSpit);
+  while (computedMax < max) {
+    computedMax += minSpit;
+  }
+  console.log('computedMax', computedMax);
   return computedMax;
 };
 
@@ -253,6 +267,8 @@ const getMarkPoint = (title: any[], data: number[], color?: string, MAX: number 
     label: {
       position: [color ? 13 : 0, -15],
       color: color || '#668EFF',
+      backgroundColor: '#fff',
+      padding: 1,
     },
   });
 

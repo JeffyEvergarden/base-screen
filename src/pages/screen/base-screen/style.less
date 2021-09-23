@@ -109,6 +109,7 @@
 .inner-tips {
   height: 34px * @rate;
 }
+
 // ---------------
 // 通用组件
 .title-box {
@@ -273,9 +274,27 @@
 }
 
 .tooltips-bg {
-  padding-right: 20px;
+  position: relative;
+  padding: 5px;
+  padding-right: 20px * @rate;
+  // background-color: rgba(255,255,255, 0.4);
 }
 
+.tt-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  opacity: 0.7;
+}
+
+.tc-bg {
+  position: relative;
+  z-index: 20;
+}
 .tooltips-box {
   display: flex;
   align-items: center;
@@ -349,9 +368,10 @@
       .ant-table-thead {
         tr {
           th {
-            padding: 6px * @rate;
+            padding: 4px * @rate 8px * @rate 4px * @rate;
             font-weight: 700;
             font-size: 14px * @rate;
+            line-height: 20px * @rate;
             background: #fff;
             border: 1px solid #80c4ff;
             border-bottom: none;
@@ -365,8 +385,9 @@
         tr:nth-child(odd) {
           td {
             min-width: 80px * @rate;
-            padding: 5px * @rate 10px * @rate 3px * @rate;
+            padding: 5px * @rate 8px * @rate 4px * @rate;
             font-size: 14px * @rate;
+            line-height: 20px * @rate;
             background: rgba(67, 160, 241, 0.03);
             border: 1px solid #80c4ff;
             border-bottom: none;
@@ -386,8 +407,9 @@
         tr:nth-child(even) {
           td {
             min-width: 80px * @rate;
-            padding: 5px * @rate 10px * @rate 3px * @rate;
+            padding: 4px * @rate 8px * @rate 4px * @rate;
             font-size: 14px * @rate;
+            line-height: 20px * @rate;
             background: rgba(67, 160, 241, 0.1);
             border: 1px solid #80c4ff;
             border-bottom: none;
