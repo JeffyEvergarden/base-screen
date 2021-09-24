@@ -1,6 +1,7 @@
 import mapJson from './assets/map.json';
 
 const testData: any = [];
+const map = new Map();
 
 function randomData() {
   return Math.round(Math.random() * 2000);
@@ -13,6 +14,9 @@ mapJson.features.forEach((item: any) => {
     value: randomData(),
     extra: item.properties,
   });
+  map.set(item.properties.adcode, item.properties.name);
 });
+
+console.log(map);
 
 export default testData;
