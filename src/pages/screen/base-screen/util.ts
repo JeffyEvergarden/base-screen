@@ -76,3 +76,11 @@ export function formateNumer(val: number): string {
   }
   return str;
 }
+
+export function formateInt(val: number): string {
+  if (isNaN(val) || !val) {
+    return '0';
+  }
+  let str = val.toFixed(0);
+  return str;
+}
