@@ -25,7 +25,7 @@ export function formatePercent(val: number): string {
     let str2 = (val * 100).toFixed(2);
     return (Number(str1) === Number(str2) ? str1 : str2) + '%';
   }
-  return val;
+  return '0%';
 }
 
 // 格式化 亿元

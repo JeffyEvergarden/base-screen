@@ -41,7 +41,7 @@ const Pie: React.FC<any> = (props: any) => {
           labelLine: {
             show: true,
             length: 20 * base,
-            length2: (i === 0 ? 40 : 10) * base,
+            length2: (i === 0 ? 40 : 20) * base,
             lineStyle: {
               color: '#B7B7B7',
               lineHeight: 18,
@@ -85,10 +85,10 @@ const Pie: React.FC<any> = (props: any) => {
       },
       title: {
         text: `贷款余额 (${unit}元)`,
-        subtext: `¥ ${money}`,
+        subtext: `¥ ${money || 0}`,
         top: '35%',
         textAlign: 'center',
-        left: '49%',
+        left: '44%',
         textStyle: {
           color: '#1A2B5B',
           fontSize: 18 * base,
@@ -106,7 +106,7 @@ const Pie: React.FC<any> = (props: any) => {
         {
           name: '饼图',
           type: 'pie',
-          center: ['50%', '50%'],
+          center: ['45%', '50%'],
           radius: ['63%', '85%'],
           avoidLabelOverlap: true,
           itemStyle: {

@@ -22,17 +22,17 @@
       "channelType": "其他",
       "showOrder": 8,
       "channelName": "其他",
-      "inPartsNumberByDay": 10.0,
-      "loansMoneyByDay": 10.0,
-      "growthBalanceByDay": 10.0,
-      "inPartsNumberByMonth": 10.0,
-      "loansMoneyByMonth": 10.0,
-      "growthBalanceByMonth": 10.0,
+      "inPartsNumberByDay": null,
+      "loansMoneyByDay": null,
+      "growthBalanceByDay": null,
+      "inPartsNumberByMonth": null,
+      "loansMoneyByMonth": null,
+      "growthBalanceByMonth": null,
       "passByMonth": null,
       "refuseByMonth": null,
-      "passRateMonth": 0.5,
-      "growthBalanceByYear": 10.0,
-      "loanBalance": 10.0
+      "passRateMonth": null,
+      "growthBalanceByYear": null,
+      "loanBalance": null
     },
     "pieDataList": [
       {

@@ -18,7 +18,7 @@ const columns = [
       } else if (text === '合计') {
         obj.props.colSpan = 2; // 两列
       } else if (text === '其他') {
-        obj.props.colSpan = 2;
+        // 不作处理
       } else {
         obj.props.colSpan = 0;
       }
@@ -39,7 +39,7 @@ const columns = [
       if (row.channel === '合计') {
         obj.props.colSpan = 0;
       } else if (row.channel === '其他') {
-        obj.props.rowSpan = 0;
+        // obj.props.rowSpan = 0;
       }
       return obj;
     },
@@ -48,22 +48,34 @@ const columns = [
     dataIndex: 'inPartsNumberByDay',
     title: '本日进件量',
     align: 'right',
+    render: (text: any, row: any, index: any) => {
+      return text || 0;
+    },
   },
   {
     dataIndex: 'loansMoneyByDay',
     title: '本日放贷金额',
     align: 'right',
+    render: (text: any, row: any, index: any) => {
+      return text || 0;
+    },
   },
   {
     dataIndex: 'growthBalanceByDay',
     title: '本日净增余额',
     align: 'right',
+    render: (text: any, row: any, index: any) => {
+      return text || 0;
+    },
   },
   {
     dataIndex: 'inPartsNumberByMonth',
     title: '本月进件量',
     align: 'right',
     className: 'row_blue',
+    render: (text: any, row: any, index: any) => {
+      return text || 0;
+    },
   },
   {
     dataIndex: 'passRateMonth',
@@ -79,24 +91,36 @@ const columns = [
     title: '本月放贷金额',
     align: 'right',
     className: 'row_blue',
+    render: (text: any, row: any, index: any) => {
+      return text || 0;
+    },
   },
   {
     dataIndex: 'growthBalanceByMonth',
     title: '本月净增余额',
     align: 'right',
     className: 'row_blue',
+    render: (text: any, row: any, index: any) => {
+      return text || 0;
+    },
   },
   {
     dataIndex: 'growthBalanceByYear',
     title: '本年净增余额',
     align: 'right',
     className: 'row_blue_sp',
+    render: (text: any, row: any, index: any) => {
+      return text || 0;
+    },
   },
   {
     dataIndex: 'loanBalance',
     title: '贷款余额',
     align: 'right',
     className: 'row_blue_sp',
+    render: (text: any, row: any, index: any) => {
+      return text || 0;
+    },
   },
 ];
 
