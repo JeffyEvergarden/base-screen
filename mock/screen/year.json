@@ -2,9 +2,10 @@
   "code": 0,
   "msg": "成功",
   "resObject": [
-    { "month": "去年10", "inPartsNumber": 10316570, "growthBalance": 1030316570 },
-    { "month": "去年11", "inPartsNumber": 3211897, "growthBalance": 1069188864 },
-    { "month": "去年12", "inPartsNumber": 1221414, "growthBalance": 1060442215 },
+    { "month": "去年9月", "inPartsNumber": 10316570, "growthBalance": 1030316570 },
+    { "month": "去年10月", "inPartsNumber": 10316570, "growthBalance": 1030316570 },
+    { "month": "去年11月", "inPartsNumber": 3211897, "growthBalance": 1069188864 },
+    { "month": "去年12月", "inPartsNumber": 1221414, "growthBalance": 1060442215 },
     { "month": "1月", "inPartsNumber": 123334, "growthBalance": 1016364872 },
     { "month": "2月", "inPartsNumber": 1037600, "growthBalance": -1033413514 },
     { "month": "3月", "inPartsNumber": 49898282, "growthBalance": 1098677267 },

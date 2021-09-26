@@ -3,6 +3,66 @@
   "msg": "成功",
   "resObject": [
     {
+      "day": "01-01",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-02",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-03",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-04",
+      "inPartsNumber": 1000000000,
+      "growthBalance": 1000000000
+    },
+    {
+      "day": "01-05",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-06",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-07",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-08",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-09",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-10",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-11",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-12",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
       "day": "01-13",
       "inPartsNumber": 1000000,
       "growthBalance": 1000000
@@ -69,6 +129,31 @@
     },
     {
       "day": "01-26",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-27",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-28",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-29",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-30",
+      "inPartsNumber": 1000000,
+      "growthBalance": 1000000
+    },
+    {
+      "day": "01-31",
       "inPartsNumber": 1000000,
       "growthBalance": 1000000
     }
