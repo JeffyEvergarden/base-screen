@@ -18,6 +18,9 @@ export default defineConfig({
     siderWidth: 208,
     ...defaultSettings,
   },
+  publicPath: '/bdp-businessScreen/',
+  outputPath: 'dist/bdp-businessScreen/',
+  base: 'bdp-businessScreen',
   dynamicImport: {
     loading: '@ant-design/pro-layout/es/PageLoading',
   },
@@ -37,7 +40,7 @@ export default defineConfig({
   ignoreMomentLocale: true,
   proxy: proxy[REACT_APP_ENV || 'dev'],
   manifest: {
-    basePath: '/bdp-businessScreen',
+    basePath: '/',
   },
   // Fast Refresh 热更新
   fastRefresh: {},
