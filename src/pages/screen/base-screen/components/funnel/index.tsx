@@ -5,9 +5,10 @@ import * as echarts from 'echarts';
 import { option, getLine } from './config';
 import { formateBaseMoney } from '../../util';
 import style from '../../style.less';
+import { Spin } from 'antd';
 
 const Funnel: React.FC<any> = (props: any) => {
-  let { base = 1, data = [] } = props;
+  let { base = 1, data = [], loading } = props;
   const myChart = useRef<any>(null);
 
   let first = false;
@@ -69,11 +70,13 @@ const Funnel: React.FC<any> = (props: any) => {
   }, [options]);
 
   return (
-    <div className={style['chart_one']}>
-      <div id="funnel" className={style['funnel-box']}></div>
+    <Spin spinning={loading}>
+      <div className={style['chart_one']}>
+        <div id="funnel" className={style['funnel-box']}></div>
 
-      <div className={style['tips']}>备注：结存用户数及余额指标都已剔除abs出表</div>
-    </div>
+        <div className={style['tips']}>备注：结存用户数及余额指标都已剔除abs出表</div>
+      </div>
+    </Spin>
   );
 };
 

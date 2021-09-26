@@ -42,6 +42,8 @@ export const useOverViewModel = () => {
   const [dayOutMoney, setDayOutMoney] = useState<any>('');
   const [dayNetProfitMoney, setDayNetProfitMoney] = useState<any>('');
 
+  const [overviewFinished, setOverviewFinished] = useState<boolean>(false);
+
   const [total, setTotal] = useState<any>('');
 
   // 表格数据
@@ -88,6 +90,7 @@ export const useOverViewModel = () => {
 
   const getOverviewData = async () => {
     const res: any = await API.getOverviewData();
+    setOverviewFinished(true);
     const data: any = res?.resObject || {};
 
     const totalObj: any = data.total || {};
@@ -95,9 +98,9 @@ export const useOverViewModel = () => {
     if (res.code === 0) {
       // 处理总揽数据
       // 今日放款金额(万)
-      const loansMoneyByDay = Math.floor((totalObj.loansMoneyByDay || 0) / 10000);
+      const loansMoneyByDay = Math.ceil((totalObj.loansMoneyByDay || 0) / 10000);
       // 今日净增余额(万)
-      const growthBalanceByDay = Math.floor((totalObj.growthBalanceByDay || 0) / 10000);
+      const growthBalanceByDay = Math.ceil((totalObj.growthBalanceByDay || 0) / 10000);
 
       const totalVal = totalObj.loanBalance || 0;
 
@@ -127,6 +130,7 @@ export const useOverViewModel = () => {
     total,
     pieList,
     tableList,
+    overviewFinished,
     getOverviewData,
   };
 };
@@ -135,8 +139,12 @@ export const useOverViewModel = () => {
 export const useFunnelModel = () => {
   const [funnelList, setFunnelList] = useState<any[]>([]);
 
+  const [funnelLoading, setFunnelLoading] = useState<boolean>(false);
+
   const getFunnel = async () => {
+    setFunnelLoading(true);
     const res: any = await API.getFunnel();
+    setFunnelLoading(false);
     let data: any = res?.resObject || [];
     const len = data.length;
     data = data.map((item: any, i: number) => {
@@ -153,6 +161,7 @@ export const useFunnelModel = () => {
   return {
     funnelList,
     getFunnel,
+    funnelLoading,
   };
 };
 
@@ -162,8 +171,13 @@ export const useLineModal = () => {
   const [dayList, setDayList] = useState<any[]>([]);
   const [monthList, setMonthList] = useState<any[]>([]);
 
+  const [dayLoading, setDayLoading] = useState<boolean>(false);
+  const [monthLoading, setMonthLoading] = useState<boolean>(false);
+
   const getMonthList = async () => {
+    setDayLoading(true);
     const res: any = await API.getMonthList();
+    setDayLoading(false);
     let data: any = res?.resObject || [];
     data = data.map((item: any) => {
       return {
@@ -176,7 +190,9 @@ export const useLineModal = () => {
   };
 
   const getYearList = async () => {
+    setMonthLoading(true);
     const res: any = await API.getYearList();
+    setMonthLoading(false);
     let data: any = res?.resObject || [];
     data = data.map((item: any) => {
       return {
@@ -191,6 +207,8 @@ export const useLineModal = () => {
   return {
     dayList,
     monthList,
+    dayLoading,
+    monthLoading,
     getMonthList,
     getYearList,
   };
@@ -206,8 +224,8 @@ export const useMapModel = () => {
 
     data = data.map((item: any) => {
       return {
-        code: item.code,
-        name: item.provinceName,
+        code: String(item.code),
+        name: item.provinceName.slice(0, -2),
         value: item.inPartsNumberByProvince,
       };
     });

@@ -3,10 +3,11 @@ import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { getMax, getMarkPoint } from './config';
 import { formateMoney, formateNumer } from '../../util';
+import { Spin } from 'antd';
 import style from '../../style.less';
 
 const LineChart: React.FC<any> = (props: any) => {
-  let { base = 1, id, type, data = [] } = props;
+  let { base = 1, id, type, data = [], loading } = props;
   const lineChart = useRef<any>(null);
 
   let first = false;
@@ -55,6 +56,7 @@ const LineChart: React.FC<any> = (props: any) => {
           },
           axisLabel: {
             color: 'rgba(0, 0, 0, 0.65)',
+            // showMaxLabel: true,
           },
         },
         yAxis: [
@@ -201,7 +203,9 @@ const LineChart: React.FC<any> = (props: any) => {
 
   return (
     <div className={style['line-box']}>
-      <div id={`linebox-${id}`} className={style['line-box']}></div>
+      <Spin spinning={loading}>
+        <div id={`linebox-${id}`} className={style['line-box']}></div>
+      </Spin>
     </div>
   );
 };

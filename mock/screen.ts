@@ -21,12 +21,16 @@ const TEN_MILLION = 10000000;
 
 // 获取总揽
 const getOverviewData = (req: Request, res: Response) => {
-  res.json(overviewJson);
+  setTimeout(() => {
+    res.json(overviewJson);
+  }, 2000);
 };
 
 // 获取漏斗数据
 const getFunnel = (req: Request, res: Response) => {
-  res.json(funnelJson);
+  setTimeout(() => {
+    res.json(funnelJson);
+  }, 2000);
 };
 
 // 获取 中国地图 进件数据
@@ -57,7 +61,9 @@ const getMonthData = (req: Request, res: Response) => {
     item.inPartsNumber = item.inPartsNumber * Math.random();
     item.growthBalance = Number((TEN_MILLION * Math.random() + 10 * TEN_MILLION).toFixed(0));
   });
-  res.json(monthJson);
+  setTimeout(() => {
+    res.json(monthJson);
+  }, 2000);
 };
 
 // 获取 年份数据

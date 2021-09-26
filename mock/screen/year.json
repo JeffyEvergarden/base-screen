@@ -2,7 +2,6 @@
   "code": 0,
   "msg": "成功",
   "resObject": [
-    { "month": "去年9", "inPartsNumber": 10333309, "growthBalance": 1031333309 },
     { "month": "去年10", "inPartsNumber": 10316570, "growthBalance": 1030316570 },
     { "month": "去年11", "inPartsNumber": 3211897, "growthBalance": 1069188864 },
     { "month": "去年12", "inPartsNumber": 1221414, "growthBalance": 1060442215 },

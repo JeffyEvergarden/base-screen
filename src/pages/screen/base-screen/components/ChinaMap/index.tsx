@@ -41,9 +41,10 @@ const Funnel: React.FC<any> = (props: any) => {
       }
       return {
         ...ele,
-        name: map.get(ele.code) || ele.name,
+        name: map.get(String(ele.code)),
       };
     });
+    console.log(newData);
     // console.log(newData)
     return Object.assign(
       {},

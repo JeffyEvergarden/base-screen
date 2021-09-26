@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // 通用组件
-import { Tooltip } from 'antd';
+import { Tooltip, Spin } from 'antd';
 import { Title, TitleNum } from './components/common';
 import { InfoCircleOutlined } from '@ant-design/icons';
 // 图表组件
@@ -19,22 +19,13 @@ import { throttle } from './util';
 
 // 数据
 import { useOverViewModel, useFunnelModel, useLineModal, useMapModel, useTimeModel } from './model';
+import Condition from '@/pages/TestEditor/flow/common/Condition';
 
 const ScreenPage: React.FC<any> = (props: any) => {
-  // 右上角时间
-  const [time, setTime] = useState<string>(getCnTime());
-  useEffect(() => {
-    const timeFn = setInterval(() => {
-      setTime(getCnTime());
-    }, 1000);
-    return () => {
-      clearInterval(timeFn);
-    };
-  }, []);
-
   // 比率计算
   const rate = document.body.clientWidth / 1920;
   const [base, setBase] = useState<number>(rate);
+
   useEffect(() => {
     const fn = throttle(() => {
       const realRate = document.body.clientWidth / 1920;
@@ -47,17 +38,26 @@ const ScreenPage: React.FC<any> = (props: any) => {
   }, []);
 
   // 总揽数据 饼图数据
-  const { dayInNum, dayOutMoney, dayNetProfitMoney, total, pieList, tableList, getOverviewData } =
-    useOverViewModel();
+  const {
+    dayInNum,
+    dayOutMoney,
+    dayNetProfitMoney,
+    total,
+    pieList,
+    tableList,
+    overviewFinished,
+    getOverviewData,
+  } = useOverViewModel();
 
   // 更新数据
   const { tipsTime, tipsTime2, updateList, getTime } = useTimeModel();
 
   // 漏斗数据
-  const { funnelList, getFunnel } = useFunnelModel();
+  const { funnelList, getFunnel, funnelLoading } = useFunnelModel();
 
   // 直线表数据
-  const { dayList, monthList, getMonthList, getYearList } = useLineModal();
+  const { dayList, monthList, dayLoading, monthLoading, getMonthList, getYearList } =
+    useLineModal();
 
   // 漏斗数据
   const { mapList, getMap } = useMapModel();
@@ -137,11 +137,13 @@ const ScreenPage: React.FC<any> = (props: any) => {
 
       <div className={style['screen-content']}>
         {/* 漏斗图 */}
-        <Funnel base={base} data={funnelList} />
+        <Funnel base={base} data={funnelList} loading={funnelLoading} />
         {/* 中国地图 */}
         <ChinaMap base={base} data={mapList} />
         {/* 饼图  需显示总贷款余额*/}
-        <Pie base={base} data={pieList} totalMoney={total} />
+        <Condition r-if={overviewFinished}>
+          <Pie base={base} data={pieList} totalMoney={total} />
+        </Condition>
       </div>
 
       <div className={style['screen-content_bottom']}>
@@ -151,13 +153,13 @@ const ScreenPage: React.FC<any> = (props: any) => {
             <Title title="近30天进件量与净增余额" />
           </div>
 
-          <LineChart type="day" id="day" base={base} data={dayList} />
+          <LineChart type="day" id="day" base={base} data={dayList} loading={dayLoading} />
 
           <div className={style['title-5']}>
             <Title title="近1年进件量与净增余额" />
           </div>
 
-          <LineChart type="month" id="month" base={base} data={monthList} />
+          <LineChart type="month" id="month" base={base} data={monthList} loading={monthLoading} />
         </div>
       </div>
     </div>
