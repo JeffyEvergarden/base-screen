@@ -21,6 +21,7 @@ const renderTool = (params: any) => {
           <div class="${style['tooltips-num']}">${formateNumer(params.value)}</div>
         </div>
         <div class="${style['tt-bg']}"></div>
+        <div class="${style['tt-icon']}"></div>
       </div>`;
 };
 
@@ -53,6 +54,10 @@ const Funnel: React.FC<any> = (props: any) => {
           // confine: true,
           padding: 0,
           backgroundColor: 'transparent',
+          position: function (point: any) {
+            // 固定在顶部
+            return [point[0] - 50, point[1] - 70];
+          },
           formatter: function (params: any) {
             // console.log(params);
             // params.name === '海南省' && console.log('params', params);
@@ -125,10 +130,24 @@ const Funnel: React.FC<any> = (props: any) => {
             },
             emphasis: {
               itemStyle: {
-                areaColor: '#2E65FF',
+                areaColor: '#FCB344',
               },
               label: {
                 show: false,
+                color: '#fff',
+                fontWeight: '700',
+                fontSize: 12 * base,
+              },
+            },
+            selectMode: false,
+            select: {
+              itemStyle: {
+                areaColor: '#FCB344',
+                borderColor: '#fff',
+                borderWidth: 1,
+              },
+              label: {
+                show: true,
                 color: '#fff',
                 fontWeight: '700',
                 fontSize: 12 * base,
