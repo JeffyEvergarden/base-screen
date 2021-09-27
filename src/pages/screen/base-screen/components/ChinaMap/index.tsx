@@ -125,7 +125,7 @@ const Funnel: React.FC<any> = (props: any) => {
             },
             emphasis: {
               itemStyle: {
-                areaColor: '#8dd7fc',
+                areaColor: '#2E65FF',
               },
               label: {
                 show: false,

@@ -225,7 +225,6 @@ export const useMapModel = () => {
     data = data.map((item: any) => {
       return {
         code: String(item.code),
-        name: item.provinceName.slice(0, -2),
         value: item.inPartsNumberByProvince,
       };
     });
