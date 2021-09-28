@@ -84,3 +84,14 @@ export function formateInt(val: number): string {
   let str = val.toFixed(0);
   return str;
 }
+
+export function formateWanNum(val: number): string {
+  val = val / ONE_W;
+  if (isNaN(val) || !val) {
+    return '0';
+  }
+  let str1 = Number(val.toFixed(0));
+  let str2 = Number(val.toFixed(2));
+  let str = Number(str1) === Number(str2) ? str1 : str2;
+  return formateNumer(str);
+}

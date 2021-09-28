@@ -1,4 +1,4 @@
-import { formatePercent, formateInt } from '../../util';
+import { formatePercent, formateWanNum } from '../../util';
 
 const columns = [
   {
@@ -49,7 +49,7 @@ const columns = [
     title: '本日进件量',
     align: 'right',
     render: (text: any, row: any, index: any) => {
-      return formateInt(text) || 0;
+      return formateWanNum(text) || 0;
     },
   },
   {
@@ -57,7 +57,7 @@ const columns = [
     title: '本日放款金额',
     align: 'right',
     render: (text: any, row: any, index: any) => {
-      return formateInt(text) || 0;
+      return formateWanNum(text) || 0;
     },
   },
   {
@@ -65,7 +65,7 @@ const columns = [
     title: '本日净增余额',
     align: 'right',
     render: (text: any, row: any, index: any) => {
-      return formateInt(text) || 0;
+      return formateWanNum(text) || 0;
     },
   },
   {
@@ -74,7 +74,7 @@ const columns = [
     align: 'right',
     className: 'row_blue',
     render: (text: any, row: any, index: any) => {
-      return formateInt(text) || 0;
+      return formateWanNum(text) || 0;
     },
   },
   {
@@ -92,7 +92,7 @@ const columns = [
     align: 'right',
     className: 'row_blue',
     render: (text: any, row: any, index: any) => {
-      return formateInt(text) || 0;
+      return formateWanNum(text) || 0;
     },
   },
   {
@@ -101,7 +101,7 @@ const columns = [
     align: 'right',
     className: 'row_blue',
     render: (text: any, row: any, index: any) => {
-      return formateInt(text) || 0;
+      return formateWanNum(text) || 0;
     },
   },
   {
@@ -110,7 +110,7 @@ const columns = [
     align: 'right',
     className: 'row_blue_sp',
     render: (text: any, row: any, index: any) => {
-      return formateInt(text) || 0;
+      return formateWanNum(text) || 0;
     },
   },
   {
@@ -119,7 +119,7 @@ const columns = [
     align: 'right',
     className: 'row_blue_sp',
     render: (text: any, row: any, index: any) => {
-      return formateInt(text) || 0;
+      return formateWanNum(text) || 0;
     },
   },
 ];

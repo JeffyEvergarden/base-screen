@@ -6,16 +6,16 @@
       "channelType": "合计",
       "showOrder": 9,
       "channelName": "合计",
-      "inPartsNumberByDay": 80.0,
-      "loansMoneyByDay": 80.0,
-      "growthBalanceByDay": 80.0,
-      "inPartsNumberByMonth": 80.0,
-      "loansMoneyByMonth": 80.0,
-      "growthBalanceByMonth": 80.0,
+      "inPartsNumberByDay": 23280.0,
+      "loansMoneyByDay": 8320.0,
+      "growthBalanceByDay": 23280.0,
+      "inPartsNumberByMonth": 23280.0,
+      "loansMoneyByMonth": 1823210.0,
+      "growthBalanceByMonth": 842190.0,
       "passByMonth": null,
       "refuseByMonth": null,
       "passRateMonth": 0.5,
-      "growthBalanceByYear": 80.0,
+      "growthBalanceByYear": 87890.0,
       "loanBalance": 800000000.0
     },
     "other": {
@@ -36,39 +36,39 @@
     },
     "pieDataList": [
       {
-        "channelName": "中邮钱包",
-        "loalBalance": 10.0,
-        "rate": 0.125
+        "channelName": "手机银行",
+        "loalBalance": 10093000000,
+        "rate": 0.2396
       },
       {
-        "channelName": "京东金融",
-        "loalBalance": 10.0,
-        "rate": 0.125
+        "channelName": "中邮钱包",
+        "loalBalance": 8274729898.67,
+        "rate": 0.1965
       },
       {
         "channelName": "蚂蚁金服",
-        "loalBalance": 0,
-        "rate": 0.125
+        "loalBalance": 7804042541.95,
+        "rate": 0.1853
       },
       {
-        "channelName": "手机银行",
-        "loalBalance": 10.0,
-        "rate": 0.125
+        "channelName": "京东金融",
+        "loalBalance": 7740798563.38,
+        "rate": 0.1244
       },
       {
         "channelName": "微信",
-        "loalBalance": 10.0,
+        "loalBalance": 477835070.42,
         "rate": 0.125
       },
       {
         "channelName": "支付宝",
-        "loalBalance": 10.0,
-        "rate": 0.125
+        "loalBalance": 1739908835.33,
+        "rate": 0.12
       },
       {
         "channelName": "其他",
-        "loalBalance": 60.0,
-        "rate": 0.75
+        "loalBalance": 5985686990.55,
+        "rate": 0.1421
       }
     ],
     "onlineDataList": [
@@ -76,49 +76,49 @@
         "channelType": "线上",
         "showOrder": 1,
         "channelName": "中邮钱包",
-        "inPartsNumberByDay": 10.0,
-        "loansMoneyByDay": 10.0,
-        "growthBalanceByDay": 10.0,
-        "inPartsNumberByMonth": 10.0,
-        "loansMoneyByMonth": 10.0,
-        "growthBalanceByMonth": 10.0,
+        "inPartsNumberByDay": 23280.0,
+        "loansMoneyByDay": 8320.0,
+        "growthBalanceByDay": 23280.0,
+        "inPartsNumberByMonth": 23280.0,
+        "loansMoneyByMonth": 1823210.0,
+        "growthBalanceByMonth": 842190.0,
         "passByMonth": null,
         "refuseByMonth": null,
         "passRateMonth": 0.5,
-        "growthBalanceByYear": 10.0,
-        "loanBalance": 10.0
+        "growthBalanceByYear": 87890.0,
+        "loanBalance": 1012312.0
       },
       {
         "channelType": "线上",
         "showOrder": 1,
         "channelName": "中邮钱包",
-        "inPartsNumberByDay": 10.0,
-        "loansMoneyByDay": 10.0,
-        "growthBalanceByDay": 10.0,
-        "inPartsNumberByMonth": 10233.12,
-        "loansMoneyByMonth": 10.0,
-        "growthBalanceByMonth": 10.0,
+        "inPartsNumberByDay": 23280.0,
+        "loansMoneyByDay": 8320.0,
+        "growthBalanceByDay": 23280.0,
+        "inPartsNumberByMonth": 23280.0,
+        "loansMoneyByMonth": 1823210.0,
+        "growthBalanceByMonth": 842190.0,
         "passByMonth": null,
         "refuseByMonth": null,
         "passRateMonth": 0.5,
-        "growthBalanceByYear": 10.0,
-        "loanBalance": 10.0
+        "growthBalanceByYear": 87890.0,
+        "loanBalance": 1012312.0
       },
       {
         "channelType": "线上",
         "showOrder": 1,
         "channelName": "中邮钱包",
-        "inPartsNumberByDay": 10.0,
-        "loansMoneyByDay": 10.0,
-        "growthBalanceByDay": 10.0,
-        "inPartsNumberByMonth": 10.0,
-        "loansMoneyByMonth": 10.0,
-        "growthBalanceByMonth": 10.0,
+        "inPartsNumberByDay": 23280.0,
+        "loansMoneyByDay": 8320.0,
+        "growthBalanceByDay": 23280.0,
+        "inPartsNumberByMonth": 23280.0,
+        "loansMoneyByMonth": 182333210.0,
+        "growthBalanceByMonth": 842190.0,
         "passByMonth": null,
         "refuseByMonth": null,
         "passRateMonth": 0.5,
-        "growthBalanceByYear": 10.0,
-        "loanBalance": 10.0
+        "growthBalanceByYear": 87890.0,
+        "loanBalance": 101223312.0
       },
       {
         "channelType": "线上",

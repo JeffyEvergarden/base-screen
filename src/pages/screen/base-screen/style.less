@@ -9,7 +9,7 @@
 
 .screen-bg {
   width: 1920px * @rate;
-  height: 1080px * @rate;
+  padding-bottom: 8px * @rate;
   overflow: hidden;
   font-family: PingFang SC, Microsoft YaHei, SimHei;
   background: url('./assets/bg.svg') no-repeat 100%;
@@ -207,7 +207,7 @@
   .chart_one {
     position: relative;
     width: 592px * @rate;
-    height: 320px * @rate;
+    height: 270px * @rate;
     margin-top: 24px * @rate;
     margin-right: 10px * @rate;
     margin-left: 48px * @rate;
@@ -215,7 +215,7 @@
 
     .tips {
       position: absolute;
-      bottom: -8px * @rate;
+      bottom: -15px * @rate;
       left: 0;
       z-index: 10;
       width: 100%;
@@ -230,8 +230,8 @@
   .chart_two {
     position: relative;
     width: 592px * @rate;
-    height: 422px * @rate;
-    margin-right: 70px * @rate;
+    height: 340px * @rate;
+    margin-right: 10px * @rate;
 
     // overflow: hidden;
     .title-map {
@@ -242,8 +242,8 @@
   }
 
   .chart_three {
-    width: 592px * @rate;
-    height: 320px * @rate;
+    width: 652px * @rate;
+    height: 280px * @rate;
     margin-top: 24px * @rate;
     overflow: hidden;
   }
@@ -253,22 +253,23 @@
 // 漏斗图
 .funnel-box {
   width: 592px * @rate;
-  height: 320px * @rate;
+  height: 270px * @rate;
 }
 
 .map-box {
   width: 592px * @rate;
-  height: 422px * @rate;
+  height: 340px * @rate;
 }
 
 .pie-box {
-  width: 592px * @rate;
-  height: 320px * @rate;
+  position: relative;
+  width: 652px * @rate;
+  height: 280px * @rate;
 }
 
 .line-box {
   width: 592px * @rate;
-  height: 207px * @rate;
+  height: 200px * @rate;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
 }
@@ -336,9 +337,9 @@
   .my-row;
 
   position: relative;
-  top: -5px * @rate;
   align-items: flex-start;
   height: 495px * @rate;
+  margin-top: 30px * @rate;
   padding-left: 48px * @rate;
 
   .chart_four {
@@ -364,7 +365,7 @@
     position: relative;
     display: flex;
     justify-content: flex-end;
-    margin-top: 40px * @rate;
+    margin-top: 20px * @rate;
     margin-bottom: 16px * @rate;
   }
 
@@ -385,7 +386,7 @@
           th {
             padding: 4px * @rate 8px * @rate 4px * @rate;
             font-weight: 700;
-            font-size: 14px * @rate;
+            font-size: 12px * @rate;
             line-height: 20px * @rate;
             background: #fff;
             border: 1px solid #80c4ff;
@@ -401,8 +402,8 @@
           td {
             padding: 5px * @rate 8px * @rate 4px * @rate;
             overflow: hidden;
-            font-size: 14px * @rate;
-            line-height: 20px * @rate;
+            font-size: 12px * @rate;
+            line-height: 18px * @rate;
             white-space: nowrap;
             text-overflow: ellipsis;
           }
@@ -454,4 +455,16 @@
       }
     }
   }
+}
+
+.title-tips {
+  position: absolute;
+  top: -35px * @rate;
+  left: 330px * @rate;
+  z-index: 10;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: 700;
+  font-size: 13px * @rate;
+  line-height: 22px * @rate;
 }

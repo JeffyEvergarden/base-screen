@@ -19,13 +19,13 @@ const Funnel: React.FC<any> = (props: any) => {
     return Object.assign({}, option, {
       series: [
         {
-          top: 8 * base,
+          top: 0 * base,
           bottom: 21 * base,
           type: 'funnel',
           gap: 11.85 * base,
-          minSize: 196 * base,
-          left: 120 * base,
-          width: 334 * base,
+          minSize: 175 * base,
+          left: 140 * base,
+          width: 300 * base,
           itemStyle: {
             borderColor: '#fff',
             borderWidth: 0,
@@ -73,8 +73,6 @@ const Funnel: React.FC<any> = (props: any) => {
     <Spin spinning={loading}>
       <div className={style['chart_one']}>
         <div id="funnel" className={style['funnel-box']}></div>
-
-        <div className={style['tips']}>备注：结存用户数及余额指标都已剔除abs出表</div>
       </div>
     </Spin>
   );

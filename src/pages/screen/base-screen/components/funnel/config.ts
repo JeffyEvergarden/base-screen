@@ -206,9 +206,9 @@ const option = {
       bottom: 32,
       type: 'funnel',
       gap: 11.85,
-      minSize: 196,
-      left: 120,
-      width: 334,
+      minSize: 175,
+      left: 150,
+      width: 300,
       itemStyle: {
         borderColor: '#fff',
         borderWidth: 1,
@@ -243,7 +243,7 @@ const getLine = (base: number, data: any[]) => {
     // 画箭头线
     z: 1,
     top: 30 * base,
-    height: 320 * base,
+    height: 270 * base,
     type: 'graph',
     layout: 'none',
     symbolSize: 0,

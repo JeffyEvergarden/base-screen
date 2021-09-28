@@ -148,6 +148,9 @@ const ScreenPage: React.FC<any> = (props: any) => {
 
       <div className={style['screen-content_bottom']}>
         <TableView data={tableList} />
+        <div className={style['title-tips']}>
+          备注：结存用户数及余额指标都已剔除abs出表，金额单位为：万元
+        </div>
         <div className={style['chart_four']}>
           <div className={style['title-4']}>
             <Title title="近30天进件量与净增余额" />

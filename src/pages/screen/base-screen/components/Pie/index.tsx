@@ -27,21 +27,27 @@ const Pie: React.FC<any> = (props: any) => {
     }
 
     let len: number = data.length ? data.length : 1;
-    let gadVal = data.reduce((total: number, cur: any) => total + cur.value, 0) / len;
+    let total = data.reduce((total: number, cur: any) => total + cur.value, 0);
+    let gadVal = total / len;
     gadVal = Math.floor(gadVal / 13);
     const targetData: any = [];
+    let half = 0;
     data.forEach((item: any, i: number) => {
       // 过滤 0的数据
       if (item.value === 0) {
         return;
       }
+      if (half < total / 2 && half + item.value >= total / 2) {
+        item.flag = true;
+      }
+      half = half + item.value;
       targetData.push(
         {
           ...item,
           labelLine: {
             show: true,
             length: 20 * base,
-            length2: (i === 0 ? 40 : 20) * base,
+            length2: 35 * base,
             lineStyle: {
               color: '#B7B7B7',
               lineHeight: 18,
@@ -81,14 +87,14 @@ const Pie: React.FC<any> = (props: any) => {
         top: 0,
         left: 0,
         right: 0,
-        bottom: 0,
+        bottom: 8 * base,
       },
       title: {
         text: `贷款余额 (${unit}元)`,
         subtext: `¥ ${money || 0}`,
-        top: '35%',
+        top: '36%',
         textAlign: 'center',
-        left: '44%',
+        left: '46%',
         textStyle: {
           color: '#1A2B5B',
           fontSize: 18 * base,
@@ -106,7 +112,7 @@ const Pie: React.FC<any> = (props: any) => {
         {
           name: '饼图',
           type: 'pie',
-          center: ['45%', '50%'],
+          center: ['47%', '50%'],
           radius: ['63%', '85%'],
           avoidLabelOverlap: true,
           itemStyle: {
@@ -146,8 +152,8 @@ const Pie: React.FC<any> = (props: any) => {
                 d.name +
                 ' | ' +
                 formatePercent(d.data.realPercent) +
-                '\n' +
-                `¥ ${formateBaseMoney(d.value)}元`;
+                `${d.data.flag ? '    ' : ''}\n` +
+                `¥ ${formateBaseMoney(d.value)}元${d.data.flag ? '    ' : ''}`;
               return ins;
             },
           },

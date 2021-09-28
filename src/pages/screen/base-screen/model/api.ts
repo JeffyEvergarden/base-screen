@@ -1,8 +1,10 @@
 import { request } from 'umi';
 
+const baseUrl = '/bdp-businessScreen';
+
 // 获取总揽数据
 export const getOverviewData = async (params?: any) => {
-  return request('/screen/data/overview', {
+  return request(`${baseUrl}/screen/data/overview`, {
     method: 'get',
     params,
   });
@@ -10,35 +12,35 @@ export const getOverviewData = async (params?: any) => {
 
 // 获取总揽数据
 export const getFunnel = async (params?: any) => {
-  return request('/screen/data/funnel', {
+  return request(`${baseUrl}/screen/data/funnel`, {
     method: 'get',
     params,
   });
 };
 
 const getMonthList = async (params?: any) => {
-  return request('/screen/data/month', {
+  return request(`${baseUrl}/screen/data/month`, {
     method: 'get',
     params,
   });
 };
 
 const getYearList = async (params?: any) => {
-  return request('/screen/data/year', {
+  return request(`${baseUrl}/screen/data/year`, {
     method: 'get',
     params,
   });
 };
 
 const getChinaMap = async (params?: any) => {
-  return request('/screen/data/map', {
+  return request(`${baseUrl}/screen/data/map`, {
     method: 'get',
     params,
   });
 };
 
 const getTimeList = async (params?: any) => {
-  return request('/screen/data/time', {
+  return request(`${baseUrl}/screen/data/time`, {
     method: 'get',
     params,
   });

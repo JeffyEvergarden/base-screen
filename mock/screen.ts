@@ -111,10 +111,10 @@ const getChinaMap = (req: Request, res: Response) => {
 };
 
 export default {
-  'GET /screen/data/overview': getOverviewData,
-  'GET /screen/data/funnel': getFunnel,
-  'GET /screen/data/map': getChinaMap,
-  'GET /screen/data/month': getMonthData,
-  'GET /screen/data/year': getYearData,
-  'GET /screen/data/time': getTime,
+  'GET /bdp-businessScreen/screen/data/overview': getOverviewData,
+  'GET /bdp-businessScreen/screen/data/funnel': getFunnel,
+  'GET /bdp-businessScreen/screen/data/map': getChinaMap,
+  'GET /bdp-businessScreen/screen/data/month': getMonthData,
+  'GET /bdp-businessScreen/screen/data/year': getYearData,
+  'GET /bdp-businessScreen/screen/data/time': getTime,
 };

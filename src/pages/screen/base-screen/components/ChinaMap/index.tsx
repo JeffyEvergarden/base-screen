@@ -68,7 +68,7 @@ const Funnel: React.FC<any> = (props: any) => {
         visualMap: {
           min: 0,
           max: max,
-          left: '0%',
+          left: '10%',
           bottom: '5%',
           text: ['高', '低'],
           calculable: false,
@@ -90,8 +90,8 @@ const Funnel: React.FC<any> = (props: any) => {
         geo: {
           map: 'china',
           show: true,
-          center: [98, 38],
-          zoom: 1,
+          center: [98, 36],
+          zoom: 1.15,
           roam: false,
           itemStyle: {
             borderColor: 'rgba(0,63,140,0.2)',
@@ -116,8 +116,8 @@ const Funnel: React.FC<any> = (props: any) => {
           {
             type: 'map',
             map: 'china',
-            center: [98, 38],
-            zoom: 1,
+            center: [98, 36],
+            zoom: 1.15,
             // geoIndex: 0,
             label: {
               show: false,
@@ -125,7 +125,7 @@ const Funnel: React.FC<any> = (props: any) => {
             },
             itemStyle: {
               areaColor: '#B2CAE0',
-              borderColor: '#fff',
+              borderColor: '#73bdf9',
               borderWidth: 1,
             },
             emphasis: {
