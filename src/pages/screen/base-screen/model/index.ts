@@ -142,9 +142,9 @@ export const useFunnelModel = () => {
   const [funnelLoading, setFunnelLoading] = useState<boolean>(false);
 
   const getFunnel = async () => {
-    setFunnelLoading(true);
+    // setFunnelLoading(true);
     const res: any = await API.getFunnel();
-    setFunnelLoading(false);
+    // setFunnelLoading(false);
     let data: any = res?.resObject || [];
     const len = data.length;
     data = data.map((item: any, i: number) => {
@@ -175,9 +175,9 @@ export const useLineModal = () => {
   const [monthLoading, setMonthLoading] = useState<boolean>(false);
 
   const getMonthList = async () => {
-    setDayLoading(true);
+    // setDayLoading(true);
     const res: any = await API.getMonthList();
-    setDayLoading(false);
+    // setDayLoading(false);
     let data: any = res?.resObject || [];
     data = data.map((item: any) => {
       return {
@@ -190,9 +190,9 @@ export const useLineModal = () => {
   };
 
   const getYearList = async () => {
-    setMonthLoading(true);
+    // setMonthLoading(true);
     const res: any = await API.getYearList();
-    setMonthLoading(false);
+    // setMonthLoading(false);
     let data: any = res?.resObject || [];
     data = data.map((item: any) => {
       return {

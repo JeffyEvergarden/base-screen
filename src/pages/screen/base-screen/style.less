@@ -9,6 +9,7 @@
 
 .screen-bg {
   width: 1920px * @rate;
+  min-height: 100vh;
   padding-bottom: 8px * @rate;
   overflow: hidden;
   font-family: PingFang SC, Microsoft YaHei, SimHei;
@@ -115,12 +116,12 @@
 .title-box {
   display: inline-flex;
   align-items: center;
-  height: 40px * @rate;
+  height: 32px * @rate;
   padding-right: 20px * @rate;
   padding-left: 10px * @rate;
   color: #fff;
   font-weight: 700;
-  font-size: 20px * @rate;
+  font-size: 16px * @rate;
   background: #668eff;
   border-radius: 8px; // radius 不用乘
 
@@ -140,7 +141,7 @@
 
   .title-1 {
     position: absolute;
-    top: 32px * @rate;
+    top: 40px * @rate;
     left: 48px * @rate;
   }
 
@@ -191,7 +192,7 @@
 
   .title-2 {
     position: absolute;
-    top: 32px * @rate;
+    top: 40px * @rate;
     right: 48px * @rate;
   }
 }
@@ -208,7 +209,7 @@
     position: relative;
     width: 592px * @rate;
     height: 270px * @rate;
-    margin-top: 24px * @rate;
+    margin-top: 10px * @rate;
     margin-right: 10px * @rate;
     margin-left: 48px * @rate;
     // overflow: hidden;
@@ -230,7 +231,7 @@
   .chart_two {
     position: relative;
     width: 592px * @rate;
-    height: 340px * @rate;
+    height: 320px * @rate;
     margin-right: 10px * @rate;
 
     // overflow: hidden;
@@ -244,7 +245,7 @@
   .chart_three {
     width: 652px * @rate;
     height: 280px * @rate;
-    margin-top: 24px * @rate;
+    margin-top: 10px * @rate;
     overflow: hidden;
   }
 }
@@ -258,7 +259,7 @@
 
 .map-box {
   width: 592px * @rate;
-  height: 340px * @rate;
+  height: 320px * @rate;
 }
 
 .pie-box {
@@ -338,8 +339,7 @@
 
   position: relative;
   align-items: flex-start;
-  height: 495px * @rate;
-  margin-top: 30px * @rate;
+  margin-top: 10px * @rate;
   padding-left: 48px * @rate;
 
   .chart_four {
@@ -350,14 +350,14 @@
 
   .title-3 {
     position: absolute;
-    top: -56px * @rate;
+    top: -48px * @rate;
     left: 0 * @rate;
     z-index: 10;
   }
 
   .title-4 {
     position: absolute;
-    top: -56px * @rate;
+    top: -48px * @rate;
     right: 0;
   }
 
@@ -365,8 +365,8 @@
     position: relative;
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px * @rate;
-    margin-bottom: 16px * @rate;
+    margin-top: 18px * @rate;
+    margin-bottom: 12px * @rate;
   }
 
   .table-box {
@@ -383,7 +383,7 @@
       .ant-table-thead {
         tr {
           th {
-            padding: 4px * @rate 8px * @rate 4px * @rate 2px * @rate;
+            padding: 4px * @rate 8px * @rate 2px * @rate 2px * @rate;
             font-weight: 700;
             font-size: 12px * @rate;
             line-height: 20px * @rate;
@@ -407,7 +407,7 @@
       .ant-table-tbody {
         tr {
           td {
-            padding: 3px * @rate 8px * @rate 4px * @rate 2px * @rate;
+            padding: 3px * @rate 8px * @rate 3px * @rate 2px * @rate;
             overflow: hidden;
             font-size: 12px * @rate;
             line-height: 20px * @rate;
@@ -477,7 +477,7 @@
 .title-tips {
   position: absolute;
   top: -35px * @rate;
-  left: 330px * @rate;
+  left: 320px * @rate;
   z-index: 10;
   width: 100%;
   color: rgba(0, 0, 0, 0.65);

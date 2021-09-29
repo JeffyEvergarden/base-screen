@@ -68,7 +68,7 @@ const Funnel: React.FC<any> = (props: any) => {
         visualMap: {
           min: 0,
           max: max,
-          left: '10%',
+          left: '18%',
           bottom: '5%',
           text: ['高', '低'],
           calculable: false,
