@@ -183,7 +183,7 @@ export const useLineModal = () => {
       return {
         name: item.day,
         value1: formateNumByWan(item.inPartsNumber),
-        value2: formateNumByTenMillion(item.growthBalance),
+        value2: formateNumByhundredMillion(item.growthBalance),
       };
     });
     setDayList(data || []);

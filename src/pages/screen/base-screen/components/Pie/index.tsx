@@ -152,8 +152,8 @@ const Pie: React.FC<any> = (props: any) => {
                 d.name +
                 ' | ' +
                 formatePercent(d.data.realPercent) +
-                `${d.data.flag ? '    ' : ''}\n` +
-                `¥ ${formateBaseMoney(d.value)}元${d.data.flag ? '    ' : ''}`;
+                `${d.data.flag ? '      ' : ''}\n` +
+                `¥ ${formateBaseMoney(d.value)}元${d.data.flag ? '      ' : ''}`;
               return ins;
             },
           },

@@ -30,7 +30,7 @@ const ScreenPage: React.FC<any> = (props: any) => {
     const fn = throttle(() => {
       const realRate = document.body.clientWidth / 1920;
       setBase(realRate);
-    }, 300);
+    }, 200);
     window.addEventListener('resize', fn);
     return () => {
       window.removeEventListener('resize', fn);
@@ -147,7 +147,7 @@ const ScreenPage: React.FC<any> = (props: any) => {
       </div>
 
       <div className={style['screen-content_bottom']}>
-        <TableView data={tableList} />
+        <TableView data={tableList} base={base} />
         <div className={style['title-tips']}>
           备注：结存用户数及余额指标都已剔除abs出表，金额单位为：万元
         </div>

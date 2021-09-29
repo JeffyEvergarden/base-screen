@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Table } from 'antd';
 import { Title } from '../common';
-import { columns, testData } from './config';
+import { columns, testData, genColumn } from './config';
 import style from '../../style.less';
 
 interface tableProps {
   data: any[];
+  base?: number;
 }
 
 // 表格
 
 const TableView: React.FC<tableProps> = (props: tableProps) => {
-  const { data = [] } = props;
+  const { data = [], base = 1 } = props;
+
+  const columns = useMemo(() => {
+    return genColumn(base);
+  }, [base]);
 
   return (
     <div className={style['table-box']}>

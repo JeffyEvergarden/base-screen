@@ -375,7 +375,6 @@
 
     :global {
       .ant-table {
-        font-weight: 700;
         border-bottom: 1px solid #80c4ff;
         border-left: 1px solid #80c4ff;
       }
@@ -384,7 +383,7 @@
       .ant-table-thead {
         tr {
           th {
-            padding: 4px * @rate 8px * @rate 4px * @rate;
+            padding: 4px * @rate 8px * @rate 4px * @rate 2px * @rate;
             font-weight: 700;
             font-size: 12px * @rate;
             line-height: 20px * @rate;
@@ -394,24 +393,42 @@
             border-left: none;
             border-collapse: collapse;
           }
+
+          th:first-child {
+            text-align: center;
+          }
+
+          th:nth-child(2) {
+            text-align: center;
+          }
         }
       }
 
       .ant-table-tbody {
         tr {
           td {
-            padding: 5px * @rate 8px * @rate 4px * @rate;
+            padding: 3px * @rate 8px * @rate 4px * @rate 2px * @rate;
             overflow: hidden;
             font-size: 12px * @rate;
-            line-height: 18px * @rate;
+            line-height: 20px * @rate;
             white-space: nowrap;
             text-overflow: ellipsis;
           }
         }
 
+        .row_first {
+          text-align: center;
+        }
+
+        .col_two {
+          overflow: auto;
+          white-space: initial;
+          text-overflow: initial;
+        }
+
         tr:nth-child(odd) {
           td {
-            min-width: 80px * @rate;
+            min-width: 78px * @rate;
             max-width: 120px * @rate;
             background: rgba(67, 160, 241, 0.03);
             border: 1px solid #80c4ff;
@@ -431,7 +448,7 @@
 
         tr:nth-child(even) {
           td {
-            min-width: 80px * @rate;
+            min-width: 78px * @rate;
             max-width: 120px * @rate;
             background: rgba(67, 160, 241, 0.1);
             border: 1px solid #80c4ff;

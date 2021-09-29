@@ -34,7 +34,7 @@ const LineChart: React.FC<any> = (props: any) => {
           data: ['进件量', '净增余额'],
         },
         grid: {
-          top: 35 * base,
+          top: 40 * base,
           left: 55 * base,
           right: 50 * base,
           bottom: 30 * base,
@@ -82,7 +82,7 @@ const LineChart: React.FC<any> = (props: any) => {
             },
           },
           {
-            name: `单位：${type === 'month' ? '亿' : '千万'}元`,
+            name: `单位：亿元`,
             type: 'value',
             max: max2,
             splitNumber: 6,

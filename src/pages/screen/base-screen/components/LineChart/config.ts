@@ -252,7 +252,7 @@ const getMarkPoint = (title: any[], data: number[], color?: string, MAX: number 
     zlevel: 200,
     z: 200,
     label: {
-      position: [color ? 13 : 0, -15],
+      position: color ? [13, -10] : [-10, -18],
       color: color || '#668EFF',
       backgroundColor: '#fff',
       padding: 1,
@@ -265,7 +265,7 @@ const getMarkPoint = (title: any[], data: number[], color?: string, MAX: number 
     zlevel: 200,
     z: 200,
     label: {
-      position: [color ? 13 : 0, -15],
+      position: color ? [13, -10] : [-10, -18],
       color: color || '#668EFF',
       backgroundColor: '#fff',
       padding: 1,
