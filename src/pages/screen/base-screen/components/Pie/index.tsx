@@ -76,6 +76,7 @@ const Pie: React.FC<any> = (props: any) => {
 
     return Object.assign({}, option, {
       tooltip: {
+        show: false,
         formatter: function (params: any) {
           if (!params.name) {
             return '';
