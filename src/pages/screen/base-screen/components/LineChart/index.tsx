@@ -20,7 +20,7 @@ const LineChart: React.FC<any> = (props: any) => {
 
     let max2 = getMax(data2);
 
-    console.log('max: ' + max1 + ' ' + max2);
+    // console.log('max: ' + max1 + ' ' + max2);
 
     return Object.assign(
       {},
@@ -61,7 +61,7 @@ const LineChart: React.FC<any> = (props: any) => {
         },
         yAxis: [
           {
-            name: `单位：万笔数`,
+            name: `单位：万笔`,
             type: 'value',
             max: max1,
             splitNumber: 6,
@@ -127,7 +127,7 @@ const LineChart: React.FC<any> = (props: any) => {
               //     return `${columns[coord]}: ${value}`;
               //   },
               // },
-              data: getMarkPoint(['进件量最大', '进件量最小'], data1, '', max1),
+              data: getMarkPoint(['进件量最大', '进件量最小'], data1, '', max1, type),
             },
             data: data1,
           },
@@ -161,7 +161,7 @@ const LineChart: React.FC<any> = (props: any) => {
               //     return `${columns[coord]}: ${value}${type === 'month' ? '亿' : '千万'}元`;
               //   },
               // },
-              data: getMarkPoint(['净增余额最大', '净增余额最小'], data2, '#1CD389', max2),
+              data: getMarkPoint(['净增余额最大', '净增余额最小'], data2, '#1CD389', max2, type),
             },
             data: data2,
           },

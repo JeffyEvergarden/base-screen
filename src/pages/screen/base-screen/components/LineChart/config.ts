@@ -232,7 +232,13 @@ const getMax = (data: any[]) => {
 
 // 最大 最小节点显示
 
-const getMarkPoint = (title: any[], data: number[], color?: string, MAX: number = 1) => {
+const getMarkPoint = (
+  title: any[],
+  data: number[],
+  color?: string,
+  MAX: number = 1,
+  type?: any,
+) => {
   let max = 0;
   let min: number = data[0];
 
@@ -265,7 +271,7 @@ const getMarkPoint = (title: any[], data: number[], color?: string, MAX: number 
     zlevel: 200,
     z: 200,
     label: {
-      position: color ? [13, -10] : [-10, -18],
+      position: color ? [13, type === 'month' ? -7 : -10] : [-10, -18],
       color: color || '#668EFF',
       backgroundColor: '#fff',
       padding: 1,

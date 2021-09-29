@@ -1,4 +1,4 @@
-import { formatePercent, formateWanNum } from '../../util';
+import { formatePercent, formateWanNum, formateNumer } from '../../util';
 
 const columns = [
   {
@@ -174,7 +174,7 @@ const genColumn = (base: number) => {
       title: '本日进件量',
       align: 'right',
       render: (text: any, row: any, index: any) => {
-        return formateWanNum(text) || 0;
+        return formateNumer(text) || 0;
       },
     },
     {
@@ -199,7 +199,7 @@ const genColumn = (base: number) => {
       align: 'right',
       className: 'row_blue',
       render: (text: any, row: any, index: any) => {
-        return formateWanNum(text) || 0;
+        return formateNumer(text) || 0;
       },
     },
     {
