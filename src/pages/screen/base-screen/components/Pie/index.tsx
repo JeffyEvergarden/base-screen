@@ -69,6 +69,14 @@ const Pie: React.FC<any> = (props: any) => {
             borderColor: 'rgba(0, 0, 0, 0)',
             borderWidth: 0,
           },
+          emphasis: {
+            label: {
+              show: false,
+            },
+            labelLine: {
+              show: false,
+            },
+          },
         },
       );
     });

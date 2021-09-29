@@ -258,7 +258,7 @@ const getMarkPoint = (
     zlevel: 200,
     z: 200,
     label: {
-      position: color ? [13, -10] : [-10, -18],
+      position: color ? [13, type === 'month' ? -7.5 : -10] : [-10, -18],
       color: color || '#668EFF',
       backgroundColor: '#fff',
       padding: 1,
@@ -271,7 +271,7 @@ const getMarkPoint = (
     zlevel: 200,
     z: 200,
     label: {
-      position: color ? [13, type === 'month' ? -7 : -10] : [-10, -18],
+      position: color ? [13, type === 'month' ? -7 : -10] : [-8, -20],
       color: color || '#668EFF',
       backgroundColor: '#fff',
       padding: 1,
