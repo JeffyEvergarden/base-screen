@@ -16,6 +16,9 @@ import monthJson from './screen/month.json';
 // 月数据json
 import timeJson from './screen/Time.json';
 
+// 其他大屏
+import DetailScreen from './detail-screen';
+
 const ONE_YI = 100000000;
 const TEN_MILLION = 10000000;
 
@@ -117,4 +120,5 @@ export default {
   'GET /bdp-businessScreen/screen/data/month': getMonthData,
   'GET /bdp-businessScreen/screen/data/year': getYearData,
   'GET /bdp-businessScreen/screen/data/time': getTime,
+  ...DetailScreen,
 };

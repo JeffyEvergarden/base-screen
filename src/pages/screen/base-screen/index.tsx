@@ -101,7 +101,7 @@ const ScreenPage: React.FC<any> = (props: any) => {
       {/* 标题 header栏 */}
       <div className={style['header']}>
         <div className={style['header-left']}>
-          <div className={style['title']}>中邮消费金融业务实时监控</div>
+          <div className={style['title']}>中邮消费金融基础业务量监控</div>
         </div>
         <div className={style['time']}>
           <div>

@@ -2,14 +2,20 @@ export default [
   {
     path: '/',
     layout: false,
-    name: '标准基础大屏',
+    name: '基础业务量大屏',
     component: './screen/base-screen',
   },
   {
     path: '/screen',
     layout: false,
-    name: '基础大屏',
+    name: '基础业务量大屏',
     component: './screen/base-screen',
+  },
+  {
+    path: '/screen/detail',
+    layout: false,
+    name: '分渠道业务量大屏',
+    component: './screen/detail-screen',
   },
   {
     path: '/editor',
@@ -43,5 +49,5 @@ export default [
   },
   { name: '查询表格', icon: 'table', path: '/list', component: './TableList' },
   // { path: '/', redirect: '/screen' },
-  { component: './404' },
+  { component: './404', layout: false },
 ];

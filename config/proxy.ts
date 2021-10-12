@@ -8,11 +8,11 @@
  */
 export default {
   dev: {
-    '/screen/': {
-      target: 'http://172.16.250.66:10068',
-      changeOrigin: true,
-      pathRewrite: { '^': '' },
-    },
+    // '/screen/': {
+    //   target: 'http://172.16.250.66:10068',
+    //   changeOrigin: true,
+    //   pathRewrite: { '^': '' },
+    // },
   },
   test: {
     '/api/': {

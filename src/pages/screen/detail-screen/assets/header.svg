@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 48" class="design-iconfont">
+  <g data-name="组 106" fill="#668eff">
+    <path data-name="路径 508" d="M329.9,0H0V48H293.229Z" transform="translate(903)"/>
+    <path data-name="路径 510" d="M718,0H601l-6,8H718Z" transform="translate(608.836 40)"/>
+    <path data-name="路径 509" d="M707.5-6H28L0,30H707.5Z" transform="translate(1212.5 6)"/>
+    <path data-name="矩形 115" transform="translate(1332.792 40)" d="M0 0H8V8H0z"/>
+    <path data-name="矩形 116" transform="translate(1346.785 40)" opacity=".8" d="M0 0H8V8H0z"/>
+    <path data-name="矩形 117" transform="translate(1360.777 40)" opacity=".4" d="M0 0H8V8H0z"/>
+  </g>
+  <g data-name="组 107" fill="#668eff">
+    <path data-name="路径 508" d="M0,0H329.9V48H36.671Z" transform="translate(687.1)"/>
+    <path data-name="路径 510" d="M595,0H712l6,8H595Z" transform="translate(-1.836 40)"/>
+    <path data-name="路径 509" d="M0-6H679.5l28,36H0Z" transform="translate(0 6)"/>
+    <path data-name="矩形 115" transform="translate(579.208 40)" d="M0 0H8V8H0z"/>
+    <path data-name="矩形 116" transform="translate(565.215 40)" opacity=".8" d="M0 0H8V8H0z"/>
+    <path data-name="矩形 117" transform="translate(551.223 40)" opacity=".4" d="M0 0H8V8H0z"/>
+  </g>
+</svg>

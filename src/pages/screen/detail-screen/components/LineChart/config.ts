@@ -1,133 +1,13 @@
 // import * as echarts from 'echarts';
-
-// 渐变色
+import { text } from 'express';
+import style from '../../style.less';
+// 颜色
 const colors = [
-  {
-    type: 'linear',
-    x: 0,
-    y: 0,
-    x2: 1,
-    y2: 0,
-    colorStops: [
-      {
-        offset: 0,
-        color: '#668EFF', // 0% 处的颜色
-      },
-      {
-        offset: 1,
-        color: '#2E65FF', // 100% 处的颜色
-      },
-    ],
-    global: false, // 缺省为 false
-  },
-  {
-    type: 'linear',
-    x: 0,
-    y: 0,
-    x2: 1,
-    y2: 0,
-    colorStops: [
-      {
-        offset: 0,
-        color: '#36CBCB', // 0% 处的颜色
-      },
-      {
-        offset: 1,
-        color: '#1ABBBB', // 100% 处的颜色
-      },
-    ],
-    global: false, // 缺省为 false
-  },
-  {
-    type: 'linear',
-    x: 0,
-    y: 0,
-    x2: 1,
-    y2: 0,
-    colorStops: [
-      {
-        offset: 0,
-        color: '#4ECB73', // 0% 处的颜色
-      },
-      {
-        offset: 1,
-        color: '#00BA6E', // 100% 处的颜色
-      },
-    ],
-    global: false, // 缺省为 false
-  },
-  {
-    type: 'linear',
-    x: 0,
-    y: 0,
-    x2: 1,
-    y2: 0,
-    colorStops: [
-      {
-        offset: 0,
-        color: '#FFC751', // 0% 处的颜色
-      },
-      {
-        offset: 1,
-        color: '#FEA137', // 100% 处的颜色
-      },
-    ],
-    global: false, // 缺省为 false
-  },
-  {
-    type: 'linear',
-    x: 0,
-    y: 0,
-    x2: 1,
-    y2: 0,
-    colorStops: [
-      {
-        offset: 0,
-        color: '#F6946F', // 0% 处的颜色
-      },
-      {
-        offset: 1,
-        color: '#FF8330', // 100% 处的颜色
-      },
-    ],
-    global: false, // 缺省为 false
-  },
-  {
-    type: 'linear',
-    x: 0,
-    y: 0,
-    x2: 1,
-    y2: 0,
-    colorStops: [
-      {
-        offset: 0,
-        color: '#F9526E', // 0% 处的颜色
-      },
-      {
-        offset: 1,
-        color: '#FF474D', // 100% 处的颜色
-      },
-    ],
-    global: false, // 缺省为 false
-  },
-  {
-    type: 'linear',
-    x: 0,
-    y: 0,
-    x2: 1,
-    y2: 0,
-    colorStops: [
-      {
-        offset: 0,
-        color: '#975FE5', // 0% 处的颜色
-      },
-      {
-        offset: 1,
-        color: '#975FE5', // 100% 处的颜色
-      },
-    ],
-    global: false, // 缺省为 false
-  },
+  '#FF6E73', // 红色
+  '#1890FF', // 蓝色
+  '#975FE4', // 紫色
+  '#2FC25B', // 绿色
+  '#FAA138', // 橙色
 ];
 
 // 找最适合的刻度线
@@ -228,15 +108,21 @@ const getMax = (data: any[]) => {
   return computedMax;
 };
 
+const renderMarkPoint = (text: any, color: any) => {
+  const htmlText = `
+    <div class="${style['markpoint-bg']}">
+      <div class="${style['markpoint-shadow']}" style="background: ${color};"></div>
+
+      <div class="${style['markpoint-text']}">${text}</div>
+    </div>
+  `;
+
+  return 'dev:' + text;
+};
+
 // 最大 最小节点显示
 
-const getMarkPoint = (
-  title: any[],
-  data: number[],
-  color?: string,
-  MAX: number = 1,
-  type?: any,
-) => {
+const getMarkPoint = (title: any[], data: number[], color?: string, MAX: number = 1) => {
   let max = 0;
   let min: number = data[0];
 
@@ -256,10 +142,14 @@ const getMarkPoint = (
     zlevel: 200,
     z: 200,
     label: {
-      position: color ? [13, type === 'month' ? -7.5 : -10] : [-10, -18],
+      position: [13, -10],
       color: color || '#668EFF',
       backgroundColor: '#fff',
       padding: 1,
+      formatter: (params: any) => {
+        return '';
+        // return renderMarkPoint(params.value, color);
+      },
     },
   });
 
@@ -269,7 +159,7 @@ const getMarkPoint = (
     zlevel: 200,
     z: 200,
     label: {
-      position: color ? [13, type === 'month' ? -7 : -10] : [-8, -20],
+      position: [13, -10],
       color: color || '#668EFF',
       backgroundColor: '#fff',
       padding: 1,
@@ -279,7 +169,7 @@ const getMarkPoint = (
   return arr;
 };
 
-export { getMax, getMarkPoint };
+export { colors, getMax, getMarkPoint };
 
 // markLine: {
 //   symbol: 'none',
