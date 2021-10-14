@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Tooltip, Spin } from 'antd';
 import { Title, TitleNum } from './components/common';
 import { InfoCircleOutlined } from '@ant-design/icons';
+import { WaterMark } from '@ant-design/pro-layout';
 // 图表组件
 import Funnel from './components/Funnel';
 import ChinaMap from './components/ChinaMap';
@@ -14,7 +15,7 @@ import LineChart from './components/LineChart';
 import style from './style.less';
 // import logo from '@/assets/logo.png';
 // 方法
-import { getCnTime } from '@/utils';
+import { getCnTime, getIP } from '@/utils';
 import { throttle } from './util';
 
 // 数据
@@ -26,7 +27,12 @@ const ScreenPage: React.FC<any> = (props: any) => {
   const rate = document.body.clientWidth / 1920;
   const [base, setBase] = useState<number>(rate);
 
+  const [ip, setIP] = useState<string>('');
+
   useEffect(() => {
+    getIP((address: any) => {
+      setIP(address);
+    });
     const fn = throttle(() => {
       const realRate = document.body.clientWidth / 1920;
       setBase(realRate);
@@ -97,75 +103,83 @@ const ScreenPage: React.FC<any> = (props: any) => {
   );
 
   return (
-    <div className={style['screen-bg']}>
-      {/* 标题 header栏 */}
-      <div className={style['header']}>
-        <div className={style['header-left']}>
-          <div className={style['title']}>中邮消费金融基础业务量监控</div>
-        </div>
-        <div className={style['time']}>
-          <div>
-            <div>进件数据更新时间：{tipsTime}</div>
-            <div>放款数据更新时间：{tipsTime2}</div>
+    <WaterMark content={ip}>
+      <div className={style['screen-bg']}>
+        {/* 标题 header栏 */}
+        <div className={style['header']}>
+          <div className={style['header-left']}>
+            <div className={style['title']}>中邮消费金融基础业务量监控</div>
           </div>
-          <div className={style['time_icon']}>
-            <Tooltip
-              placement="bottomRight"
-              title={renderHeaderIcon}
-              trigger={'hover'}
-              overlayClassName={style['fake-tips']}
-              overlayStyle={{ maxWidth: '700px' }}
-            >
-              <div className={style['inner-tips']}>
-                <InfoCircleOutlined />
-              </div>
-            </Tooltip>
+          <div className={style['time']}>
+            <div>
+              <div>进件数据更新时间：{tipsTime}</div>
+              <div>放款数据更新时间：{tipsTime2}</div>
+            </div>
+            <div className={style['time_icon']}>
+              <Tooltip
+                placement="bottomRight"
+                title={renderHeaderIcon}
+                trigger={'hover'}
+                overlayClassName={style['fake-tips']}
+                overlayStyle={{ maxWidth: '700px' }}
+              >
+                <div className={style['inner-tips']}>
+                  <InfoCircleOutlined />
+                </div>
+              </Tooltip>
+            </div>
+          </div>
+        </div>
+
+        <div className={style['screen-content_top']}>
+          <div className={style['title-1']}>
+            <Title title="客户数" />
+          </div>
+          <div className={style['title-2']}>
+            <Title title="贷款余额" />
+          </div>
+
+          <TitleNum num1={dayInNum} num2={dayOutMoney} num3={dayNetProfitMoney} />
+        </div>
+
+        <div className={style['screen-content']}>
+          {/* 漏斗图 */}
+          <Funnel base={base} data={funnelList} loading={funnelLoading} />
+          {/* 中国地图 */}
+          <ChinaMap base={base} data={mapList} />
+          {/* 饼图  需显示总贷款余额*/}
+          <Condition r-if={overviewFinished}>
+            <Pie base={base} data={pieList} totalMoney={total} />
+          </Condition>
+        </div>
+
+        <div className={style['screen-content_bottom']}>
+          <TableView data={tableList} base={base} />
+          <div className={style['title-tips']}>
+            备注：结存用户数及余额指标都已剔除abs出表，金额单位为：万元
+          </div>
+          <div className={style['chart_four']}>
+            <div className={style['title-4']}>
+              <Title title="近30天进件量与净增余额" />
+            </div>
+
+            <LineChart type="day" id="day" base={base} data={dayList} loading={dayLoading} />
+
+            <div className={style['title-5']}>
+              <Title title="近1年进件量与净增余额" />
+            </div>
+
+            <LineChart
+              type="month"
+              id="month"
+              base={base}
+              data={monthList}
+              loading={monthLoading}
+            />
           </div>
         </div>
       </div>
-
-      <div className={style['screen-content_top']}>
-        <div className={style['title-1']}>
-          <Title title="客户数" />
-        </div>
-        <div className={style['title-2']}>
-          <Title title="贷款余额" />
-        </div>
-
-        <TitleNum num1={dayInNum} num2={dayOutMoney} num3={dayNetProfitMoney} />
-      </div>
-
-      <div className={style['screen-content']}>
-        {/* 漏斗图 */}
-        <Funnel base={base} data={funnelList} loading={funnelLoading} />
-        {/* 中国地图 */}
-        <ChinaMap base={base} data={mapList} />
-        {/* 饼图  需显示总贷款余额*/}
-        <Condition r-if={overviewFinished}>
-          <Pie base={base} data={pieList} totalMoney={total} />
-        </Condition>
-      </div>
-
-      <div className={style['screen-content_bottom']}>
-        <TableView data={tableList} base={base} />
-        <div className={style['title-tips']}>
-          备注：结存用户数及余额指标都已剔除abs出表，金额单位为：万元
-        </div>
-        <div className={style['chart_four']}>
-          <div className={style['title-4']}>
-            <Title title="近30天进件量与净增余额" />
-          </div>
-
-          <LineChart type="day" id="day" base={base} data={dayList} loading={dayLoading} />
-
-          <div className={style['title-5']}>
-            <Title title="近1年进件量与净增余额" />
-          </div>
-
-          <LineChart type="month" id="month" base={base} data={monthList} loading={monthLoading} />
-        </div>
-      </div>
-    </div>
+    </WaterMark>
   );
 };
 

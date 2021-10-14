@@ -3,11 +3,19 @@ import { text } from 'express';
 import style from '../../style.less';
 // 颜色
 const colors = [
+  '#975FE4', // 紫色
   '#FF6E73', // 红色
   '#1890FF', // 蓝色
-  '#975FE4', // 紫色
   '#2FC25B', // 绿色
   '#FAA138', // 橙色
+];
+
+const bgColors = [
+  'rgba(151, 95, 228, 0.8)', // 紫
+  'rgba(255, 110, 115, 0.8)', // 红色
+  'rgba(24, 144, 255, 0.8)', // 蓝色
+  'rgba(47, 194, 91, 0.8)', // 绿色
+  'rgba(250, 161, 56, 0.8)', // 橙色
 ];
 
 // 找最适合的刻度线
@@ -117,14 +125,15 @@ const renderMarkPoint = (text: any, color: any) => {
     </div>
   `;
 
-  return 'dev:' + text;
+  return htmlText;
 };
 
 // 最大 最小节点显示
 
-const getMarkPoint = (title: any[], data: number[], color?: string, MAX: number = 1) => {
+const getMarkPoint = (title: any[], data: number[], colorIndex: number, MAX: number = 1) => {
   let max = 0;
   let min: number = data[0];
+  let point: any[] = [];
 
   data.forEach((val: any) => {
     if (val > max) {
@@ -139,16 +148,14 @@ const getMarkPoint = (title: any[], data: number[], color?: string, MAX: number 
   arr.push({
     name: title[0],
     type: 'max',
-    zlevel: 200,
-    z: 200,
     label: {
-      position: [13, -10],
-      color: color || '#668EFF',
-      backgroundColor: '#fff',
-      padding: 1,
+      position: [10, -8],
+      color: '#fff',
+      backgroundColor: bgColors[colorIndex],
+      padding: [2, 8],
+      borderRadius: 4,
       formatter: (params: any) => {
-        return '';
-        // return renderMarkPoint(params.value, color);
+        return params.value;
       },
     },
   });
@@ -156,16 +163,17 @@ const getMarkPoint = (title: any[], data: number[], color?: string, MAX: number 
   arr.push({
     name: title[1],
     type: 'min',
-    zlevel: 200,
-    z: 200,
     label: {
-      position: [13, -10],
-      color: color || '#668EFF',
-      backgroundColor: '#fff',
-      padding: 1,
+      position: [10, -8],
+      color: '#fff',
+      backgroundColor: bgColors[colorIndex],
+      padding: [2, 8],
+      borderRadius: 4,
+      formatter: (params: any) => {
+        return `${params.value}`;
+      },
     },
   });
-
   return arr;
 };
 

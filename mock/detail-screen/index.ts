@@ -68,7 +68,7 @@ const getWorkLineList = (req: Request, res: Response) => {
       {
         name: '9月1日',
         value1: 30,
-        value2: 10,
+        value2: 60,
         value3: 20,
       },
       {
@@ -86,7 +86,7 @@ const getWorkLineList = (req: Request, res: Response) => {
       {
         name: '9月4日',
         value1: 25,
-        value2: 70,
+        value2: 60,
         value3: 30,
       },
       {

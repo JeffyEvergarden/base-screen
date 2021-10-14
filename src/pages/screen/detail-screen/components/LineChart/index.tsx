@@ -14,11 +14,11 @@ const LineChart: React.FC<any> = (props: any) => {
 
   const lineChart = useRef<any>(null);
 
-  const initOptions = (columns: any[], data1: any[], data2: any[], data3: any[]) => {
+  const initOptions = (columns: any[], data1: any[], data2: any[]) => {
     // 获取坐标最大节点
     let max1 = getMax(data1);
 
-    let max2 = getMax(data2.concat(data3));
+    let max2 = getMax(data2);
 
     console.log('max: ' + max1 + ' ' + max2);
 
@@ -31,7 +31,7 @@ const LineChart: React.FC<any> = (props: any) => {
         },
         legend: {
           // icon: 'circle',
-          data: ['进件笔数', '放款金额', '净增余额'],
+          data: ['放款金额', '净增余额'],
         },
         grid: {
           top: 34 * base,
@@ -61,7 +61,7 @@ const LineChart: React.FC<any> = (props: any) => {
         },
         yAxis: [
           {
-            name: `单位：万笔`,
+            name: `单位：亿元`,
             type: 'value',
             max: max1,
             splitNumber: 6,
@@ -101,31 +101,10 @@ const LineChart: React.FC<any> = (props: any) => {
         ],
         series: [
           {
-            name: '进件笔数',
-            type: 'line',
-            zlevel: 20,
-            showSymbol: false,
-            lineStyle: {
-              width: 2 * base,
-            },
-            emphasis: {
-              focus: 'series',
-            },
-            label: {
-              fontSize: 12 * base,
-            },
-            markPoint: {
-              symbol: 'circle',
-              symbolSize: 6,
-              data: getMarkPoint(['进件笔数最大', '进件量笔数最小'], data1, colors[0], max1),
-            },
-            data: data1,
-          },
-          {
             name: '放款金额',
             type: 'line',
-            yAxisIndex: 1,
-            zlevel: 10,
+            yAxisIndex: 0,
+            z: 10,
             showSymbol: false,
             lineStyle: {
               width: 2 * base,
@@ -136,20 +115,23 @@ const LineChart: React.FC<any> = (props: any) => {
             label: {
               fontSize: 12 * base,
             },
+            labelLayout: {
+              moveOverlap: 'shiftY',
+            },
             markPoint: {
               symbol: 'circle',
               symbolSize: 6,
-              z: 20,
-              data: getMarkPoint(['放款余额最大', '放款余额最小'], data2, colors[1], max2),
+              zlevel: 10,
+              data: getMarkPoint(['放款余额最大', '放款余额最小'], data2, 0, max2),
             },
-            data: data2,
+            data: data1,
           },
           {
             name: '净增余额',
             type: 'line',
             yAxisIndex: 1,
-            zlevel: 10,
             showSymbol: false,
+            z: 5,
             lineStyle: {
               width: 2 * base,
             },
@@ -159,13 +141,15 @@ const LineChart: React.FC<any> = (props: any) => {
             label: {
               fontSize: 12 * base,
             },
+            labelLayout: {
+              moveOverlap: 'shiftY',
+            },
             markPoint: {
               symbol: 'circle',
               symbolSize: 6,
-              z: 20,
-              data: getMarkPoint(['净增余额最大', '净增余额最小'], data3, colors[1], max2),
+              data: getMarkPoint(['净增余额最大', '净增余额最小'], data2, 1, max2),
             },
-            data: data3,
+            data: data2,
           },
         ],
       },
