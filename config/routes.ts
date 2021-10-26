@@ -18,12 +18,6 @@ export default [
     component: './screen/detail-screen',
   },
   {
-    path: '/editor',
-    layout: false,
-    name: '编辑',
-    component: './TestEditor',
-  },
-  {
     path: '/chinamap',
     layout: false,
     name: '中国地图测试',

@@ -20,7 +20,7 @@ import { throttle } from './util';
 
 // 数据
 import { useOverViewModel, useFunnelModel, useLineModal, useMapModel, useTimeModel } from './model';
-import Condition from '@/pages/TestEditor/flow/common/Condition';
+import Condition from './components/common/Condition';
 
 const ScreenPage: React.FC<any> = (props: any) => {
   // 比率计算
