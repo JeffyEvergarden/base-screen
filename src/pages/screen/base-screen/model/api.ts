@@ -46,6 +46,13 @@ const getTimeList = async (params?: any) => {
   });
 };
 
+export const getRemoteIP = async (params?: any) => {
+  return request(`${baseUrl}/screen`, {
+    method: 'get',
+    params,
+  });
+};
+
 export default {
   getOverviewData,
   getFunnel,
@@ -53,4 +60,5 @@ export default {
   getYearList,
   getChinaMap,
   getTimeList,
+  getRemoteIP,
 };

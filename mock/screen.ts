@@ -113,6 +113,14 @@ const getChinaMap = (req: Request, res: Response) => {
   });
 };
 
+const getIP = (req: Request, res: Response) => {
+  res.json({
+    code: 0,
+    msg: '成功',
+    resObject: '192.168.88.88',
+  });
+};
+
 export default {
   'GET /bdp-businessScreen/screen/data/overview': getOverviewData,
   'GET /bdp-businessScreen/screen/data/funnel': getFunnel,
@@ -120,5 +128,6 @@ export default {
   'GET /bdp-businessScreen/screen/data/month': getMonthData,
   'GET /bdp-businessScreen/screen/data/year': getYearData,
   'GET /bdp-businessScreen/screen/data/time': getTime,
+  'GET /bdp-businessScreen/screen/data/ip': getIP,
   ...DetailScreen,
 };

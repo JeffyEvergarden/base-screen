@@ -20,6 +20,7 @@ import { throttle } from './util';
 
 // 数据
 import { useOverViewModel, useFunnelModel, useLineModal, useMapModel, useTimeModel } from './model';
+import { getRemoteIP } from './model/api';
 import Condition from './components/common/Condition';
 
 const ScreenPage: React.FC<any> = (props: any) => {
@@ -30,9 +31,17 @@ const ScreenPage: React.FC<any> = (props: any) => {
   const [ip, setIP] = useState<string>('');
 
   useEffect(() => {
-    getIP((address: any) => {
-      setIP(address);
-    });
+    getRemoteIP()
+      .then((res: any) => {
+        console.log('接口获取ip');
+        // console.log(res)
+        res = res?.resObject || '';
+        setIP(ip || res || '');
+      })
+      .catch((err) => {
+        console.log('err');
+        console.log(err);
+      });
     const fn = throttle(() => {
       const realRate = document.body.clientWidth / 1920;
       setBase(realRate);

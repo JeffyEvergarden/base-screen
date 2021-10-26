@@ -55,13 +55,21 @@ export function getHMSTime(date: Date, flag: boolean = true): string {
   return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 }
 
+// 获取ip地址
 export function getIP(callback: (...args: any[]) => void) {
   const MyPeerConnection =
     window.RTCPeerConnection ||
     (window as any).mozRTCPeerConnection ||
     window.webkitRTCPeerConnection; //compatibility for firefox and chrome
-  //console.log(myPeerConnection )
-
+  // console.log(
+  //   window.RTCPeerConnection,
+  //   (window as any).mozRTCPeerConnection,
+  //   window.webkitRTCPeerConnection,
+  // );
+  if (!MyPeerConnection) {
+    console.log('暂不支持获取ip地址');
+    return;
+  }
   const restartConfig: any = { iceServers: [] };
   // var pc = new myPeerConnection({ iceServers: [] }),
   const pc: any = new MyPeerConnection({ iceServers: [] } as any);
@@ -69,20 +77,31 @@ export function getIP(callback: (...args: any[]) => void) {
   const localIPs: any = {};
   const ipRegex: any = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g;
 
+  let flag = false;
+
   function ipIterate(ip: string) {
-    if (!localIPs[ip]) callback(ip);
+    // console.log('ip:' + ip);
+    if (!localIPs[ip]) {
+      callback(ip);
+      if (ip) {
+        callback(ip);
+        flag = true;
+      }
+    }
     localIPs[ip] = true;
   }
-  pc.setConfiguration(restartConfig);
-  pc.createDataChannel('');
-  pc.createOffer().then(function (sdp: any) {
+  pc?.setConfiguration?.(restartConfig);
+  pc?.createDataChannel?.('');
+  pc?.createOffer().then(function (sdp: any) {
     sdp.sdp.split('\n').forEach(function (line: any) {
+      // console.log(line, line.match(ipRegex));
       if (line.indexOf('candidate') < 0) return;
       line.match(ipRegex).forEach(ipIterate);
     });
-    pc.setLocalDescription(sdp, noop, noop);
+    pc?.setLocalDescription(sdp, noop, noop);
   });
   pc.onicecandidate = function (ice: any) {
+    // console.log('ice：', ice?.candidate?.candidate);
     if (
       !ice ||
       !ice.candidate ||
