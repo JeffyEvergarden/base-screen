@@ -47,7 +47,7 @@ const getTimeList = async (params?: any) => {
 };
 
 export const getRemoteIP = async (params?: any) => {
-  return request(`${baseUrl}/screen`, {
+  return request(`${baseUrl}/screen/data/ip`, {
     method: 'get',
     params,
   });
