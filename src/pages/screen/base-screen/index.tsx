@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 // 通用组件
 import { Tooltip, Spin } from 'antd';
-import { Title, TitleNum } from './components/common';
+import { Title, TitleNum, TitleNum2 } from './components/common';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { WaterMark } from '@ant-design/pro-layout';
 // 图表组件
@@ -98,6 +98,13 @@ const ScreenPage: React.FC<any> = (props: any) => {
     };
   }, []);
 
+  // const fake: any = useRef<any>(null);
+
+  // const callback = (obj: any) => {
+  //   console.log('fake')
+  //   fake.current.update(obj);
+  // };
+
   const renderHeaderIcon = (
     <div className={style['tips-box']}>
       {updateList.map((item: any, i: number) => {
@@ -147,8 +154,8 @@ const ScreenPage: React.FC<any> = (props: any) => {
           <div className={style['title-2']}>
             <Title title="贷款余额" />
           </div>
-
           <TitleNum num1={dayInNum} num2={dayOutMoney} num3={dayNetProfitMoney} />
+          {/* <TitleNum2 cref={fake} num1={dayInNum} num2={dayOutMoney} num3={dayNetProfitMoney} /> */}
         </div>
 
         <div className={style['screen-content']}>

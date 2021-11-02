@@ -1,3 +1,5 @@
 import Title from './title';
 import TitleNum from './title-num';
-export { Title, TitleNum };
+import TitleNum2 from './title-num2';
+
+export { Title, TitleNum, TitleNum2 };

@@ -88,7 +88,7 @@ export const useOverViewModel = () => {
     return originTableList;
   };
 
-  const getOverviewData = async () => {
+  const getOverviewData = async (callback?: (...args: any[]) => void) => {
     const res: any = await API.getOverviewData();
     setOverviewFinished(true);
     const data: any = res?.resObject || {};
@@ -108,6 +108,11 @@ export const useOverViewModel = () => {
       setDayInNum(totalObj.inPartsNumberByDay || 0); // 今日进见
       setDayOutMoney(loansMoneyByDay || 0); // 处理成万
       setDayNetProfitMoney(growthBalanceByDay || 0); // 处理成万
+      callback?.({
+        num1: totalObj.inPartsNumberByDay,
+        num2: loansMoneyByDay,
+        num3: growthBalanceByDay,
+      });
       setTotal(totalVal);
       // 处理饼图数据
       const list = pieDataList.map((item: any) => {
