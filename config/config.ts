@@ -18,9 +18,9 @@ export default defineConfig({
     siderWidth: 208,
     ...defaultSettings,
   },
-  publicPath: '/bdp-businessScreen/',
-  outputPath: 'dist/bdp-businessScreen/',
-  base: 'bdp-businessScreen',
+  publicPath: '/businessScreen/',
+  outputPath: 'dist/businessScreen/',
+  base: 'businessScreen',
   dynamicImport: {
     loading: '@ant-design/pro-layout/es/PageLoading',
   },

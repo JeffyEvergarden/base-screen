@@ -122,12 +122,12 @@ const getIP = (req: Request, res: Response) => {
 };
 
 export default {
-  'GET /bdp-businessScreen/screen/data/overview': getOverviewData,
-  'GET /bdp-businessScreen/screen/data/funnel': getFunnel,
-  'GET /bdp-businessScreen/screen/data/map': getChinaMap,
-  'GET /bdp-businessScreen/screen/data/month': getMonthData,
-  'GET /bdp-businessScreen/screen/data/year': getYearData,
-  'GET /bdp-businessScreen/screen/data/time': getTime,
-  'GET /bdp-businessScreen/screen/data/ip': getIP,
+  'GET /businessScreen/screen/data/overview': getOverviewData,
+  'GET /businessScreen/screen/data/funnel': getFunnel,
+  'GET /businessScreen/screen/data/map': getChinaMap,
+  'GET /businessScreen/screen/data/month': getMonthData,
+  'GET /businessScreen/screen/data/year': getYearData,
+  'GET /businessScreen/screen/data/time': getTime,
+  'GET /businessScreen/screen/data/ip': getIP,
   ...DetailScreen,
 };

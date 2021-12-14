@@ -1,6 +1,6 @@
 import { request } from 'umi';
 
-const baseUrl = '/bdp-businessScreen';
+const baseUrl = '/businessScreen';
 
 // 获取总揽数据
 export const getOverviewData = async (params?: any) => {
