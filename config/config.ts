@@ -2,9 +2,15 @@
 import { defineConfig } from 'umi';
 import { join } from 'path';
 import defaultSettings from './defaultSettings';
+import CompressionPlugin from 'compression-webpack-plugin';
 import proxy from './proxy';
 import routes from './routes';
 const { REACT_APP_ENV } = process.env;
+
+console.log('process.env.NODE_ENV:' + process.env.NODE_ENV);
+
+const isProd = process.env.NODE_ENV === 'production';
+
 export default defineConfig({
   // mock: false,
   hash: true,
@@ -64,4 +70,17 @@ export default defineConfig({
   mfsu: {},
   webpack5: {},
   exportStatic: {},
+  chainWebpack: function (config, { webpack }) {
+    if (isProd) {
+      // Gzip压缩
+      config.plugin('compression-webpack-plugin').use(CompressionPlugin, [
+        {
+          algorithm: 'gzip',
+          test: /\.(js|css|html)$/i, // 匹配
+          threshold: 10240, // 超过10k的文件压缩
+          deleteOriginalAssets: false, // 不删除源文件
+        },
+      ]);
+    }
+  },
 });

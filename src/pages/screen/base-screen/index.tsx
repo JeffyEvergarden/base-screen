@@ -5,7 +5,7 @@ import { Title, TitleNum, TitleNum2 } from './components/common';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { WaterMark } from '@ant-design/pro-layout';
 // 图表组件
-import Funnel from './components/Funnel';
+import Funnel from './components/funnel';
 import ChinaMap from './components/ChinaMap';
 import Pie from './components/Pie';
 import TableView from './components/Table';
@@ -15,7 +15,7 @@ import LineChart from './components/LineChart';
 import style from './style.less';
 // import logo from '@/assets/logo.png';
 // 方法
-import { getCnTime, getIP } from '@/utils';
+// import { getCnTime, getIP } from '@/utils';
 import { throttle } from './util';
 
 // 数据
