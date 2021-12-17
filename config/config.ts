@@ -70,6 +70,16 @@ export default defineConfig({
   mfsu: {},
   webpack5: {},
   exportStatic: {},
+  // terserOptions 无效  --- 不知道为什么
+  terserOptions: {
+    compress: {
+      drop_console: true,
+      drop_debugger: true,
+    },
+  },
+  extraBabelPlugins: isProd ? ['transform-remove-console'] : [],
+
+  // 开启gzip压缩
   chainWebpack: function (config, { webpack }) {
     if (isProd) {
       // Gzip压缩
