@@ -8,7 +8,7 @@ import style from '../../style.less';
 import { Spin } from 'antd';
 
 const Funnel: React.FC<any> = (props: any) => {
-  let { base = 1, data = [], loading } = props;
+  let { base = 1, data = [], loading, fullScreen } = props;
   const myChart = useRef<any>(null);
 
   let first = false;
@@ -67,7 +67,7 @@ const Funnel: React.FC<any> = (props: any) => {
       myChart.current?.setOption?.(options);
       myChart.current?.resize?.();
     }
-  }, [options]);
+  }, [options, fullScreen]);
 
   return (
     <Spin spinning={loading}>

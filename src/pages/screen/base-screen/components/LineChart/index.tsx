@@ -7,7 +7,7 @@ import { Spin } from 'antd';
 import style from '../../style.less';
 
 const LineChart: React.FC<any> = (props: any) => {
-  let { base = 1, id, type, data = [], loading } = props;
+  let { base = 1, id, type, data = [], loading, fullScreen } = props;
   const lineChart = useRef<any>(null);
 
   let first = false;
@@ -199,7 +199,7 @@ const LineChart: React.FC<any> = (props: any) => {
       initMap();
       lineChart.current?.resize?.();
     }
-  }, [base, data]);
+  }, [base, data, fullScreen]);
 
   return (
     <div className={style['line-box']}>

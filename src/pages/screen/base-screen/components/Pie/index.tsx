@@ -7,7 +7,7 @@ import style from '../../style.less';
 import { formatePercent, formateBaseMoney, formateNumer, ONE_YI, ONE_W } from '../../util';
 
 const Pie: React.FC<any> = (props: any) => {
-  let { base = 1, data = [], totalMoney = 0 } = props;
+  let { base = 1, data = [], totalMoney = 0, fullScreen } = props;
   const mapChart = useRef<any>(null);
 
   let first = false;
@@ -225,7 +225,7 @@ const Pie: React.FC<any> = (props: any) => {
       initMap();
       mapChart.current?.resize?.();
     }
-  }, [options]);
+  }, [options, fullScreen]);
 
   return (
     <div className={style['chart_three']}>

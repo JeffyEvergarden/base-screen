@@ -21,15 +21,26 @@ const DetailScreen: React.FC<any> = (props: any) => {
   const rate = document.body.clientWidth / 1920;
   const [base, setBase] = useState<number>(rate);
 
+  const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
+
   const [ip, setIP] = useState<string>('');
+
+  const [width, setWidth] = useState<number>(0);
+  const [height, setHeight] = useState<number>(0);
 
   useEffect(() => {
     getIP((address: any) => {
       setIP(address);
     });
     const fn = throttle(() => {
+      //
       const realRate = document.body.clientWidth / 1920;
       setBase(realRate);
+      if (window.screen.height - document.body.clientHeight < 6) {
+        setIsFullScreen(true);
+      } else {
+        setIsFullScreen(false);
+      }
     }, 200);
     window.addEventListener('resize', fn);
     return () => {
@@ -95,6 +106,8 @@ const DetailScreen: React.FC<any> = (props: any) => {
               </Tooltip>
             </div>
           </div>
+
+          <div>{isFullScreen ? '全屏' : '非全屏'}</div>
 
           {/* 上折线图 */}
           <div className={style['chart-bg_one']}>

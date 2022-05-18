@@ -219,12 +219,12 @@ const getMax = (data: any[]) => {
 
   let minSpit = findMinSpit((max - min) / 5, max);
   let computedMax = 0;
-  console.log('max - min', max, ' ', max - min, ' ', (max - min) / 5);
-  console.log('minSpit', minSpit);
+  // console.log('max - min', max, ' ', max - min, ' ', (max - min) / 5);
+  // console.log('minSpit', minSpit);
   while (computedMax < max) {
     computedMax += minSpit;
   }
-  console.log('computedMax', computedMax);
+  // console.log('computedMax', computedMax);
   return computedMax;
 };
 

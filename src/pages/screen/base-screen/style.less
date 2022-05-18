@@ -1,6 +1,8 @@
 @base: 1920px;
 @rate: 100vw / @base;
 
+@fullrate: 1.2;
+
 .vw(@name: @px) {
   @{name}: @px / @base * 100vw;
 }
@@ -484,4 +486,71 @@
   font-weight: 700;
   font-size: 13px * @rate;
   line-height: 22px * @rate;
+}
+
+// -------------------------
+.screen_fullscreen {
+  .chart_one {
+    width: 592px * @rate;
+    height: 264px * @rate * @fullrate;
+  }
+
+  .chart_two {
+    width: 592px * @rate;
+    height: 310px * @rate * @fullrate;
+  }
+
+  .chart_three {
+    width: 652px * @rate;
+    height: 280px * @rate * @fullrate;
+  }
+
+  .funnel-box {
+    width: 592px * @rate;
+    height: 270px * @rate * @fullrate;
+  }
+
+  .map-box {
+    width: 592px * @rate;
+    height: 320px * @rate * @fullrate;
+  }
+
+  .pie-box {
+    position: relative;
+    width: 652px * @rate;
+    height: 280px * @rate * @fullrate;
+  }
+
+  .line-box {
+    width: 592px * @rate;
+    height: 200px * @rate * @fullrate;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+  }
+
+  .table-box {
+    :global {
+      // 关于 table
+      .ant-table-thead {
+        tr {
+          th {
+            padding: 4px * @rate 8px * @rate 2px * @rate 2px * @rate !important;
+            font-weight: 700;
+            font-size: 14px * @rate !important;
+            line-height: 22px * @rate !important;
+          }
+        }
+      }
+
+      .ant-table-tbody {
+        tr {
+          td {
+            padding: 6px * @rate 8px * @rate 5px * @rate 2px * @rate !important;
+            font-size: 14px * @rate !important;
+            line-height: 20px * @rate !important;
+          }
+        }
+      }
+    }
+  }
 }

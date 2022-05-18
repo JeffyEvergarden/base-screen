@@ -26,7 +26,7 @@ const renderTool = (params: any) => {
 };
 
 const Funnel: React.FC<any> = (props: any) => {
-  let { base = 1, data } = props;
+  let { base = 1, data, fullScreen } = props;
   const mapChart = useRef<any>(null);
 
   let first = false;
@@ -45,7 +45,7 @@ const Funnel: React.FC<any> = (props: any) => {
         name: map.get(String(ele.code)),
       };
     });
-    console.log(newData);
+    // console.log(newData);
     // console.log(newData)
     return Object.assign(
       {},
@@ -244,7 +244,7 @@ const Funnel: React.FC<any> = (props: any) => {
       mapChart.current?.setOption?.(options);
       mapChart.current?.resize?.();
     }
-  }, [options]);
+  }, [options, fullScreen]);
 
   // 激活更新
   useEffect(() => {

@@ -30,6 +30,8 @@ const ScreenPage: React.FC<any> = (props: any) => {
 
   const [ip, setIP] = useState<string>('');
 
+  const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
+
   useEffect(() => {
     getRemoteIP()
       .then((res: any) => {
@@ -45,7 +47,13 @@ const ScreenPage: React.FC<any> = (props: any) => {
     const fn = throttle(() => {
       const realRate = document.body.clientWidth / 1920;
       setBase(realRate);
+      if (window.screen.height - document.body.clientHeight < 6) {
+        setIsFullScreen(true);
+      } else {
+        setIsFullScreen(false);
+      }
     }, 200);
+    fn();
     window.addEventListener('resize', fn);
     return () => {
       window.removeEventListener('resize', fn);
@@ -98,13 +106,6 @@ const ScreenPage: React.FC<any> = (props: any) => {
     };
   }, []);
 
-  // const fake: any = useRef<any>(null);
-
-  // const callback = (obj: any) => {
-  //   console.log('fake')
-  //   fake.current.update(obj);
-  // };
-
   const renderHeaderIcon = (
     <div className={style['tips-box']}>
       {updateList.map((item: any, i: number) => {
@@ -120,7 +121,7 @@ const ScreenPage: React.FC<any> = (props: any) => {
 
   return (
     <WaterMark content={ip}>
-      <div className={style['screen-bg']}>
+      <div className={`${style['screen-bg']} ${isFullScreen ? style['screen_fullscreen'] : ''} `}>
         {/* 标题 header栏 */}
         <div className={style['header']}>
           <div className={style['header-left']}>
@@ -160,12 +161,12 @@ const ScreenPage: React.FC<any> = (props: any) => {
 
         <div className={style['screen-content']}>
           {/* 漏斗图 */}
-          <Funnel base={base} data={funnelList} loading={funnelLoading} />
+          <Funnel base={base} data={funnelList} loading={funnelLoading} fullScreen={isFullScreen} />
           {/* 中国地图 */}
-          <ChinaMap base={base} data={mapList} />
+          <ChinaMap base={base} data={mapList} fullScreen={isFullScreen} />
           {/* 饼图  需显示总贷款余额*/}
           <Condition r-if={overviewFinished}>
-            <Pie base={base} data={pieList} totalMoney={total} />
+            <Pie base={base} data={pieList} totalMoney={total} fullScreen={isFullScreen} />
           </Condition>
         </div>
 
@@ -179,7 +180,14 @@ const ScreenPage: React.FC<any> = (props: any) => {
               <Title title="近30天进件量与净增余额" />
             </div>
 
-            <LineChart type="day" id="day" base={base} data={dayList} loading={dayLoading} />
+            <LineChart
+              type="day"
+              id="day"
+              base={base}
+              data={dayList}
+              loading={dayLoading}
+              fullScreen={isFullScreen}
+            />
 
             <div className={style['title-5']}>
               <Title title="近1年进件量与净增余额" />
@@ -191,6 +199,7 @@ const ScreenPage: React.FC<any> = (props: any) => {
               base={base}
               data={monthList}
               loading={monthLoading}
+              fullScreen={isFullScreen}
             />
           </div>
         </div>
