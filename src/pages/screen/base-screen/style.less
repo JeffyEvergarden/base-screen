@@ -523,7 +523,7 @@
 
   .line-box {
     width: 592px * @rate;
-    height: 200px * @rate * @fullrate;
+    height: 198px * @rate * @fullrate;
     background: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
   }
@@ -534,7 +534,7 @@
       .ant-table-thead {
         tr {
           th {
-            padding: 4px * @rate 8px * @rate 2px * @rate 2px * @rate !important;
+            padding: 4px * @rate 8px * @rate 4px * @rate 2px * @rate !important;
             font-weight: 700;
             font-size: 14px * @rate !important;
             line-height: 22px * @rate !important;
@@ -545,9 +545,11 @@
       .ant-table-tbody {
         tr {
           td {
-            padding: 6px * @rate 8px * @rate 5px * @rate 2px * @rate !important;
-            font-size: 14px * @rate !important;
+            padding: 3px * @rate 8px * @rate 4px * @rate 2px * @rate !important;
+            overflow: hidden;
+            font-size: 12px * @rate !important;
             line-height: 20px * @rate !important;
+            text-overflow: ellipsis;
           }
         }
       }
