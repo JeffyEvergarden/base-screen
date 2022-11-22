@@ -15,7 +15,7 @@ import LineChart from './components/LineChart';
 import style from './style.less';
 // import logo from '@/assets/logo.png';
 // 方法
-// import { getCnTime, getIP } from '@/utils';
+import './animate.css';
 import { throttle } from './util';
 
 // 数据
@@ -76,14 +76,22 @@ const ScreenPage: React.FC<any> = (props: any) => {
   const { tipsTime, tipsTime2, updateList, getTime } = useTimeModel();
 
   // 漏斗数据
-  const { funnelList, getFunnel, funnelLoading } = useFunnelModel();
+  const { funnelList, getFunnel, funnelLoading, funnelFinish } = useFunnelModel();
 
   // 直线表数据
-  const { dayList, monthList, dayLoading, monthLoading, getMonthList, getYearList } =
-    useLineModal();
+  const {
+    dayList,
+    monthList,
+    dayLoading,
+    monthLoading,
+    getMonthList,
+    getYearList,
+    dayFinished,
+    monthFinished,
+  } = useLineModal();
 
-  // 漏斗数据
-  const { mapList, getMap } = useMapModel();
+  // 地图数据
+  const { mapList, getMap, mapFinish } = useMapModel();
 
   const getList = () => {
     getOverviewData(); // 总揽数据
@@ -149,58 +157,104 @@ const ScreenPage: React.FC<any> = (props: any) => {
         </div>
 
         <div className={style['screen-content_top']}>
-          <div className={style['title-1']}>
-            <Title title="客户数" />
-          </div>
-          <div className={style['title-2']}>
-            <Title title="贷款余额" />
-          </div>
-          <TitleNum num1={dayInNum} num2={dayOutMoney} num3={dayNetProfitMoney} />
+          <Condition r-if={funnelFinish}>
+            <div className={`${style['title-1']} animate__animated animate__fadeInLeft`}>
+              <Title title="客户数" />
+            </div>
+          </Condition>
+          <Condition r-if={overviewFinished}>
+            <div className={`${style['title-2']} animate__animated animate__fadeInRight`}>
+              <Title title="贷款余额" />
+            </div>
+          </Condition>
+
+          <Condition r-if={overviewFinished}>
+            <TitleNum num1={dayInNum} num2={dayOutMoney} num3={dayNetProfitMoney} />
+          </Condition>
           {/* <TitleNum2 cref={fake} num1={dayInNum} num2={dayOutMoney} num3={dayNetProfitMoney} /> */}
         </div>
 
         <div className={style['screen-content']}>
           {/* 漏斗图 */}
-          <Funnel base={base} data={funnelList} loading={funnelLoading} fullScreen={isFullScreen} />
+
+          <div className={style['chart_one']}>
+            <Condition r-if={funnelFinish}>
+              <Funnel
+                base={base}
+                data={funnelList}
+                loading={funnelLoading}
+                fullScreen={isFullScreen}
+              />
+            </Condition>
+          </div>
+
           {/* 中国地图 */}
-          <ChinaMap base={base} data={mapList} fullScreen={isFullScreen} />
+
+          <div className={style['chart_two']}>
+            <Condition r-if={mapFinish}>
+              <Title
+                title="进件省份分布"
+                className={`${style['title-map']} animate__animated animate__fadeInDown`}
+              />
+              <ChinaMap base={base} data={mapList} fullScreen={isFullScreen} />
+            </Condition>
+          </div>
+
           {/* 饼图  需显示总贷款余额*/}
-          <Condition r-if={overviewFinished}>
-            <Pie base={base} data={pieList} totalMoney={total} fullScreen={isFullScreen} />
-          </Condition>
+          <div className={style['chart_three']}>
+            <Condition r-if={overviewFinished}>
+              <Pie base={base} data={pieList} totalMoney={total} fullScreen={isFullScreen} />
+            </Condition>
+          </div>
         </div>
 
         <div className={style['screen-content_bottom']}>
           <TableView data={tableList} base={base} />
-          <div className={style['title-tips']}>
-            备注：结存用户数及余额指标都已剔除abs出表，金额单位为：万元
-          </div>
+
           <div className={style['chart_four']}>
             <div className={style['title-4']}>
-              <Title title="近30天进件量与净增余额" />
+              <Condition r-if={dayFinished}>
+                <Title
+                  title="近30天进件量与净增余额"
+                  className={`animate__animated animate__fadeInRight`}
+                />
+              </Condition>
             </div>
 
-            <LineChart
-              type="day"
-              id="day"
-              base={base}
-              data={dayList}
-              loading={dayLoading}
-              fullScreen={isFullScreen}
-            />
+            <div className={style['_line-box']}>
+              <Condition r-if={dayFinished}>
+                <LineChart
+                  type="day"
+                  id="day"
+                  base={base}
+                  data={dayList}
+                  loading={dayLoading}
+                  fullScreen={isFullScreen}
+                />
+              </Condition>
+            </div>
 
             <div className={style['title-5']}>
-              <Title title="近1年进件量与净增余额" />
+              <Condition r-if={monthFinished}>
+                <Title
+                  title="近1年进件量与净增余额"
+                  className={`animate__animated animate__fadeInRight`}
+                />
+              </Condition>
             </div>
 
-            <LineChart
-              type="month"
-              id="month"
-              base={base}
-              data={monthList}
-              loading={monthLoading}
-              fullScreen={isFullScreen}
-            />
+            <div className={style['_line-box']}>
+              <Condition r-if={monthFinished}>
+                <LineChart
+                  type="month"
+                  id="month"
+                  base={base}
+                  data={monthList}
+                  loading={monthLoading}
+                  fullScreen={isFullScreen}
+                />
+              </Condition>
+            </div>
           </div>
         </div>
       </div>

@@ -228,9 +228,7 @@ const Pie: React.FC<any> = (props: any) => {
   }, [options, fullScreen]);
 
   return (
-    <div className={style['chart_three']}>
-      <div id="piebox" className={style['pie-box']}></div>
-    </div>
+    <div id="piebox" className={`${style['pie-box']} animate__animated animate__fadeInRight`}></div>
   );
 };
 

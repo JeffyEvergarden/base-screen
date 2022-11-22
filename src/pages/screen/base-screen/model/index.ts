@@ -8,6 +8,8 @@ const TEN_MILLION = 10000000;
 
 const ONE_YI = 100000000;
 
+const successCode = 0;
+
 // 万做单位
 const formateNumByWan = (val: number) => {
   if (isNaN(val)) {
@@ -146,6 +148,8 @@ export const useFunnelModel = () => {
 
   const [funnelLoading, setFunnelLoading] = useState<boolean>(false);
 
+  const [funnelFinish, setFunnelFinish] = useState<boolean>(false);
+
   const getFunnel = async () => {
     // setFunnelLoading(true);
     const res: any = await API.getFunnel();
@@ -161,11 +165,15 @@ export const useFunnelModel = () => {
       };
     });
     setFunnelList(data || []);
+    if (data.length > 0) {
+      setFunnelFinish(true);
+    }
   };
 
   return {
     funnelList,
     getFunnel,
+    funnelFinish,
     funnelLoading,
   };
 };
@@ -179,34 +187,43 @@ export const useLineModal = () => {
   const [dayLoading, setDayLoading] = useState<boolean>(false);
   const [monthLoading, setMonthLoading] = useState<boolean>(false);
 
+  const [dayFinished, setDayFinished] = useState<boolean>(false);
+  const [monthFinished, setMonthFinished] = useState<boolean>(false);
+
   const getMonthList = async () => {
     // setDayLoading(true);
     const res: any = await API.getMonthList();
     // setDayLoading(false);
-    let data: any = res?.resObject || [];
-    data = data.map((item: any) => {
-      return {
-        name: item.day,
-        value1: formateNumByWan(item.inPartsNumber),
-        value2: formateNumByhundredMillion(item.growthBalance),
-      };
-    });
-    setDayList(data || []);
+    if (res.code === successCode) {
+      setDayFinished(true);
+      let data: any = res?.resObject || [];
+      data = data.map((item: any) => {
+        return {
+          name: item.day,
+          value1: formateNumByWan(item.inPartsNumber),
+          value2: formateNumByhundredMillion(item.growthBalance),
+        };
+      });
+      setDayList(data || []);
+    }
   };
 
   const getYearList = async () => {
     // setMonthLoading(true);
     const res: any = await API.getYearList();
     // setMonthLoading(false);
-    let data: any = res?.resObject || [];
-    data = data.map((item: any) => {
-      return {
-        name: item.month,
-        value1: formateNumByWan(item.inPartsNumber),
-        value2: formateNumByhundredMillion(item.growthBalance),
-      };
-    });
-    setMonthList(data || []);
+    if (res.code === successCode) {
+      setMonthFinished(true);
+      let data: any = res?.resObject || [];
+      data = data.map((item: any) => {
+        return {
+          name: item.month,
+          value1: formateNumByWan(item.inPartsNumber),
+          value2: formateNumByhundredMillion(item.growthBalance),
+        };
+      });
+      setMonthList(data || []);
+    }
   };
 
   return {
@@ -214,6 +231,8 @@ export const useLineModal = () => {
     monthList,
     dayLoading,
     monthLoading,
+    dayFinished,
+    monthFinished,
     getMonthList,
     getYearList,
   };
@@ -222,6 +241,8 @@ export const useLineModal = () => {
 // 地图数据
 export const useMapModel = () => {
   const [mapList, setMapList] = useState<any[]>([]);
+
+  const [mapFinish, setMapFinish] = useState<boolean>(false);
 
   const getMap = async () => {
     const res: any = await API.getChinaMap();
@@ -233,11 +254,14 @@ export const useMapModel = () => {
         value: item.inPartsNumberByProvince,
       };
     });
-    // console.log('map', data);
     setMapList(data || []);
+    if (data.length > 0) {
+      setMapFinish(true);
+    }
   };
   return {
     mapList,
+    mapFinish,
     getMap,
   };
 };

@@ -6,7 +6,7 @@ const TitleNum: React.FC<any> = (props: any) => {
   const { num1, num2, num3 } = props;
 
   return (
-    <div className={style['center-box']}>
+    <div className={`${style['center-box']} animate__animated animate__fadeInDown`}>
       <div className={style['center-box_left']}>
         <div className={style['tmp-box']}>
           <div className={style['center-box__header']}>

@@ -276,6 +276,12 @@
   border-radius: 8px;
 }
 
+._line-box {
+  width: 592px * @rate;
+  height: 200px * @rate;
+  border-radius: 8px;
+}
+
 .tooltips-bg {
   position: relative;
   padding: 5px;
@@ -432,7 +438,8 @@
           td {
             min-width: 78px * @rate;
             max-width: 120px * @rate;
-            background: rgba(67, 160, 241, 0.03);
+            background: #fff;
+            // background: rgba(67, 160, 241, 0.03);
             border: 1px solid #80c4ff;
             border-bottom: none;
             border-left: none;
@@ -452,7 +459,8 @@
           td {
             min-width: 78px * @rate;
             max-width: 120px * @rate;
-            background: rgba(67, 160, 241, 0.1);
+            background: #fff;
+            // background: rgba(67, 160, 241, 0.1);
             border: 1px solid #80c4ff;
             border-bottom: none;
             border-left: none;
@@ -528,6 +536,12 @@
     border-radius: 8px;
   }
 
+  ._line-box {
+    width: 592px * @rate;
+    height: 198px * @rate * @fullrate;
+    border-radius: 8px;
+  }
+
   .table-box {
     :global {
       // 关于 table
@@ -555,4 +569,8 @@
       }
     }
   }
+}
+
+.fs_sp {
+  font-weight: 700;
 }

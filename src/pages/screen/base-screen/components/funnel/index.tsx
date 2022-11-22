@@ -71,9 +71,10 @@ const Funnel: React.FC<any> = (props: any) => {
 
   return (
     <Spin spinning={loading}>
-      <div className={style['chart_one']}>
-        <div id="funnel" className={style['funnel-box']}></div>
-      </div>
+      <div
+        id="funnel"
+        className={`${style['funnel-box']} animate__animated animate__fadeInLeft`}
+      ></div>
     </Spin>
   );
 };

@@ -257,11 +257,10 @@ const Funnel: React.FC<any> = (props: any) => {
   }, [data]);
 
   return (
-    <div className={style['chart_two']}>
-      <Title title="进件省份分布" className={style['title-map']} />
-
-      <div id="china-map" className={style['map-box']}></div>
-    </div>
+    <div
+      id="china-map"
+      className={`${style['map-box']} animate__animated animate__fadeInDown`}
+    ></div>
   );
 };
 

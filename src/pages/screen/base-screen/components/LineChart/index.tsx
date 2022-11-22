@@ -202,11 +202,12 @@ const LineChart: React.FC<any> = (props: any) => {
   }, [base, data, fullScreen]);
 
   return (
-    <div className={style['line-box']}>
-      <Spin spinning={loading}>
-        <div id={`linebox-${id}`} className={style['line-box']}></div>
-      </Spin>
-    </div>
+    <Spin spinning={loading}>
+      <div
+        id={`linebox-${id}`}
+        className={`${style['line-box']} animate__animated animate__fadeInRight`}
+      ></div>
+    </Spin>
   );
 };
 
