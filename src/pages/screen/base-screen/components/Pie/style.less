@@ -1,0 +1,60 @@
+@base: 1920px;
+@rate: 100vw / @base;
+
+.bg {
+  position: relative;
+  z-index: 200;
+  min-width: 300px;
+  min-height: 100px;
+  padding: 12px 8px;
+  background: #fff;
+  filter: drop-shadow(0 9px 28px rgba(0, 0, 0, 0.05));
+
+  table {
+    width: 100%;
+  }
+
+  tr {
+    th {
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: right;
+      text-overflow: ellipsis;
+
+      &:first-child {
+        text-align: left !important;
+      }
+    }
+
+    td {
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: right;
+      text-overflow: ellipsis;
+
+      &:first-child {
+        text-align: left !important;
+      }
+    }
+
+    border-bottom: 1px solid #e9e9ef;
+  }
+}
+
+.table-thead {
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.table-cell {
+  max-width: 150px;
+  height: 40px * @rate;
+  padding: 6px * @rate 16px * @rate;
+  font-size: 14px;
+  line-height: 40px * @rate;
+  overflow-wrap: break-word;
+}
+
+.col-first {
+  text-align: left;
+}

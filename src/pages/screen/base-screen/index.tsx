@@ -32,6 +32,12 @@ const ScreenPage: React.FC<any> = (props: any) => {
 
   const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
 
+  const [activeObj, setActiveObj] = useState<any>({});
+
+  const onPieEventListener = (val: any) => {
+    setActiveObj(val);
+  };
+
   useEffect(() => {
     getRemoteIP()
       .then((res: any) => {
@@ -203,13 +209,19 @@ const ScreenPage: React.FC<any> = (props: any) => {
           {/* 饼图  需显示总贷款余额*/}
           <div className={style['chart_three']}>
             <Condition r-if={overviewFinished}>
-              <Pie base={base} data={pieList} totalMoney={total} fullScreen={isFullScreen} />
+              <Pie
+                base={base}
+                data={pieList}
+                totalMoney={total}
+                fullScreen={isFullScreen}
+                activeEvent={onPieEventListener}
+              />
             </Condition>
           </div>
         </div>
 
         <div className={style['screen-content_bottom']}>
-          <TableView data={tableList} base={base} />
+          <TableView data={tableList} base={base} activeObj={activeObj} />
 
           <div className={style['chart_four']}>
             <div className={style['title-4']}>

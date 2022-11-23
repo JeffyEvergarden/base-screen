@@ -1,13 +1,39 @@
 import React, { useEffect, useRef, useMemo } from 'react';
 
 import * as echarts from 'echarts';
-import { option } from './config';
+import { option, genHtmlStr } from './config';
 import style from '../../style.less';
-
+import instyle from './style.less';
 import { formatePercent, formateBaseMoney, formateNumer, ONE_YI, ONE_W } from '../../util';
 
+const renderTool = (params: any, base: number = 1) => {
+  // console.log(params);
+
+  if (params.name !== '京东金融' && params.name !== '蚂蚁金服') {
+    return null;
+  }
+
+  const { colStr, columnsStr, rowStr } = genHtmlStr(params.data.subData || [], base);
+
+  return `
+    <div class="${instyle['bg']}">
+      <table style="table-layout: 'fixed'">
+        <colgroup>
+          ${colStr}
+        </colgroup>
+        <thead class="${instyle['table-thead']}">
+          <tr>${columnsStr}</tr>
+        </thead>
+        <tbody>
+          ${rowStr}
+        </tbody>
+      </table>
+    </div>
+  `;
+};
+
 const Pie: React.FC<any> = (props: any) => {
-  let { base = 1, data = [], totalMoney = 0, fullScreen } = props;
+  let { base = 1, data = [], totalMoney = 0, fullScreen, activeEvent } = props;
   const mapChart = useRef<any>(null);
 
   let first = false;
@@ -84,12 +110,19 @@ const Pie: React.FC<any> = (props: any) => {
 
     return Object.assign({}, option, {
       tooltip: {
-        show: false,
+        show: true,
+        trigger: 'item',
+        padding: 0,
+        backgroundColor: '#fff',
+        borderWidth: 0,
+        appendToBody: true,
+        position: function (point: any, params: any, dom: any) {
+          // console.log(point, params, dom, dom.clientHeight);
+          // 固定在顶部
+          return [point[0] - dom.clientWidth / 2 + 8, point[1] + 16];
+        },
         formatter: function (params: any) {
-          if (!params.name) {
-            return '';
-          }
-          return params.name + ':' + params.value + '<br>';
+          return renderTool(params, base);
         },
       },
       grid: {
@@ -194,6 +227,12 @@ const Pie: React.FC<any> = (props: any) => {
         dataIndex: 0,
       });
     }
+    // console.log('disabled', e?.name);
+    activeEvent?.({
+      type: 'disabled',
+      name: e?.name,
+      color: null,
+    });
   };
   const moveInFn = (e: any) => {
     // 移除事件
@@ -204,6 +243,18 @@ const Pie: React.FC<any> = (props: any) => {
         dataIndex: 0,
       });
     }
+
+    let color: any = e.color;
+
+    if (typeof color !== 'string') {
+      color = color?.colorStops?.[0]?.color || '#668eff';
+    }
+    // console.log('active', e?.name, color);
+    activeEvent?.({
+      type: 'active',
+      name: e?.name,
+      color,
+    });
   };
 
   useEffect(() => {

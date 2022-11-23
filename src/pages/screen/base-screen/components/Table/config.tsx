@@ -144,20 +144,22 @@ const genColumn = (base: number) => {
       title: '渠道大类', // 渠道大类
       className: 'row_first',
       render: (text: any, row: any, index: any) => {
-        const obj: any = {
-          children: text,
-          props: {},
-        };
-        if (text === '线上') {
-          obj.props.rowSpan = row.rowSpan;
-        } else if (text === '线下') {
-          obj.props.rowSpan = row.rowSpan;
-        } else if (text === '合计') {
-          obj.props.colSpan = 2; // 两列
-        } else if (text === '其他') {
+        return text;
+      },
+      onCell: (row: any, index: any) => {
+        const obj: any = {};
+        if (row.channel === '线上') {
+          // console.log('-------')
+          // console.log(row.rowSpan)
+          obj.rowSpan = row.rowSpan;
+        } else if (row.channel === '线下') {
+          obj.rowSpan = row.rowSpan;
+        } else if (row.channel === '合计') {
+          obj.colSpan = 2; // 两列
+        } else if (row.channel === '其他') {
           // 不作处理
         } else {
-          obj.props.colSpan = 0;
+          obj.colSpan = 0;
         }
         return obj;
       },
@@ -169,18 +171,17 @@ const genColumn = (base: number) => {
       className: 'col_two',
 
       render: (text: any, row: any, index: any) => {
-        const obj: any = {
-          children: text,
-          props: {},
-        };
         //
         if (needWeightColumns.includes(text)) {
-          obj.children = <span className={style['fs_sp']}>{text}</span>;
+          return <span className={style['fs_sp']}>{text}</span>;
+        } else {
+          return text;
         }
-
-        // console.log(row)
+      },
+      onCell: (row: any, index: any) => {
+        const obj: any = {};
         if (row.channel === '合计') {
-          obj.props.colSpan = 0;
+          obj.colSpan = 0;
         } else if (row.channel === '其他') {
           // obj.props.rowSpan = 0;
         }

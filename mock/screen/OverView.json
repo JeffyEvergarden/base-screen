@@ -48,12 +48,46 @@
       {
         "channelName": "蚂蚁金服",
         "loalBalance": 7804042541.95,
-        "rate": 0.1853
+        "rate": 0.1853,
+        "subData": [
+          {
+            "channelName": "街呗三期",
+            "loalBalance": 7804042541,
+            "monthMoney": 7804
+          },
+          {
+            "channelName": "街呗",
+            "loalBalance": 7804042541,
+            "monthMoney": 78047832
+          },
+          {
+            "channelName": "街呗四期街呗四期街呗四期街呗四期街呗四期街呗四期",
+            "loalBalance": 7804042541,
+            "monthMoney": 7804
+          }
+        ]
       },
       {
         "channelName": "京东金融",
         "loalBalance": 7740798563.38,
-        "rate": 0.1244
+        "rate": 0.1244,
+        "subData": [
+          {
+            "channelName": "京东一期",
+            "loalBalance": 7804042541,
+            "monthMoney": 7804
+          },
+          {
+            "channelName": "京东二期",
+            "loalBalance": 7804042541,
+            "monthMoney": 7804
+          },
+          {
+            "channelName": "京东三期",
+            "loalBalance": 7804042541,
+            "monthMoney": 7804
+          }
+        ]
       },
       {
         "channelName": "微信",

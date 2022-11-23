@@ -122,6 +122,7 @@ export const useOverViewModel = () => {
           name: item.channelName, // 名称
           value: item.loalBalance, // 资本额度
           realPercent: item.rate, // 百分比
+          subData: item.subData || [],
         };
       });
       setPieList(list);

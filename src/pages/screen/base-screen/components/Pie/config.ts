@@ -1,5 +1,6 @@
 // import * as echarts from 'echarts';
-
+import { formateBaseMoney, ONE_YI, ONE_W } from '../../util';
+import style from './style.less';
 // 渐变色
 const colors = [
   {
@@ -134,4 +135,69 @@ const option = {
   color: colors,
 };
 
-export { option };
+const columns: any[] = [
+  {
+    key: 'channelName',
+    title: '渠道子类',
+    width: 140 + 16,
+  },
+  {
+    key: 'monthMoney',
+    title: '本月净增',
+    width: 120 + 16,
+  },
+  {
+    key: 'loalBalance',
+    title: '贷款余额',
+    width: 120 + 16,
+  },
+];
+
+const formateMoney = (val: any) => {
+  if (isNaN(val)) {
+    return val;
+  }
+};
+
+const genHtmlStr = (data: any[], base: number = 1) => {
+  let colStr = '';
+  let columnsStr = '';
+  let rowStr = '';
+
+  let cols = columns.map((item: any) => {
+    return `<col style="width: ${item.width * base + 'px'}" />`;
+  });
+  colStr = cols.join('');
+
+  let ths = columns.map((item: any, i: number) => {
+    return `<th class="${style['table-cell']}  ${i === 0 ? ' ' + style['col-first'] : ''}" >${
+      item.title
+    }</th>`;
+  });
+  columnsStr = ths.join('');
+
+  let rows = data.map((item: any) => {
+    let tds = columns.map((subitem: any, i: number) => {
+      //formateBaseMoney
+      let val = item[subitem.key];
+
+      if (!isNaN(val)) {
+        val = formateBaseMoney(val) + '元';
+      }
+
+      return `<td class="${style['table-cell']} ${
+        i === 0 ? ' ' + style['col-first'] : ''
+      }" >${val}</td>`;
+    });
+    return '<tr>' + tds.join('') + '</tr>';
+  });
+  rowStr = rows.join('');
+
+  return {
+    colStr,
+    columnsStr,
+    rowStr,
+  };
+};
+
+export { option, columns, genHtmlStr };
