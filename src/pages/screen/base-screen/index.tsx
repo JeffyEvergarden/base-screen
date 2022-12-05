@@ -165,7 +165,7 @@ const ScreenPage: React.FC<any> = (props: any) => {
         <div className={style['screen-content_top']}>
           <Condition r-if={funnelFinish}>
             <div className={`${style['title-1']} animate__animated animate__fadeInLeft`}>
-              <Title title="客户数" />
+              <Title title="有效用户数" />
             </div>
           </Condition>
           <Condition r-if={overviewFinished}>
