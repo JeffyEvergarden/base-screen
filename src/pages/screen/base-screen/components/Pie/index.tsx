@@ -272,9 +272,11 @@ const Pie: React.FC<any> = (props: any) => {
 
   useEffect(() => {
     if (!first) {
-      // console.log('重新绘制-------：', mapChart.current);
+      console.log('重新绘制饼图');
       initMap();
-      mapChart.current?.resize?.();
+      setTimeout(() => {
+        mapChart.current?.resize?.();
+      }, 200);
     }
   }, [options, fullScreen]);
 

@@ -144,12 +144,14 @@
     position: absolute;
     top: 40px * @rate;
     left: 48px * @rate;
+    z-index: 20;
   }
 
   .center-box {
     position: absolute;
     top: -16px * @rate;
     left: 0;
+    z-index: 10;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -264,7 +266,8 @@
 
 .pie-box {
   position: relative;
-  width: 652px * @rate;
+  left: -50px * @rate;
+  width: 750px * @rate;
   height: 280px * @rate;
 }
 
@@ -525,7 +528,7 @@
 
   .pie-box {
     position: relative;
-    width: 652px * @rate;
+    width: 750px * @rate;
     height: 280px * @rate * @fullrate;
   }
 
