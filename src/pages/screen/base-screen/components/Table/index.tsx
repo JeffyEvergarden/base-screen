@@ -29,6 +29,9 @@ const TableView: React.FC<tableProps> = (props: tableProps) => {
 
   const diyRowClassName = useCallback(
     (record: any, index: number) => {
+      if (activeObj?.name === '其他') {
+        return '';
+      }
       if (activeObj?.name === record.channelName && activeObj.type === 'active') {
         let color = activeObj?.color;
         let colorClass = colorClassMap[color];
