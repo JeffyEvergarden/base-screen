@@ -139,7 +139,7 @@ const columns: any[] = [
   {
     key: 'channelName',
     title: '渠道子类',
-    width: 140 + 16,
+    width: 160 + 16,
   },
   {
     key: 'monthMoney',
