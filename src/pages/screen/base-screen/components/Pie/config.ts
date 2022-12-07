@@ -1,5 +1,5 @@
 // import * as echarts from 'echarts';
-import { formateBaseMoney, ONE_YI, ONE_W } from '../../util';
+import { formateBaseMoney, formateNumer, ONE_YI, ONE_W } from '../../util';
 import style from './style.less';
 // 渐变色
 const colors = [
@@ -139,16 +139,16 @@ const columns: any[] = [
   {
     key: 'channelName',
     title: '渠道子类',
-    width: 160 + 16,
+    width: 120 + 16,
   },
   {
     key: 'monthMoney',
-    title: '本月净增',
+    title: '本月净增(亿元)',
     width: 120 + 16,
   },
   {
     key: 'loalBalance',
-    title: '贷款余额',
+    title: '贷款余额(亿元)',
     width: 120 + 16,
   },
 ];
@@ -156,6 +156,14 @@ const columns: any[] = [
 const formateMoney = (val: any) => {
   if (isNaN(val)) {
     return val;
+  }
+  if (typeof val === 'number') {
+    let str1 = (val / ONE_YI).toFixed(0);
+    let str2 = (val / ONE_YI).toFixed(2);
+    let str = Number(str1) === Number(str2) ? str1 : str2;
+    str = formateNumer(Number(str));
+
+    return str;
   }
 };
 
@@ -182,7 +190,7 @@ const genHtmlStr = (data: any[], base: number = 1) => {
       let val = item[subitem.key];
 
       if (!isNaN(val)) {
-        val = formateBaseMoney(val) + '元';
+        val = formateMoney(val);
       }
 
       return `<td class="${style['table-cell']} ${

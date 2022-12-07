@@ -8,6 +8,7 @@
   min-height: 100px;
   padding: 12px 8px;
   background: #fff;
+  border-radius: 8px;
   filter: drop-shadow(0 9px 28px rgba(0, 0, 0, 0.05));
 
   table {
@@ -37,19 +38,26 @@
       }
     }
 
-    border-bottom: 1px solid #e9e9ef;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
 }
 
 .table-thead {
   background: rgba(0, 0, 0, 0.02);
-  border-bottom: 1px solid #e9e9e9;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+  .table-cell {
+    height: 28px * @rate;
+    padding: 4px * @rate 16px * @rate;
+    font-weight: 500;
+    line-height: 28px * @rate;
+    overflow-wrap: break-word;
+  }
 }
 
 .table-cell {
   max-width: 150px;
   height: 28px * @rate;
-  padding: 2px * @rate 16px * @rate;
+  padding: 4px * @rate 16px * @rate;
   font-size: 14px;
   line-height: 28px * @rate;
   overflow-wrap: break-word;

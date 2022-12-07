@@ -164,11 +164,9 @@ const ScreenPage: React.FC<any> = (props: any) => {
 
         <div className={style['screen-content_top']}>
           <Condition r-if={funnelFinish}>
-            <Tooltip placement="right" title="数据为 t-1 数据">
-              <div className={`${style['title-1']} animate__animated animate__fadeInLeft`}>
-                <Title title="有效用户数" />
-              </div>
-            </Tooltip>
+            <div className={`${style['title-1']} animate__animated animate__fadeInLeft`}>
+              <Title title="有效用户数" />
+            </div>
           </Condition>
 
           <Condition r-if={overviewFinished}>

@@ -64,7 +64,7 @@ const TableView: React.FC<tableProps> = (props: tableProps) => {
           ></Table>
         </div>
         <div className={style['title-tips']}>
-          备注：结存用户数及余额指标都已剔除abs出表，金额单位为：万元
+          备注：用户数指标为t-1数据；结存用户数及余额指标均剔除abs出表，金额单位为：万元
         </div>
       </>
     );

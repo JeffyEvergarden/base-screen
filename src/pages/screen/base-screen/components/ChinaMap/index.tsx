@@ -69,7 +69,7 @@ const Funnel: React.FC<any> = (props: any) => {
           min: 0,
           max: max,
           left: '18%',
-          bottom: '8%',
+          bottom: '14%',
           text: ['高', '低'],
           calculable: false,
           seriesIndex: [0],
