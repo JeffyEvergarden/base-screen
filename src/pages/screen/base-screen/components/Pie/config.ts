@@ -139,12 +139,12 @@ const columns: any[] = [
   {
     key: 'channelName',
     title: '渠道子类',
-    width: 120 + 16,
+    width: 140 + 16,
   },
   {
     key: 'monthMoney',
     title: '本月净增(亿元)',
-    width: 120 + 16,
+    width: 110 + 16,
   },
   {
     key: 'loalBalance',
