@@ -128,6 +128,7 @@ const columns = [
 // 需要增重的字段
 const needWeightColumns: any[] = [
   '中邮钱包',
+  '中邮钱包APP',
   '支付宝',
   '蚂蚁金服',
   '京东金融',
