@@ -13,6 +13,10 @@ const renderTool = (params: any, base: number = 1) => {
     return null;
   }
 
+  if (params.data.subData && params.data.subData.length === 0) {
+    return null;
+  }
+
   const { colStr, columnsStr, rowStr } = genHtmlStr(params.data.subData || [], base);
 
   return `

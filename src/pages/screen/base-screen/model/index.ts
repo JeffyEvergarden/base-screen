@@ -118,11 +118,17 @@ export const useOverViewModel = () => {
       setTotal(totalVal);
       // 处理饼图数据
       const list = pieDataList.map((item: any) => {
+        let subData: any[] = item.subData || [];
+        subData = subData.filter((it: any) => {
+          let val1 = Number(it.monthMoney);
+          let val2 = Number(it.loalBalance);
+          return val1 !== 0 || val2 !== 0;
+        });
         return {
           name: item.channelName, // 名称
           value: item.loalBalance, // 资本额度
           realPercent: item.rate, // 百分比
-          subData: item.subData || [],
+          subData: subData || [],
         };
       });
       setPieList(list);
